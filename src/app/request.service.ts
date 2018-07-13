@@ -18,7 +18,7 @@ export class RequestService {
       );
   }
 
-  private formatHeaders(headers: Header): HttpHeaders {
+  public formatHeaders(headers: Header[]): HttpHeaders {
     let header_param = {};
     Object.keys(headers).forEach(key => {
       header_param[key] = headers[key];
