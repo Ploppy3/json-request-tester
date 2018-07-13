@@ -10,7 +10,9 @@ import { RequestService } from './request.service';
 
 export class AppComponent implements OnInit {
 
-  constructor(private _requestService: RequestService) {}
+  constructor(
+    private _requestService: RequestService,
+  ) { }
 
   ngOnInit(): void {
     this.test();
@@ -30,16 +32,6 @@ export class AppComponent implements OnInit {
       },
       url: 'https://api.travian.engin9tools.com/api/global/servers',
     }
-    //send request to service
-
-    let httpOptions = {
-      headers: this._requestService.formatHeaders(request.headers)
-    };
-
-    this._requestService.get(request.url, httpOptions).subscribe(
-      (res) => {
-        console.log(res);
-      }
-    );
+    this._requestService.processRequest(request);
   }
 }
