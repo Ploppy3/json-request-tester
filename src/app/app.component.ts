@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RequestService } from './request.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private _requestService: RequestService) {
+    this._requestService.get('https://www.google.fr').subscribe(
+      (res) => {
+        console.log(res);
+      }
+    )
+  }
 }

@@ -6,10 +6,15 @@ export interface Data {
 export interface Request{
   url: string;
   method: 'POST' | 'GET' | 'PUT' | 'DELETE';
-  header: { key: string, value: string }[];
+  header: Header[];
   body: any;
   response: {
     text: string;
     status: number;
   }
+}
+
+export interface Header{
+  key: string;
+  value: string;
 }
