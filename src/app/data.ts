@@ -6,7 +6,7 @@ export interface Data {
 export interface Request{
   url: string;
   method: 'POST' | 'GET' | 'PUT' | 'DELETE';
-  header: Header[];
+  headers: Header[];
   body: any;
   response: {
     text: string;
