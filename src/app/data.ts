@@ -1,3 +1,5 @@
+import { HttpComparatorObjectError } from "./http-comparator";
+
 export interface Data {
   version: number;
   data: HttpTest[];
@@ -10,11 +12,12 @@ export interface HttpTest{
   body: any;
   expectedResponse: {
     body: string;
-    status: number;
+    status: number
   },
   response?: {
     body: string;
     status: number;
+    errors: HttpComparatorObjectError[];
   }
 }
 

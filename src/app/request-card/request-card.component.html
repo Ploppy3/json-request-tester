@@ -1,7 +1,21 @@
-<div class="card-request">
-  <span class="request-method bold">{{ request?.method }}</span>
-  <span class="request-url">{{ request?.url }}</span>
+<div class="card-request flex column">
+  <span class="request-method bold">{{ test?.method }}</span>
+  <span class="request-url">{{ test?.url }}</span>
 </div>
 <div class="card-result">
-  <pre>{{ result | json }}</pre>
+  <button (click)="start()">Test</button>
+  <pre class="overflow">{{ test.expectedResponse | json }}</pre>
+  <ng-container *ngIf="test.response">
+    <div>Status {{ test.response?.status }}</div>
+    <ng-container *ngIf="test.response?.errors.length > 0">
+      <div *ngFor="let error of test.response?.errors">
+        <div>
+          <span *ngFor="let object of error.depth">{{ object }}</span>
+        </div>
+        <div>{{error.key}}</div>
+        <div>Error: {{error.type}}</div>
+      </div>
+    </ng-container>
+    <pre class="overflow">{{ test.response?.body | json }}</pre>
+  </ng-container>
 </div>

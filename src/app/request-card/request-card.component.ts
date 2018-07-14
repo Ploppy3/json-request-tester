@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpTest } from '../data';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-request-card',
@@ -7,12 +8,24 @@ import { HttpTest } from '../data';
   styleUrls: ['./request-card.component.scss']
 })
 export class RequestCardComponent implements OnInit {
-  @Input() request: HttpTest;
+  @Input() test: HttpTest;
   @Input() result: any;
   
-  constructor() { }
+  constructor(
+    private requestService: RequestService
+  ) { }
 
   ngOnInit() {
+
+  }
+  public start() {
+    this.requestService.processRequest(this.test).subscribe(res => {
+      this.test.response = { 
+        body: res.response.body,
+        status: res.response.status,
+        errors: res.errors,
+      };
+    });
   }
 
 }

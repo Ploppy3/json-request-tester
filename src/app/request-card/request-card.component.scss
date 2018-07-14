@@ -5,10 +5,6 @@
   border-radius: 4px;
   overflow: hidden;
 }
-.card-request,
-.card-result {
-  display: flex;
-}
 .card-request {
   font-size: .8rem;
   word-break: break-word;
@@ -37,4 +33,7 @@
     padding: $spacer-padding;
     word-break: break-word
   }
+}
+pre{
+  max-height: 300px;
 }

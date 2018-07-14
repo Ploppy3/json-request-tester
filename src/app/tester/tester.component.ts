@@ -9,7 +9,7 @@ import { HttpTest } from '../data';
 })
 export class TesterComponent implements OnInit {
 
-  public requests = [
+  public tests = [
     <HttpTest>{
       body: null,
       headers: [],
@@ -39,8 +39,8 @@ export class TesterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public test() {
-    this._requestService.processRequest(this.requests[1]).subscribe(res => console.log(res))
+  public test(request: HttpTest) {
+    this._requestService.processRequest(this.tests[1]).subscribe(res => console.log(res))
   }
 
 }
