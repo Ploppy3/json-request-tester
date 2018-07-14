@@ -45,11 +45,14 @@
 pre {
   max-height: 200px;
 }
-.error-report {
+.error-wrapper {
+  overflow: hidden;
   border-radius: 8px;
   border: 1px solid #FF3D00;
   .title {
-    color: #F4511E;
+    background-color: #FF3D00;
+    color: #fff;
+    padding: 8px;
   }
   .field,
   .separator {
@@ -61,6 +64,9 @@ pre {
   }
   span {
     display: inline-block;
+    &:nth-child(2){
+      margin-left: 8px;
+    }
   }
 }
 .code-wrapper {

@@ -19,23 +19,26 @@
     <pre class="overflow">{{ test.expectedResponse.body | toJson | json }}</pre>
   </div>
 
-  <ng-container *ngIf="test.response">
+  <ng-container *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
     <hr>
     <div class="code-wrapper">
       <div class="title">Response Status</div>
       <pre class="overflow">{{ test.response?.status }}</pre>
     </div>
     <ng-container *ngIf="test.response?.errors.length > 0">
-      <div class="error-report horizontal-spacer vertical-spacer" *ngFor="let error of test.response?.errors">
+      <div class="error-wrapper" *ngFor="let error of test.response?.errors">
         <div class="title">Error</div>
-        <div>
-          <span class="secondary">Field:</span>
-          <ng-container *ngFor="let property of error.depth">
-            <span class="field">{{property}}</span>
-            <span class="separator secondary">></span>
-          </ng-container>
-          <span class="field">{{error.key}}</span></div>
-        <div><span class="secondary">Message:</span> {{error.type}}</div>
+        <div class="horizontal-spacer vertical-spacer">
+          <div>
+            <span class="secondary">Field:</span>
+            <ng-container *ngFor="let property of error.depth">
+              <span class="field">{{property}}</span>
+              <span class="separator secondary">></span>
+            </ng-container>
+            <span class="field">{{error.key}}</span>
+          </div>
+          <div><span class="secondary">Message:</span> {{error.type}}</div>
+        </div>
       </div>
     </ng-container>
     <div class="code-wrapper">
