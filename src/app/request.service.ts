@@ -12,10 +12,10 @@ export class RequestService {
   constructor(private _http: HttpClient) { }
 
   public processRequest(request: Request) {
+    let httpRequest;
     let httpOptions = {
       headers: this.formatHeaders(request.headers)
-    };
-    let httpRequest;
+    }
     switch (request.method) {
       case 'GET':
         httpRequest = this.get(request.url, httpOptions);
@@ -31,7 +31,7 @@ export class RequestService {
         //check response
       },
       err => {
-        console.log(err);
+        console.log('error', err);
       }
     );
   }
@@ -43,15 +43,16 @@ export class RequestService {
       );
   }
 
-  private formatHeaders(headers: Header[]): HttpHeaders {
-    let header_params = {};
-    Object.keys(headers).forEach(key => {
-      header_params[key] = headers[key];
+  private formatHeaders(headers: Header[]) {
+    let httpHeaders = new HttpHeaders();
+    headers.forEach(header => {
+      httpHeaders = httpHeaders.set(header.key, header.value);
     });
-    return new HttpHeaders(header_params);
+    return httpHeaders;
   }
 
   private handleError(error: HttpErrorResponse) {
+    console.log('handleError', error);
     return throwError('Something bad happened; please try again later.');
   };
 }
