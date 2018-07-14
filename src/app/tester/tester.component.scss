@@ -1,54 +1,47 @@
 @import '~CssFramework/styles.scss';
-
 $command_size: 64px;
-
 :host {
-    display: block;
-    padding: $spacer-padding;
-    overflow-y: visible;
-    padding-right: calc(#{$command_size} + #{$spacer-padding}); // 8 + 64
+  display: block;
+  padding: $spacer-padding;
+  overflow-y: visible;
+  padding-right: calc(#{$command_size} + #{$spacer-padding}); // 8 + 64
 }
-
 #tester-command {
-    position: fixed;
-    width: $command_size; height: 100%;
-    bottom: 0; right: 0;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    &>* {
-        margin: 8px;
-    }
-
-    #play-btn {
-        background-color: #FF7274;
-        color: white;
-        box-shadow: 0 8px 38px rgba(255, 114, 116, .3), 0 6px 12px rgba(255, 114, 116, .22);
-    }
+  position: fixed;
+  width: $command_size;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &>* {
+    margin: 8px;
+  }
+  #play-btn {
+    background-color: #FF7274;
+    color: white;
+    box-shadow: 0 8px 38px rgba(255, 114, 116, .3), 0 6px 12px rgba(255, 114, 116, .22);
+  }
 }
-
 #card-list {
-    app-request-card {
-        margin: 8px 0;
-
-        &:first-child {
-            margin-top: 0;
-        }
-        &:last-child {
-            margin-bottom: 0;
-        }
+  app-request-card {
+    margin: 8px 0;
+    &:first-child {
+      margin-top: 0;
     }
-}
-
-@media screen and (max-width: 640px) {
-    :host {
-        padding-right: $spacer-padding;
-    }
-
-    #tester-command {
-        flex-direction: row;
-        width: initial; height: $command_size;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
+}
+@media screen and (max-width: 640px) {
+  :host {
+    padding-right: $spacer-padding;
+  }
+  #tester-command {
+    flex-direction: row;
+    width: initial;
+    height: $command_size;
+  }
+}

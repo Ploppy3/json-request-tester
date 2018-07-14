@@ -1,33 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
 @import '~CssFramework/styles.scss';
-
 * {
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
-
 body {
-    background-color: #424242;
+  background-color: #424242;
 }
-
 .bold {
-    font-weight: 700;
+  font-weight: 700;
 }
-
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 .fab {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    border: 0;
-
-    display: flex;
-    align-items: center; justify-content: center;
-
-    .icons, .material-icons {
-        font-size: 32px;
-    }
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .icons,
+  .material-icons {
+    font-size: 32px;
+  }
 }
