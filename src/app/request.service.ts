@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Header, Request } from './data';
+import { Header, HttpTest } from './data';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -29,7 +29,7 @@ export class RequestService {
     //*/
   }
 
-  public processRequest(request: Request) {
+  public processRequest(request: HttpTest) {
     let httpRequest;
     let httpOptions = {
       headers: this.formatHeaders(request.headers)
@@ -69,7 +69,7 @@ export class RequestService {
     return httpHeaders;
   }
 
-  private testResponse(request: Request, response: HttpResponse<any>) {
+  private testResponse(request: HttpTest, response: HttpResponse<any>) {
     let expected;
 
     try {

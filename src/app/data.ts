@@ -1,9 +1,9 @@
 export interface Data {
   version: number;
-  data: Request[];
+  data: HttpTest[];
 }
 
-export interface Request{
+export interface HttpTest{
   url: string;
   method: 'POST' | 'GET' | 'PUT' | 'DELETE';
   headers: Header[];

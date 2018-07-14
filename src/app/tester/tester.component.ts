@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
-import { Request } from '../data';
+import { HttpTest } from '../data';
 
 @Component({
   selector: 'app-tester',
@@ -10,7 +10,7 @@ import { Request } from '../data';
 export class TesterComponent implements OnInit {
 
   public requests = [
-    <Request>{
+    <HttpTest>{
       body: null,
       headers: [],
       method: 'GET',
@@ -20,7 +20,7 @@ export class TesterComponent implements OnInit {
       },
       url: 'https://api.travian.engin9tools.com/api/global/servers',
     },
-    <Request>{
+    <HttpTest>{
       body: null,
       headers: [],
       method: 'GET',
