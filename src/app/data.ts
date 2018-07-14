@@ -11,6 +11,10 @@ export interface HttpTest{
   expectedResponse: {
     body: string;
     status: number;
+  },
+  response?: {
+    body: string;
+    status: number;
   }
 }
 
