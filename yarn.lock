@@ -355,6 +355,10 @@
     text-table "^0.2.0"
     webpack-log "^1.1.2"
 
+"CssFramework@https://github.com/Ploppy3/CssFramework":
+  version "0.0.0"
+  resolved "https://github.com/Ploppy3/CssFramework#4b9f92eab46b79e445d170359dcc78bd21e3d1b3"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
