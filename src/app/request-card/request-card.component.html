@@ -17,12 +17,15 @@ class="card-request flex column">
   <ng-container *ngIf="test.response">
     <div>Status {{ test.response?.status }}</div>
     <ng-container *ngIf="test.response?.errors.length > 0">
-      <div class="error-report" *ngFor="let error of test.response?.errors">
+      <div class="error-report horizontal-spacer vertical-spacer" *ngFor="let error of test.response?.errors">
+        <div class="title">Error</div>
         <div>
-          <span *ngFor="let object of error.depth">{{ object }}</span>
-        </div>
-        <div>Error</div>
-        <div><span class="secondary">Field:</span> {{error.key}}</div>
+          <span class="secondary">Field:</span>
+          <ng-container *ngFor="let property of error.depth">
+            <span class="field">{{property}}</span>
+            <span class="separator secondary">></span>
+          </ng-container>
+          <span class="field">{{error.key}}</span></div>
         <div><span class="secondary">Message:</span> {{error.type}}</div>
       </div>
     </ng-container>

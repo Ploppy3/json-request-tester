@@ -43,7 +43,8 @@ export class TesterComponent implements OnInit {
     this._requestService.processRequest(this.tests[1]).subscribe(res => console.log(res))
   }
 
-  public start(test) {
+  public start(test: HttpTest) {
+    test.response = null;
     this._requestService.processRequest(test).subscribe(res => {
       test.response = { 
         body: res.response.body,

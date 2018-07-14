@@ -38,20 +38,33 @@
 .card-result {
   flex: 1;
   background-color: white;
-  padding: $spacer-padding;
   overflow: hidden;
-  div {
-    padding: $spacer-padding;
-    word-break: break-word
+  .fields{
+    background-color: red;
   }
 }
 pre{
   max-height: 200px;
 }
 .error-report{
-  padding: 8px;
   border-radius: 8px;
   border: 1px solid #FF3D00;
+  .title{
+    color: #F4511E;
+  }
+  .field, .separator{
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+  .field{
+    background-color: rgba($color: #000000, $alpha: .12);
+  }
+  .field:first-child{
+    margin-left: 8px;
+  }
+  span{
+    display: inline-block;
+  }
 }
 
 @media screen and (max-width: 640px) {
