@@ -4,10 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RequestService } from './request.service';
+import { RequestCardComponent } from './request-card/request-card.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RequestCardComponent
   ],
   imports: [
     BrowserModule,

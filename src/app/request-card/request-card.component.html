@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-request">
+    <span class="request-method bold">{{ request?.method }}</span>
+    <span class="request-url">{{ request?.url }}</span>
+  </div>
+
+  <div class="card-result">
+    <div>{{ result | json }}</div>
+  </div>
+</div>
