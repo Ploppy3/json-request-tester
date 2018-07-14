@@ -73,12 +73,12 @@ export class RequestService {
     let expected;
 
     try {
-      expected = JSON.parse(request.response.body);
+      expected = JSON.parse(request.expectedResponse.body);
     } catch (error) { }
 
     if (!expected) { console.warn('could not parse expected response json'); return; }
     
-    if (request.response.status != response.status) {
+    if (request.expectedResponse.status != response.status) {
       console.log('different status');
     }
     let errors = this.compareObjects(expected, response.body);

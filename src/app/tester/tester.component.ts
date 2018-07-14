@@ -14,7 +14,7 @@ export class TesterComponent implements OnInit {
       body: null,
       headers: [],
       method: 'GET',
-      response: {
+      expectedResponse: {
         body: '{"status":200,"description":"ok","data":"%any%"}',
         status: 200,
       },
@@ -24,7 +24,7 @@ export class TesterComponent implements OnInit {
       body: null,
       headers: [],
       method: 'GET',
-      response: {
+      expectedResponse: {
         body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
         status: 200,
       },

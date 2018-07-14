@@ -8,7 +8,7 @@ export interface HttpTest{
   method: 'POST' | 'GET' | 'PUT' | 'DELETE';
   headers: Header[];
   body: any;
-  response: {
+  expectedResponse: {
     body: string;
     status: number;
   }
