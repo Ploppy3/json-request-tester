@@ -5,6 +5,7 @@
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
+  color: rgba(0, 0, 0, .87);
 }
 body {
   background-color: #424242;
@@ -27,4 +28,12 @@ button {
   .material-icons {
     font-size: 32px;
   }
+}
+pre{
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 8px;
+  padding: 8px;
+}
+.secondary{
+  color: rgba(0, 0, 0, .54);
 }
