@@ -21,10 +21,7 @@ export class AppComponent implements OnInit {
   public test() {
     let request: Request = {
       body: null,
-      headers: [{
-        key: 'key',
-        value: 'value',
-      }],
+      headers: [],
       method: 'GET',
       response: {
         text: '{"status":200,"description":"ok"}',
