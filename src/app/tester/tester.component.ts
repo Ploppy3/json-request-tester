@@ -40,7 +40,7 @@ export class TesterComponent implements OnInit {
   }
 
   public test() {
-    this._requestService.processRequest(this.requests[0]);
+    this._requestService.processRequest(this.requests[1]).subscribe(res => console.log(res))
   }
 
 }
