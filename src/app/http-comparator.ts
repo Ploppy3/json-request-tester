@@ -1,7 +1,7 @@
 export abstract class HttpComparator {
 
   static compareObjects(expected: any, response: any, depth?: string[]) {
-    let errors: ErrorComparison[] = [];
+    let errors: HttpComparatorObjectError[] = [];
 
     console.log('expected', expected);
     console.log('got', response);
@@ -16,7 +16,7 @@ export abstract class HttpComparator {
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // using json to compare if values are object
         //console.log(expected[key], '!=', response[key]);
         if (!depth) { depth = [] }
-        let error: ErrorComparison = {
+        let error: HttpComparatorObjectError = {
           depth: depth,
           key: key,
           type: 'DIFFERENT_VALUE',
@@ -46,7 +46,7 @@ export abstract class HttpComparator {
   }
 }
 
-export interface ErrorComparison {
+export interface HttpComparatorObjectError {
   /** the depth from original object */
   depth: string[];
   key: string;
