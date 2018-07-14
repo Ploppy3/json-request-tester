@@ -9,7 +9,7 @@ export interface Request{
   headers: Header[];
   body: any;
   response: {
-    text: string;
+    body: string;
     status: number;
   }
 }

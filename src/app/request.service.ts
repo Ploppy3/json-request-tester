@@ -73,7 +73,7 @@ export class RequestService {
     let expected;
 
     try {
-      expected = JSON.parse(request.response.text);
+      expected = JSON.parse(request.response.body);
     } catch (error) { }
 
     if (!expected) { console.warn('could not parse expected response json'); return; }

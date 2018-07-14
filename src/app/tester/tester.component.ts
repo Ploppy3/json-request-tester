@@ -13,7 +13,7 @@ export class TesterComponent implements OnInit {
     headers: [],
     method: 'GET',
     response: {
-      text: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
+      body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
       status: 200,
     },
     url: 'https://api.travian.engin9tools.com/api/global/servers',
