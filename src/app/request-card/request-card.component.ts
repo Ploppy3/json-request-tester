@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpTest } from '../data';
 
 @Component({
   selector: 'app-request-card',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./request-card.component.scss']
 })
 export class RequestCardComponent implements OnInit {
-  @Input() request: Request;
+  @Input() request: HttpTest;
   @Input() result: any;
   
   constructor() { }
