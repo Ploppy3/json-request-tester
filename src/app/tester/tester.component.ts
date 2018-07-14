@@ -30,6 +30,16 @@ export class TesterComponent implements OnInit {
       },
       url: 'https://api.travian.engin9tools.com/api/global/servers',
     },
+    <HttpTest>{
+      body: null,
+      headers: [],
+      method: 'GET',
+      expectedResponse: {
+        body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
+        status: 200,
+      },
+      url: 'https://api.travian.engin9tools.com/api/global/testststs',
+    },
   ]
 
   constructor(
@@ -45,13 +55,24 @@ export class TesterComponent implements OnInit {
 
   public start(test: HttpTest) {
     test.response = null;
-    this._requestService.processRequest(test).subscribe(res => {
-      test.response = { 
-        body: res.response.body,
-        status: res.response.status,
-        errors: res.errors,
-      };
-    });
+    this._requestService.processRequest(test).pipe(
+    ).subscribe(
+      res => {
+        test.response = {
+          body: res.response.body,
+          status: res.response.status,
+          errors: res.errors,
+        }
+      },
+      err => {
+        console.log('error', err)
+        test.response = {
+          body: err.error,
+          status: err.status,
+          errors: [],
+        }
+      }
+    );
   }
 
 }

@@ -30,14 +30,14 @@ export class RequestService {
     //*/
   }
 
-  public processRequest(request: HttpTest) {
+  public processRequest(test: HttpTest) {
     let httpRequest: Observable<any>;
     let httpOptions = {
-      headers: this.formatHeaders(request.headers)
+      headers: this.formatHeaders(test.headers)
     }
-    switch (request.method) {
+    switch (test.method) {
       case 'GET':
-        httpRequest = this.httpGET(request.url, httpOptions);
+        httpRequest = this.httpGET(test.url, httpOptions);
         break;
       default:
         console.warn('Unsupported HTTP Method')
@@ -47,7 +47,7 @@ export class RequestService {
     //<{ response: HttpResponse<any>, errors: HttpComparatorObjectError[] }>(next);
     return httpRequest.pipe(
       map(res => {
-        let errors = this.findErrors(request, res);
+        let errors = this.findErrors(test, res);
         let finalRes: ProcessedRequest = {
           response: res,
           errors: errors,
@@ -60,9 +60,16 @@ export class RequestService {
   private httpGET(url, httpOptions) {
     httpOptions.observe = 'response'; // to get full http response
     return this._http.get(url, httpOptions).pipe(
-      catchError(this.handleError) // then handle the error
+      //catchError(this.handleError) // then handle the error
     );
   }
+
+  /*
+  private handleError(error: HttpErrorResponse) {
+    console.log('handleError', error);
+    return throwError('Something bad happened; please try again later.');
+  };
+  //*/
 
   private formatHeaders(headers: Header[]) {
     let httpHeaders = new HttpHeaders();
@@ -81,7 +88,7 @@ export class RequestService {
     } catch (error) { }
 
     if (!expected) { console.warn('could not parse expected response json'); return; }
-    
+
     if (request.expectedResponse.status != response.status) {
       console.log('different status');
     }
@@ -89,16 +96,9 @@ export class RequestService {
     console.log('errors', errors);
     return errors;
   }
-
-  
-
-  private handleError(error: HttpErrorResponse) {
-    console.log('handleError', error);
-    return throwError('Something bad happened; please try again later.');
-  };
 }
 
-export interface ProcessedRequest{
+export interface ProcessedRequest {
   response: HttpResponse<any>,
   errors: HttpComparatorObjectError[],
 }
