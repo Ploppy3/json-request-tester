@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Header, Request } from './data';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -36,7 +36,7 @@ export class RequestService {
     }
     switch (request.method) {
       case 'GET':
-        httpRequest = this.get(request.url, httpOptions);
+        httpRequest = this.httpGET(request.url, httpOptions);
         break;
       default:
         console.warn('Unsupported HTTP Method')
@@ -54,7 +54,8 @@ export class RequestService {
     );
   }
 
-  private get(url, httpOptions = {}) {
+  private httpGET(url, httpOptions) {
+    httpOptions.observe = 'response';
     return this._http.get(url, httpOptions).pipe(
       catchError(this.handleError) // then handle the error
     );
@@ -68,15 +69,19 @@ export class RequestService {
     return httpHeaders;
   }
 
-  private testResponse(request: Request, response: any) {
+  private testResponse(request: Request, response: HttpResponse<any>) {
     let expected;
+
     try {
       expected = JSON.parse(request.response.text);
     } catch (error) { }
 
     if (!expected) { console.warn('could not parse expected response json'); return; }
-
-    let errors = this.compareObjects(expected, response);
+    
+    if (request.response.status != response.status) {
+      console.log('different status');
+    }
+    let errors = this.compareObjects(expected, response.body);
     console.log('errors', errors);
   }
 
