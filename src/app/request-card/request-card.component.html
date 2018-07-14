@@ -1,7 +1,5 @@
-<div 
-[class.good]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length == 0" 
-[class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
-class="card-request flex column">
+<div [class.good]="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0" [class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
+  class="card-request flex column">
   <span class="request-method no-shrink bold">{{ test?.method }}</span>
 
   <div class="request-actions">
@@ -12,10 +10,21 @@ class="card-request flex column">
 </div>
 
 <div class="card-result horizontal-spacer vertical-spacer">
-  <pre class="overflow">{{ test.expectedResponse | json }}</pre>
+  <div class="code-wrapper">
+    <div class="title">Expected Status</div>
+    <pre class="overflow">{{ test.expectedResponse.status }}</pre>
+  </div>
+  <div class="code-wrapper">
+    <div class="title">Expected Body</div>
+    <pre class="overflow">{{ test.expectedResponse.body | toJson | json }}</pre>
+  </div>
 
   <ng-container *ngIf="test.response">
-    <div>Status {{ test.response?.status }}</div>
+    <hr>
+    <div class="code-wrapper">
+      <div class="title">Response Status</div>
+      <pre class="overflow">{{ test.response?.status }}</pre>
+    </div>
     <ng-container *ngIf="test.response?.errors.length > 0">
       <div class="error-report horizontal-spacer vertical-spacer" *ngFor="let error of test.response?.errors">
         <div class="title">Error</div>
@@ -29,6 +38,9 @@ class="card-request flex column">
         <div><span class="secondary">Message:</span> {{error.type}}</div>
       </div>
     </ng-container>
-    <pre class="overflow">{{ test.response?.body | json }}</pre>
+    <div class="code-wrapper">
+      <div class="title">Response Body</div>
+      <pre class="overflow">{{ test.response?.body | json }}</pre>
+    </div>
   </ng-container>
 </div>

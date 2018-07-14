@@ -30,10 +30,14 @@ button {
   }
 }
 pre{
-  border: 1px solid rgba(0, 0, 0, .12);
-  border-radius: 8px;
   padding: 16px;
+  margin: 0;
 }
 .secondary{
   color: rgba(0, 0, 0, .54);
+}
+hr{
+  height: 1px;
+  background-color: rgba(0, 0, 0, .24);
+  border: none;
 }
