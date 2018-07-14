@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { RequestService } from './request.service';
 import { RequestCardComponent } from './request-card/request-card.component';
 import { TesterComponent } from './tester/tester.component';
+import { ToJson } from './tojson.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     RequestCardComponent,
-    TesterComponent
+    TesterComponent,
+    ToJson,
   ],
   imports: [
     BrowserModule,
