@@ -8,27 +8,39 @@ import { Request } from '../data';
   styleUrls: ['./tester.component.scss']
 })
 export class TesterComponent implements OnInit {
-  request: Request = {
-    body: null,
-    headers: [],
-    method: 'GET',
-    response: {
-      body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
-      status: 200,
+
+  public requests = [
+    <Request>{
+      body: null,
+      headers: [],
+      method: 'GET',
+      response: {
+        body: '{"status":200,"description":"ok","data":"%any%"}',
+        status: 200,
+      },
+      url: 'https://api.travian.engin9tools.com/api/global/servers',
     },
-    url: 'https://api.travian.engin9tools.com/api/global/servers',
-  }
+    <Request>{
+      body: null,
+      headers: [],
+      method: 'GET',
+      response: {
+        body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
+        status: 200,
+      },
+      url: 'https://api.travian.engin9tools.com/api/global/servers',
+    },
+  ]
 
   constructor(
     private _requestService: RequestService,
   ) { }
 
   ngOnInit(): void {
-    //this.test();
   }
 
   public test() {
-    this._requestService.processRequest(this.request);
+    this._requestService.processRequest(this.requests[0]);
   }
 
 }
