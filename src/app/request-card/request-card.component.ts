@@ -18,14 +18,4 @@ export class RequestCardComponent implements OnInit {
   ngOnInit() {
 
   }
-  public start() {
-    this.requestService.processRequest(this.test).subscribe(res => {
-      this.test.response = { 
-        body: res.response.body,
-        status: res.response.status,
-        errors: res.errors,
-      };
-    });
-  }
-
 }

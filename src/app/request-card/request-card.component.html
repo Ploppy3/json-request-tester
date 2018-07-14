@@ -1,10 +1,18 @@
-<div class="card-request flex column">
+<div class="card-request flex column" 
+[class.error]="test.response?.errors.length > 0"
+[class.good]="test.response?.errors.length == 0">
   <span class="request-method bold">{{ test?.method }}</span>
+
+  <div class="request-actions">
+    <ng-content></ng-content>
+  </div>
+
   <span class="request-url">{{ test?.url }}</span>
 </div>
+
 <div class="card-result">
-  <button (click)="start()">Test</button>
   <pre class="overflow">{{ test.expectedResponse | json }}</pre>
+
   <ng-container *ngIf="test.response">
     <div>Status {{ test.response?.status }}</div>
     <ng-container *ngIf="test.response?.errors.length > 0">

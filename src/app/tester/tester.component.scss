@@ -15,6 +15,7 @@ $command_size: 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 1;
   &>* {
     margin: 8px;
   }

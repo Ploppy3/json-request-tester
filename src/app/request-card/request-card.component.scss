@@ -15,9 +15,18 @@
   justify-content: space-between;
   flex-shrink: 0;
   background-color: #B0BEC5; // blue gray 200
+  transition: .4s background-color ease;
   color: white;
   .request-method {
     font-size: 2rem;
+  }
+  .request-actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .request-url {
+    margin-top: auto;
+    font-weight: 300;
   }
   &.error {
     background-color: #E53935; // red 600
@@ -29,6 +38,8 @@
 .card-result {
   flex: 1;
   background-color: white;
+  padding: $spacer-padding;
+  overflow: hidden;
   div {
     padding: $spacer-padding;
     word-break: break-word
@@ -36,4 +47,14 @@
 }
 pre{
   max-height: 300px;
+}
+
+@media screen and (max-width: 640px) {
+  :host {
+    flex-direction: column;
+  }
+
+  .card-request {
+    max-width: 100%;
+  }
 }
