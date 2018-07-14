@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { RequestService } from '../request.service';
 import { HttpTest } from '../data';
 
@@ -44,13 +44,24 @@ export class TesterComponent implements OnInit {
 
   constructor(
     private _requestService: RequestService,
+    private zone: NgZone,
   ) { }
 
   ngOnInit(): void {
   }
 
-  public test(request: HttpTest) {
-    this._requestService.processRequest(this.tests[1]).subscribe(res => console.log(res))
+  public testAll(request: HttpTest) {
+    for (let i = 0; i < this.tests.length; i++) {
+      const test = this.tests[i];
+      test.response = null;
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.zone.run(() => {
+            this.start(test);
+          })
+        }, 500 * i);
+      })
+    }
   }
 
   public start(test: HttpTest) {
