@@ -1,5 +1,11 @@
-<button (click)="test()">test</button>
+<div id="tester-command">
+    <button id="play-btn" class="icon fab" (click)="test()">
+        <i class="material-icons">play_arrow</i>
+    </button>
+</div>
 
 <div id="card-list">
-    <app-request-card [request]="request" [result]="{}"></app-request-card>
+    <app-request-card [request]="request" [result]="request"></app-request-card>
+    <app-request-card [request]="request" [result]="request"></app-request-card>
+    <app-request-card [request]="request" [result]="request"></app-request-card>
 </div>
