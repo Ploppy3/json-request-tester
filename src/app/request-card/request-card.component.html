@@ -1,7 +1,8 @@
-<div class="card-request flex column" 
-[class.error]="test.response?.errors.length > 0"
-[class.good]="test.response?.errors.length == 0">
-  <span class="request-method bold">{{ test?.method }}</span>
+<div 
+[class.good]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length == 0" 
+[class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
+class="card-request flex column">
+  <span class="request-method no-shrink bold">{{ test?.method }}</span>
 
   <div class="request-actions">
     <ng-content></ng-content>
@@ -10,18 +11,19 @@
   <span class="request-url">{{ test?.url }}</span>
 </div>
 
-<div class="card-result">
+<div class="card-result horizontal-spacer vertical-spacer">
   <pre class="overflow">{{ test.expectedResponse | json }}</pre>
 
   <ng-container *ngIf="test.response">
     <div>Status {{ test.response?.status }}</div>
     <ng-container *ngIf="test.response?.errors.length > 0">
-      <div *ngFor="let error of test.response?.errors">
+      <div class="error-report" *ngFor="let error of test.response?.errors">
         <div>
           <span *ngFor="let object of error.depth">{{ object }}</span>
         </div>
-        <div>{{error.key}}</div>
-        <div>Error: {{error.type}}</div>
+        <div>Error</div>
+        <div><span class="secondary">Field:</span> {{error.key}}</div>
+        <div><span class="secondary">Message:</span> {{error.type}}</div>
       </div>
     </ng-container>
     <pre class="overflow">{{ test.response?.body | json }}</pre>

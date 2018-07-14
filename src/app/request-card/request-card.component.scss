@@ -1,4 +1,5 @@
 @import '~CssFramework/styles.scss';
+
 :host {
   display: flex;
   width: 100%;
@@ -7,16 +8,15 @@
 }
 .card-request {
   font-size: .8rem;
-  word-break: break-word;
-  padding: $spacer-padding;
+  word-break: break-all;
+  padding: 8px;
   max-width: 200px;
   width: 100%;
-  flex-direction: column;
   justify-content: space-between;
-  flex-shrink: 0;
   background-color: #B0BEC5; // blue gray 200
   transition: .4s background-color ease;
   color: white;
+  transition: background-color .5s ease-out;
   .request-method {
     font-size: 2rem;
   }
@@ -29,10 +29,10 @@
     font-weight: 300;
   }
   &.error {
-    background-color: #E53935; // red 600
+    background-color: #FF5722; // red 500
   }
   &.good {
-    background-color: #43A047; // green 600
+    background-color: #4CAF50; // green 500
   }
 }
 .card-result {
@@ -46,7 +46,12 @@
   }
 }
 pre{
-  max-height: 300px;
+  max-height: 200px;
+}
+.error-report{
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #FF3D00;
 }
 
 @media screen and (max-width: 640px) {
