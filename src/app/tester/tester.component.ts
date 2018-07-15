@@ -25,7 +25,7 @@ export class TesterComponent implements OnInit {
       headers: [],
       method: 'GET',
       expectedResponse: {
-        body: '{"status":"%anyNumber%","description":"%anyString%","data":"%anyArray%"}',
+        body: '{"status":"%anyNumber%","description":"%anyString%","data":["%anyObject%"]}',
         status: 200,
       },
       url: 'https://api.travian.engin9tools.com/api/global/servers',

@@ -27,23 +27,23 @@ export abstract class JsonComparator {
           error.type = 'ALLOWED';
           console.log('allowed, %any%');
         }
-        else if (expected[key] == '%anyArray%' &&  !isArray(expected[key])) { // allow %anyArray%
+        else if (expected[key] == '%anyArray%' && !isArray(expected[key])) { // allow %anyArray%
           error.type = 'ALLOWED';
           console.log('allowed, %anyArray%');
         }
-        else if (expected[key] == '%anyObject%' && typeof response[key] === 'object') { // allow %anyObject%
+        else if (expected[key] == '%anyObject%' && typeof response[key] === 'object' && !isArray(expected[key])) { // allow %anyObject%
           error.type = 'ALLOWED';
           console.log('allowed, %anyObject%');
         }
-        else if (expected[key] == '%anyNumber%' && typeof response[key] === 'number') { // allow %anyNumber%
+        else if (expected[key] == '%anyNumber%' && typeof response[key] === 'number' && !isArray(expected[key])) { // allow %anyNumber%
           error.type = 'ALLOWED';
           console.log('allowed, %anyNumber%');
         }
-        else if (expected[key] == '%anyString%' && typeof response[key] === 'string') { // allow %anyString%
+        else if (expected[key] == '%anyString%' && typeof response[key] === 'string' && !isArray(expected[key])) { // allow %anyString%
           error.type = 'ALLOWED';
           console.log('allowed, %anyString%');
         }
-        else if (expected[key] == '%anyBoolean%' && typeof response[key] === 'boolean') { // allow %anyBoolean%
+        else if (expected[key] == '%anyBoolean%' && typeof response[key] === 'boolean' && !isArray(expected[key])) { // allow %anyBoolean%
           error.type = 'ALLOWED';
           console.log('allowed, %anyBoolean%');
         }
