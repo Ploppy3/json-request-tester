@@ -11,6 +11,7 @@ import { TesterComponent } from './tester/tester.component';
 import { ToJson } from './tojson.pipe';
 import { TestGeneratorComponent } from './test-generator/test-generator.component';
 import { JsonEditorComponent } from './test-generator/json-editor/json-editor.component';
+import { ArrayEditorComponent } from './test-generator/array-editor/array-editor.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { JsonEditorComponent } from './test-generator/json-editor/json-editor.co
     ToJson,
     TestGeneratorComponent,
     JsonEditorComponent,
+    ArrayEditorComponent,
   ],
   imports: [
     BrowserModule,

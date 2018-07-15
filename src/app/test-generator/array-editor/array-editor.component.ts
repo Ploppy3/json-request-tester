@@ -2,13 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { isArray } from 'util';
 
 @Component({
-  selector: 'app-json-editor',
-  templateUrl: './json-editor.component.html',
-  styleUrls: ['./json-editor.component.scss']
+  selector: 'app-array-editor',
+  templateUrl: './array-editor.component.html',
+  styleUrls: ['./array-editor.component.scss']
 })
-export class JsonEditorComponent implements OnInit {
+export class ArrayEditorComponent implements OnInit {
 
-  @Input() obj;
+  @Input() obj: any[];
 
   public PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
   public PROPERTY_TYPES: string[] = [];
@@ -17,26 +17,22 @@ export class JsonEditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //console.log('array', this.obj);
     this.PROPERTY_TYPES = Object.keys(this.PROPERTY_TYPES_ENUM).filter(key => isNaN(Number(key)));
     if (this.obj) {
-      if (typeof this.obj == 'object') {
-        Object.keys(this.obj).forEach(key => {
+      if (isArray(this.obj)) {
+        for (let i = 0; i < this.obj.length; i++) {
+          const element = this.obj[i];
           this.key_value_pairs.push({
-            key: key,
-            type: getPropertyType(this.obj[key]),
+            key: i,
+            type: getPropertyType(this.obj[i]),
           });
-        });
+        }
       }
     }
     //console.log(this.key_value_pairs);
   }
 
-  public renameProperty(obj: any, oldKey: string, newKey: string, property: KeyTypePair): any {
-    //console.log('renaming property', oldKey, oldKey, newKey);
-    obj[newKey] = obj[oldKey];
-    delete obj[oldKey];
-    property.key = newKey;
-  }
 }
 
 function getPropertyType(property: any): PROPERTY_TYPES {
@@ -54,7 +50,7 @@ function getPropertyType(property: any): PROPERTY_TYPES {
 }
 
 interface KeyTypePair {
-  key: string;
+  key: number;
   type: PROPERTY_TYPES;
 }
 
