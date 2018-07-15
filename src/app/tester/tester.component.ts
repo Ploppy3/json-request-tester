@@ -41,11 +41,11 @@ export class TesterComponent implements OnInit {
       url: 'https://api.travian.engin9tools.com/api/global/servers',
     },
     <HttpTest>{
-      body: null,
+      body: '{"status": 400, "description": "bad request", "message": "this route does not exist"}',
       headers: [],
       method: 'GET',
       expectedResponse: {
-        body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
+        body: '{"status":400,"description":"k","data":"%any%","datas":"test"}',
         status: 200,
       },
       url: 'https://api.travian.engin9tools.com/api/global/testststs',
@@ -87,10 +87,11 @@ export class TesterComponent implements OnInit {
       },
       err => {
         console.log('error', err)
+        let errors = this.testService.findErrors(test, err);
         test.response = {
           body: err.error,
           status: err.status,
-          errors: [],
+          errors: errors,
         }
       }
     );

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Header, HttpTest } from './data';
-import { throwError, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { JsonComparator, JsonCmparatorObjectError } from './json-comparator';
 
 @Injectable({
@@ -46,14 +46,17 @@ export class TestService {
     if (!httpRequest) return;
     //<{ response: HttpResponse<any>, errors: HttpComparatorObjectError[] }>(next);
     return httpRequest.pipe(
-      map(res => {
-        let errors = this.findErrors(test, res);
-        let finalRes: ProcessedRequest = {
-          response: res,
-          errors: errors,
-        };
-        return finalRes;
-      })
+      map(
+        res => {
+          console.log('res', res);
+          let errors = this.findErrors(test, res);
+          let finalRes: ProcessedRequest = {
+            response: res,
+            errors: errors,
+          };
+          return finalRes;
+        }
+      )
     )
   }
 
@@ -79,20 +82,23 @@ export class TestService {
     return httpHeaders;
   }
 
-  private findErrors(request: HttpTest, response: HttpResponse<any>): JsonCmparatorObjectError[] {
+  public findErrors(test: HttpTest, response: HttpResponse<any>): JsonCmparatorObjectError[] {
+
+    console.log('fingind errors by comparing', test, response);
+
     let errors: JsonCmparatorObjectError[] = [];
     let expected;
 
     try {
-      expected = JSON.parse(request.expectedResponse.body);
+      expected = JSON.parse(test.expectedResponse.body);
     } catch (error) { }
 
     if (!expected) { console.warn('could not parse expected response json'); return; }
 
-    if (request.expectedResponse.status != response.status) {
+    if (test.expectedResponse.status != response.status) {
       console.log('different status');
     }
-    errors = JsonComparator.compareObjects(expected, response.body);
+    errors = JsonComparator.compareObjects(expected, response.body || response['error'] /* fallback when HttpErrorResponse */);
     console.log('errors', errors);
     return errors;
   }
