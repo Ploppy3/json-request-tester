@@ -7,17 +7,34 @@
   box-sizing: border-box;
   color: rgba(0, 0, 0, .87);
 }
-*:focus{
+*:focus {
   outline: none;
 }
 body {
   background-color: #424242;
 }
-.bold {
-  font-weight: 700;
-}
 button {
   cursor: pointer;
+}
+input,
+select,
+textarea {
+  font-size: 1em;
+  border: 1px solid rgba(0, 0, 0, .12);
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 100%;
+  resize: none;
+}
+input,
+select {
+  height: 39px;
+}
+select{
+  cursor: pointer;
+}
+.bold {
+  font-weight: 700;
 }
 .fab {
   width: 48px;
@@ -32,14 +49,14 @@ button {
     font-size: 32px;
   }
 }
-pre{
+pre {
   padding: 16px;
   margin: 0;
 }
-.secondary{
+.secondary {
   color: rgba(0, 0, 0, .54);
 }
-hr{
+hr {
   height: 1px;
   background-color: rgba(0, 0, 0, .24);
   border: none;
