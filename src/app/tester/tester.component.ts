@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { RequestService } from '../request.service';
+import { TestService } from '../test.service';
 import { HttpTest } from '../data';
 
 @Component({
@@ -53,7 +53,7 @@ export class TesterComponent implements OnInit {
   ]
 
   constructor(
-    private _requestService: RequestService,
+    private _requestService: TestService,
     private zone: NgZone,
   ) { }
 

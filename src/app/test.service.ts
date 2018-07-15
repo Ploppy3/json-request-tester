@@ -8,7 +8,7 @@ import { JsonComparator, JsonCmparatorObjectError } from './json-comparator';
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService {
+export class TestService {
 
   constructor(private _http: HttpClient) {
     /*

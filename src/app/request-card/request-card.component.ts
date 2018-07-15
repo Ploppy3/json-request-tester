@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpTest } from '../data';
-import { RequestService } from '../request.service';
+import { TestService } from '../test.service';
 
 @Component({
   selector: 'app-request-card',
@@ -12,7 +12,7 @@ export class RequestCardComponent implements OnInit {
   @Input() result: any;
   
   constructor(
-    private requestService: RequestService
+    private requestService: TestService
   ) { }
 
   ngOnInit() {

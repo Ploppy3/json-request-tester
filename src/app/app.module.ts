@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { RequestService } from './request.service';
+import { TestService } from './test.service';
 import { RequestCardComponent } from './request-card/request-card.component';
 import { TesterComponent } from './tester/tester.component';
 import { ToJson } from './tojson.pipe';
@@ -23,7 +23,7 @@ import { TestGeneratorComponent } from './test-generator/test-generator.componen
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [ RequestService ],
+  providers: [ TestService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
