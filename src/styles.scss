@@ -7,6 +7,9 @@
   box-sizing: border-box;
   color: rgba(0, 0, 0, .87);
 }
+*:focus{
+  outline: none;
+}
 body {
   background-color: #424242;
 }
