@@ -6,6 +6,8 @@
     <option value="get">PUT</option>
     <option value="get">DELETE</option>
   </select>
-  <textarea type="text" rows="4" placeholder="expected response body (json)"></textarea>
+  <app-json-editor [(obj)]="testObj"></app-json-editor>
+  <hr>
+  <pre>{{testObj | json}}</pre>
   <button>add</button>
 </div>

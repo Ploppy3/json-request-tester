@@ -1,0 +1,13 @@
+:host{
+  display: block;
+}
+:host,
+.wrapper-array{
+  margin-bottom: 8px;
+  margin-left: 16px;
+  padding-left: 8px;
+  border-left: 1px solid rgba($color: #000000, $alpha: .12);
+}
+.input-key{
+  max-width: 100px;
+}
