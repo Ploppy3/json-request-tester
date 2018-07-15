@@ -15,18 +15,37 @@ export abstract class JsonComparator {
     }
     Object.keys(expected).forEach(key => {
       //console.log(key, expected[key]);
-      if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // using json to compare if values are object
-        //console.log(expected[key], '!=', response[key]);
+      if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // use json to compare if values are object
+        console.log(expected[key], '!=', response[key]);
         if (!depth) { depth = [] }
         let error: JsonCmparatorObjectError = {
           depth: depth,
           key: key,
           type: 'DIFFERENT_VALUE',
         }
-        /** allow %any% values */
-        if (expected[key] == '%any%' && !isArray(expected[key])) { // also check for type array because ["%any%"] == "%any%"
+        if (expected[key] == '%any%' && !isArray(expected[key])) { // allow %any% values, also check for type array because ["%any%"] == "%any%"
           error.type = 'ALLOWED';
-          //console.log(expected[key], '==', '%any%', 'allowed');
+          console.log('allowed, %any%');
+        }
+        else if (expected[key] == '%anyArray%' &&  !isArray(expected[key])) { // allow %anyArray%
+          error.type = 'ALLOWED';
+          console.log('allowed, %anyArray%');
+        }
+        else if (expected[key] == '%anyObject%' && typeof response[key] === 'object') { // allow %anyObject%
+          error.type = 'ALLOWED';
+          console.log('allowed, %anyObject%');
+        }
+        else if (expected[key] == '%anyNumber%' && typeof response[key] === 'number') { // allow %anyNumber%
+          error.type = 'ALLOWED';
+          console.log('allowed, %anyNumber%');
+        }
+        else if (expected[key] == '%anyString%' && typeof response[key] === 'string') { // allow %anyString%
+          error.type = 'ALLOWED';
+          console.log('allowed, %anyString%');
+        }
+        else if (expected[key] == '%anyBoolean%' && typeof response[key] === 'boolean') { // allow %anyBoolean%
+          error.type = 'ALLOWED';
+          console.log('allowed, %anyBoolean%');
         }
         /** if both values are object, compare them */
         else if (typeof expected[key] === 'object' && typeof response[key] === 'object') {

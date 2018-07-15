@@ -15,7 +15,7 @@ export class TesterComponent implements OnInit {
       headers: [],
       method: 'GET',
       expectedResponse: {
-        body: '{"data":["%any%"],"total_pages":"%any%","per_page":"%any%","page":2,"total":"%any%"}',
+        body: '{"data":["%any%"],"total_pages":"%anyNumber%","per_page":"%any%","page":2,"total":"%any%"}',
         status: 200,
       },
       url: 'https://reqres.in/api/users?page=2',
@@ -25,7 +25,7 @@ export class TesterComponent implements OnInit {
       headers: [],
       method: 'GET',
       expectedResponse: {
-        body: '{"status":200,"description":"ok","data":"%any%"}',
+        body: '{"status":"%anyNumber%","description":"%anyString%","data":"%anyArray%"}',
         status: 200,
       },
       url: 'https://api.travian.engin9tools.com/api/global/servers',
