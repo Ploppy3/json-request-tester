@@ -35,18 +35,8 @@ export class TesterComponent implements OnInit {
       headers: [],
       method: 'GET',
       expectedResponse: {
-        body: '{"status":200,"description":"k","data":"%any%","datas":"test"}',
-        status: 200,
-      },
-      url: 'https://api.travian.engin9tools.com/api/global/servers',
-    },
-    <HttpTest>{
-      body: '{"status": 400, "description": "bad request", "message": "this route does not exist"}',
-      headers: [],
-      method: 'GET',
-      expectedResponse: {
-        body: '{"status":400,"description":"k","data":"%any%","datas":"test"}',
-        status: 200,
+        body: '{"status": 400, "description": "pretty bad request", "message": "this route does not exist"}',
+        status: 400,
       },
       url: 'https://api.travian.engin9tools.com/api/global/testststs',
     },
