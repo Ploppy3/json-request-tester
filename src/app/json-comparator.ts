@@ -1,9 +1,9 @@
 import { isArray } from "util";
 
-export abstract class HttpComparator {
+export abstract class JsonComparator {
 
   static compareObjects(expected: any, response: any, depth?: string[]) {
-    let errors: HttpComparatorObjectError[] = [];
+    let errors: JsonCmparatorObjectError[] = [];
 
     console.log('expected', expected);
     console.log('got', response);
@@ -18,7 +18,7 @@ export abstract class HttpComparator {
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // using json to compare if values are object
         //console.log(expected[key], '!=', response[key]);
         if (!depth) { depth = [] }
-        let error: HttpComparatorObjectError = {
+        let error: JsonCmparatorObjectError = {
           depth: depth,
           key: key,
           type: 'DIFFERENT_VALUE',
@@ -45,7 +45,7 @@ export abstract class HttpComparator {
       }
     })
     Object.keys(response).forEach(key => {
-      let error: HttpComparatorObjectError = {
+      let error: JsonCmparatorObjectError = {
         depth: depth,
         key: key,
         type: 'UNEXPECTED_KEY_VALUE_PAIR',
@@ -59,7 +59,7 @@ export abstract class HttpComparator {
   }
 }
 
-export interface HttpComparatorObjectError {
+export interface JsonCmparatorObjectError {
   /** the depth from original object */
   depth: string[];
   key: string;

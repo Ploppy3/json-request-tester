@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpEvent } f
 import { Header, HttpTest } from './data';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { HttpComparator, HttpComparatorObjectError } from './http-comparator';
+import { JsonComparator, JsonCmparatorObjectError } from './json-comparator';
 
 @Injectable({
   providedIn: 'root'
@@ -79,8 +79,8 @@ export class RequestService {
     return httpHeaders;
   }
 
-  private findErrors(request: HttpTest, response: HttpResponse<any>): HttpComparatorObjectError[] {
-    let errors: HttpComparatorObjectError[] = [];
+  private findErrors(request: HttpTest, response: HttpResponse<any>): JsonCmparatorObjectError[] {
+    let errors: JsonCmparatorObjectError[] = [];
     let expected;
 
     try {
@@ -92,7 +92,7 @@ export class RequestService {
     if (request.expectedResponse.status != response.status) {
       console.log('different status');
     }
-    errors = HttpComparator.compareObjects(expected, response.body);
+    errors = JsonComparator.compareObjects(expected, response.body);
     console.log('errors', errors);
     return errors;
   }
@@ -100,5 +100,5 @@ export class RequestService {
 
 export interface ProcessedRequest {
   response: HttpResponse<any>,
-  errors: HttpComparatorObjectError[],
+  errors: JsonCmparatorObjectError[],
 }
