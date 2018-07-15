@@ -1,3 +1,5 @@
+import { isArray } from "util";
+
 export abstract class HttpComparator {
 
   static compareObjects(expected: any, response: any, depth?: string[]) {
@@ -22,12 +24,13 @@ export abstract class HttpComparator {
           type: 'DIFFERENT_VALUE',
         }
         /** allow %any% values */
-        if (expected[key] == '%any%') {
+        if (expected[key] == '%any%' && !isArray(expected[key])) { // also check for type array because ["%any%"] == "%any%"
           error.type = 'ALLOWED';
+          //console.log(expected[key], '==', '%any%', 'allowed');
         }
         /** if both values are object, compare them */
         else if (typeof expected[key] === 'object' && typeof response[key] === 'object') {
-          error.type = 'ALLOWED';
+          //error.type = 'ALLOWED';
           let newErrors = this.compareObjects(expected[key], response[key], [...depth, key]);
           //console.log('newErrors', newErrors);
           errors = errors.concat(newErrors);
@@ -41,6 +44,16 @@ export abstract class HttpComparator {
           errors.push(error);
       }
     })
+    Object.keys(response).forEach(key => {
+      let error: HttpComparatorObjectError = {
+        depth: depth,
+        key: key,
+        type: 'UNEXPECTED_KEY_VALUE_PAIR',
+      }
+      if (!(key in expected)) {
+        errors.push(error);
+      }
+    })
 
     return errors;
   }
@@ -50,5 +63,5 @@ export interface HttpComparatorObjectError {
   /** the depth from original object */
   depth: string[];
   key: string;
-  type: 'ALLOWED' | 'MISSING_KEY' | 'DIFFERENT_VALUE';
+  type: 'ALLOWED' | 'MISSING_KEY' | 'DIFFERENT_VALUE' | 'UNEXPECTED_KEY_VALUE_PAIR'; // ALLOWED type is used to skip trusted fields
 }
