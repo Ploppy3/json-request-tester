@@ -7,7 +7,7 @@ export interface Data {
 
 export interface HttpTest{
   url: string;
-  method: 'POST' | 'GET' | 'PUT' | 'DELETE';
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   headers: Header[];
   body: any;
   expectedResponse: {

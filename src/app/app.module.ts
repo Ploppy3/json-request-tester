@@ -8,6 +8,7 @@ import { RequestService } from './request.service';
 import { RequestCardComponent } from './request-card/request-card.component';
 import { TesterComponent } from './tester/tester.component';
 import { ToJson } from './tojson.pipe';
+import { TestGeneratorComponent } from './test-generator/test-generator.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ToJson } from './tojson.pipe';
     RequestCardComponent,
     TesterComponent,
     ToJson,
+    TestGeneratorComponent,
   ],
   imports: [
     BrowserModule,

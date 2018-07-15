@@ -15,6 +15,16 @@ export class TesterComponent implements OnInit {
       headers: [],
       method: 'GET',
       expectedResponse: {
+        body: '{"data":["%any%"],"total_pages":"%any%","per_page":"%any%","page":2,"total":"%any%"}',
+        status: 200,
+      },
+      url: 'https://reqres.in/api/users?page=2',
+    },
+    <HttpTest>{
+      body: null,
+      headers: [],
+      method: 'GET',
+      expectedResponse: {
         body: '{"status":200,"description":"ok","data":"%any%"}',
         status: 200,
       },
