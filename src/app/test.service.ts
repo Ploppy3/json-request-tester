@@ -93,7 +93,7 @@ export class TestService {
       expected = JSON.parse(test.expectedResponse.body);
     } catch (error) { }
 
-    if (!expected) { console.warn('could not parse expected response json'); return; }
+    if (!expected) { console.warn('could not parse expected response json'); return []; }
 
     if (test.expectedResponse.status != response.status) {
       console.log('different status');
