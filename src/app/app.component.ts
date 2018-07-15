@@ -12,13 +12,11 @@ import { environment } from "../environments/environment";
 export class AppComponent implements DoCheck, OnInit {
 
   public showFabToTop = false;
-  public lastScrollY = 0;
+  public lastScrollY = 0; // used to keep track of fabToTop state
 
-  //96px
-
-  constructor(private zone: NgZone) {
-    
-  }
+  constructor(
+    private zone: NgZone
+  ) { }
 
   ngOnInit() {
     this.zone.runOutsideAngular(() => {

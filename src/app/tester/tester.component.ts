@@ -53,14 +53,14 @@ export class TesterComponent implements OnInit {
   ]
 
   constructor(
-    private _requestService: TestService,
+    private testService: TestService,
     private zone: NgZone,
   ) { }
 
   ngOnInit(): void {
   }
 
-  public testAll(request: HttpTest) {
+  public testAll() {
     for (let i = 0; i < this.tests.length; i++) {
       const test = this.tests[i];
       test.response = null;
@@ -76,7 +76,7 @@ export class TesterComponent implements OnInit {
 
   public start(test: HttpTest) {
     test.response = null;
-    this._requestService.processRequest(test).pipe(
+    this.testService.test(test).pipe(
     ).subscribe(
       res => {
         test.response = {

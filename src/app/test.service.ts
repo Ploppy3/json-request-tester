@@ -30,7 +30,7 @@ export class TestService {
     //*/
   }
 
-  public processRequest(test: HttpTest) {
+  public test(test: HttpTest) {
     let httpRequest: Observable<any>;
     let httpOptions = {
       headers: this.formatHeaders(test.headers)
