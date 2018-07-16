@@ -1,6 +1,5 @@
 :host{
   display: block;
-  padding-top: 8px;
 }
 .wrapper-array{
   overflow: hidden;
@@ -10,9 +9,6 @@
 }
 .spacer{
   margin: 8px 0;
-  &:first-child{
-    margin-top: 0;
-  }
 }
 input{
   margin: 0 8px;

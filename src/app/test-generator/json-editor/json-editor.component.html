@@ -35,4 +35,6 @@
   </ng-container>
   <button class="circle secondary" (click)="removeFromObject(property.key)"><i class="material-icons">close</i></button>
 </div>
-<button (click)="addToObject()" [disabled]="obj['newKey']"><i class="material-icons">add</i></button>
+<div class="spacer">
+  <button (click)="addToObject()" [disabled]="obj['newKey']"><i class="material-icons">add</i></button>
+</div>
