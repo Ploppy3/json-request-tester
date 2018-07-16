@@ -15,6 +15,8 @@
       <div class="title">Expected Status</div>
       <pre class="overflow">{{ test.expectedResponse.status }}</pre>
     </div>
+    <app-json-viewer [obj]="test.expectedResponse.body"></app-json-viewer>
+    <!--
     <div class="code-wrapper">
       <div class="title flex">
         <span class="self-center">Expected Body</span>
@@ -28,6 +30,7 @@
         <pre class="overflow">{{ test.expectedResponse.body | json }}</pre>
       </ng-template>
     </div>
+    -->
   </div>
   <ng-container *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
     <hr>
@@ -37,7 +40,7 @@
         <pre class="overflow">{{ test.response?.status }}</pre>
       </div>
       <ng-container *ngIf="test.response?.errors.length > 0">
-        <div class="error-wrapper" *ngFor="let error of test.response?.errors">
+        <div class="error-wrapper" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
           <div class="title">Error</div>
           <div class="horizontal-spacer vertical-spacer">
             <div>

@@ -18,4 +18,8 @@ export class RequestCardComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  public trackByFn(i, test: HttpTest) {
+    return i;
+  }
 }
