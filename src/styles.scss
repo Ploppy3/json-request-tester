@@ -11,6 +11,7 @@
 }
 body {
   background-color: #424242;
+  overflow-y: scroll;
 }
 button {
   cursor: pointer;
@@ -23,7 +24,7 @@ select,
 textarea {
   font-size: 1em;
   border: 1px solid rgba(0, 0, 0, .12);
-  padding: 8px;
+  padding: 0 8px;
   border-radius: 8px;
   max-width: 100%;
   resize: none;
