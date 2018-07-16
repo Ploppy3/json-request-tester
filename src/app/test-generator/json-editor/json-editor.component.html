@@ -1,6 +1,6 @@
-<div class="spacer" *ngFor="let property of key_value_pairs">
+<div class="spacer" *ngFor="let property of key_value_pairs; trackBy: trackByFn">
   <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property)">
-    <option *ngFor="let type of PROPERTY_TYPES; let i = index" [ngValue]="i">{{type}}</option>
+    <option *ngFor="let type of PROPERTY_TYPES; let i = index;" [ngValue]="i">{{type}}</option>
   </select>
   <ng-container [ngSwitch]="property.type">
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.STRING">

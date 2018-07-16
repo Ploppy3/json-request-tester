@@ -71,6 +71,10 @@ export class ArrayEditorComponent implements OnInit {
         break;
     }
   }
+
+  public trackByFn(i, keyTypePair: KeyTypePair) {
+    return i;
+  }
 }
 
 function getPropertyType(property: any): PROPERTY_TYPES {

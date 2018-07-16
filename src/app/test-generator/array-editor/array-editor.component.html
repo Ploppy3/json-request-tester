@@ -1,4 +1,4 @@
-<div class="spacer" *ngFor="let property of key_value_pairs; let i = index;">
+<div class="spacer" *ngFor="let property of key_value_pairs; let i = index; trackBy: trackByFn">
   <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property)">
     <option *ngFor="let type of PROPERTY_TYPES; let j = index" [ngValue]="j">{{type}}</option>
   </select>

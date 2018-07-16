@@ -95,4 +95,7 @@ export class TesterComponent implements OnInit {
     );
   }
 
+  public trackByFn(i, test: HttpTest) {
+    return i;
+  }
 }

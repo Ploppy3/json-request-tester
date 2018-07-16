@@ -76,6 +76,10 @@ export class JsonEditorComponent implements OnInit {
         break;
     }
   }
+
+  public trackByFn(i, keyTypePair: KeyTypePair) {
+    return i;
+  }
 }
 
 function getPropertyType(property: any): PROPERTY_TYPES {
