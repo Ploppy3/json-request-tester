@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { isArray } from 'util';
 
 @Component({
@@ -8,7 +8,7 @@ import { isArray } from 'util';
 })
 export class ArrayEditorComponent implements OnInit {
 
-  @Input() obj: any[];
+  @Input() array: any[];
 
   public PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
   public PROPERTY_TYPES: string[] = [];
@@ -17,15 +17,20 @@ export class ArrayEditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.init();
+  }
+
+  public init() {
     //console.log('array', this.obj);
     this.PROPERTY_TYPES = Object.keys(this.PROPERTY_TYPES_ENUM).filter(key => isNaN(Number(key)));
-    if (this.obj) {
-      if (isArray(this.obj)) {
-        for (let i = 0; i < this.obj.length; i++) {
-          const element = this.obj[i];
+    this.key_value_pairs = [];
+    if (this.array) {
+      if (isArray(this.array)) {
+        for (let i = 0; i < this.array.length; i++) {
+          const element = this.array[i];
           this.key_value_pairs.push({
             key: i,
-            type: getPropertyType(this.obj[i]),
+            type: getPropertyType(this.array[i]),
           });
         }
       }
@@ -33,30 +38,39 @@ export class ArrayEditorComponent implements OnInit {
     //console.log(this.key_value_pairs);
   }
 
+  public removeFromArray(index: number) {
+    this.array.splice(index, 1);
+    this.init();
+  }
+
+  public addToArray() {
+    this.array.push('a');
+    this.init();
+  }
+
   public onTypeChange(keyTypePair: KeyTypePair) {
     //console.log(keyTypePair.key, keyTypePair.type)
     switch (keyTypePair.type) {
       case PROPERTY_TYPES.STRING:
-        this.obj[keyTypePair.key] = "a";
+        this.array[keyTypePair.key] = "a";
         break;
       case PROPERTY_TYPES.NUMBER:
-        this.obj[keyTypePair.key] = 0;
+        this.array[keyTypePair.key] = 0;
         break;
       case PROPERTY_TYPES.BOOLEAN:
-        this.obj[keyTypePair.key] = true;
+        this.array[keyTypePair.key] = true;
         break;
       case PROPERTY_TYPES.ARRAY:
-        this.obj[keyTypePair.key] = [];
+        this.array[keyTypePair.key] = [];
         break;
       case PROPERTY_TYPES.OBJECT:
-        this.obj[keyTypePair.key] = {};
+        this.array[keyTypePair.key] = {};
         break;
 
       default:
         break;
     }
   }
-
 }
 
 function getPropertyType(property: any): PROPERTY_TYPES {

@@ -1,18 +1,21 @@
-<div *ngFor="let property of key_value_pairs">
+<div class="spacer" *ngFor="let property of key_value_pairs">
   <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property)">
     <option *ngFor="let type of PROPERTY_TYPES; let i = index" [ngValue]="i">{{type}}</option>
   </select>
   <ng-container [ngSwitch]="property.type">
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.STRING">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">:
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <span>:</span>
       <input type="text" [(ngModel)]="obj[property.key]">
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.NUMBER">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">:
-      <input class="input-key" type="number" [(ngModel)]="obj[property.key]">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <span>:</span>
+      <input type="number" [(ngModel)]="obj[property.key]">
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.BOOLEAN">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">:
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <span>:</span>
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
       <select [(ngModel)]="obj[property.key]">
         <option [ngValue]="true">true</option>
@@ -20,18 +23,16 @@
       </select>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.ARRAY">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">:
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
       <div class="wrapper-array">
-        <app-array-editor [obj]="obj[property.key]"></app-array-editor>
-        <button>add</button>
+        <app-array-editor [array]="obj[property.key]"></app-array-editor>
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.OBJECT">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">:
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
       <app-json-editor [(obj)]="obj[property.key]"></app-json-editor>
     </ng-container>
   </ng-container>
+  <button class="circle secondary" (click)="removeFromObject(property.key)"><i class="material-icons">close</i></button>
 </div>
-<div>
-  <button>add</button>
-</div>
+<button (click)="addToObject()" [disabled]="obj['newKey']"><i class="material-icons">add</i></button>

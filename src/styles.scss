@@ -5,7 +5,6 @@
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
-  color: rgba(0, 0, 0, .87);
 }
 *:focus {
   outline: none;
@@ -15,6 +14,9 @@ body {
 }
 button {
   cursor: pointer;
+  &:disabled{
+    cursor: default;
+  }
 }
 input,
 select,

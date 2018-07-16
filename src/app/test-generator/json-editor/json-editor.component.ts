@@ -17,7 +17,12 @@ export class JsonEditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.init();
+  }
+
+  public init() {
     this.PROPERTY_TYPES = Object.keys(this.PROPERTY_TYPES_ENUM).filter(key => isNaN(Number(key)));
+    this.key_value_pairs = [];
     if (this.obj) {
       if (typeof this.obj == 'object') {
         Object.keys(this.obj).forEach(key => {
@@ -29,6 +34,16 @@ export class JsonEditorComponent implements OnInit {
       }
     }
     //console.log(this.key_value_pairs);
+  }
+
+  public removeFromObject(key: string) {
+    delete this.obj[key];
+    this.init();
+  }
+
+  public addToObject() {
+    this.obj['newKey'] = 'a';
+    this.init();
   }
 
   public onRenameProperty(obj: any, oldKey: string, newKey: string, property: KeyTypePair): any {
