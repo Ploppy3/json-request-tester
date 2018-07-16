@@ -33,6 +33,30 @@ export class ArrayEditorComponent implements OnInit {
     //console.log(this.key_value_pairs);
   }
 
+  public onTypeChange(keyTypePair: KeyTypePair) {
+    //console.log(keyTypePair.key, keyTypePair.type)
+    switch (keyTypePair.type) {
+      case PROPERTY_TYPES.STRING:
+        this.obj[keyTypePair.key] = "a";
+        break;
+      case PROPERTY_TYPES.NUMBER:
+        this.obj[keyTypePair.key] = 0;
+        break;
+      case PROPERTY_TYPES.BOOLEAN:
+        this.obj[keyTypePair.key] = true;
+        break;
+      case PROPERTY_TYPES.ARRAY:
+        this.obj[keyTypePair.key] = [];
+        break;
+      case PROPERTY_TYPES.OBJECT:
+        this.obj[keyTypePair.key] = {};
+        break;
+
+      default:
+        break;
+    }
+  }
+
 }
 
 function getPropertyType(property: any): PROPERTY_TYPES {

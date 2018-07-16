@@ -1,5 +1,5 @@
 <div *ngFor="let property of key_value_pairs; let i = index;">
-  <select [(ngModel)]="property.type">
+  <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property)">
     <option *ngFor="let type of PROPERTY_TYPES; let j = index" [ngValue]="j">{{type}}</option>
   </select>
   <ng-container [ngSwitch]="property.type">
