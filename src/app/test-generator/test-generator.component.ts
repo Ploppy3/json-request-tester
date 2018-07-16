@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class TestGeneratorComponent implements OnInit {
 
   public formVisible = false;
+  public testObj = {};
+  /*
   public testObj = {
     _string: 'string',
     _number: 123,
@@ -15,6 +17,7 @@ export class TestGeneratorComponent implements OnInit {
     _arr: ['a', 'b', 'c'],
     _obj: { myKey: 'myVal' }
   }
+  //*/
 
   constructor() { }
 
