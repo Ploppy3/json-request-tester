@@ -87,6 +87,8 @@ export class TestService {
     console.log('fingind errors by comparing', test, response);
 
     let errors: JsonCmparatorObjectError[] = [];
+    let expected = test.expectedResponse.body;
+    /*
     let expected;
 
     try {
@@ -94,7 +96,7 @@ export class TestService {
     } catch (error) { }
 
     if (!expected) { console.warn('could not parse expected response json'); return []; }
-
+    //*/
     if (test.expectedResponse.status != response.status) {
       console.log('different status');
     }

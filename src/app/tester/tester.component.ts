@@ -15,11 +15,18 @@ export class TesterComponent implements OnInit {
       headers: [],
       method: 'GET',
       expectedResponse: {
-        body: '{"data":"%anyArray%","total_pages":"%anyNumber%","per_page":"%anyNumber%","page":2,"total":"%anyNumber%"}',
+        body: {
+          'data': '%any%',
+          "total_pages": "%anyNumber%",
+          "per_page": "%anyNumber%",
+          "page": 2,
+          "total": "%anyNumber%"
+        },
         status: 200,
       },
       url: 'https://reqres.in/api/users?page=2',
     },
+    /*
     <HttpTest>{
       body: null,
       headers: [],
@@ -40,6 +47,7 @@ export class TesterComponent implements OnInit {
       },
       url: 'https://api.travian.engin9tools.com/api/global/testststs',
     },
+    //*/
   ]
 
   constructor(

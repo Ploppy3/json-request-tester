@@ -11,7 +11,7 @@ export interface HttpTest{
   headers: Header[];
   body: any;
   expectedResponse: {
-    body: string;
+    body: {};
     status: number
   },
   response?: {
