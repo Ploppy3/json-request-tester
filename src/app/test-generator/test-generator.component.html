@@ -1,11 +1,11 @@
-<div class="horizontal-spacer vertical-spacer">
-  <input type="text" placeholder="url">
+<form class="horizontal-spacer vertical-spacer">
+  <input type="text" placeholder="url" value="https://api.travian.engin9tools.com/api/global/servers">
   <select name="selectMethod">
     <option value="get">GET</option>
-    <option value="get">POST</option>
-    <option value="get">PUT</option>
-    <option value="get">DELETE</option>
+    <option value="post">POST</option>
+    <option value="put">PUT</option>
+    <option value="delete">DELETE</option>
   </select>
   <app-json-viewer [obj]="testObj"></app-json-viewer>
   <button>add</button>
-</div>
+</form>

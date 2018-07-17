@@ -25,6 +25,12 @@
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.OBJECT">
       <app-json-editor [(obj)]="array[property.key]"></app-json-editor>
     </ng-container>
+    <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
+      <!--<input type="string" [(ngModel)]="obj[property.key]">-->
+      <select [(ngModel)]="array[property.key]">
+        <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
+      </select>
+    </ng-container>
   </ng-container>
   <button class="circle secondary" (click)="removeFromArray(i)"><i class="material-icons">close</i></button>
 </div>

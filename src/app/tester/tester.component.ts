@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { TestService } from '../test.service';
 import { HttpTest } from '../data';
+import { SessionService } from '../session.service';
 
 @Component({
   selector: 'app-tester',
@@ -17,10 +18,10 @@ export class TesterComponent implements OnInit {
       expectedResponse: {
         body: {
           'data': '%any%',
-          "total_pages": "%anyNumber%",
-          "per_page": "%anyNumber%",
+          "total_pages": "%any_number%",
+          "per_page": "%any_number%",
           "page": 2,
-          "total": "%anyNumber%"
+          "total": "%any_number%"
         },
         status: 200,
       },
@@ -52,6 +53,7 @@ export class TesterComponent implements OnInit {
 
   constructor(
     private testService: TestService,
+    private sessionsService: SessionService,
     private zone: NgZone,
   ) { }
 

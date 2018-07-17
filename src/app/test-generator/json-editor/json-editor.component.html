@@ -32,6 +32,14 @@
       <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
       <app-json-editor [(obj)]="obj[property.key]"></app-json-editor>
     </ng-container>
+    <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <span>:</span>
+      <!--<input type="string" [(ngModel)]="obj[property.key]">-->
+      <select [(ngModel)]="obj[property.key]">
+        <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
+      </select>
+    </ng-container>
   </ng-container>
   <button class="circle secondary" (click)="removeFromObject(property.key)"><i class="material-icons">close</i></button>
 </div>

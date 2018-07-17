@@ -10,6 +10,7 @@ export class JsonEditorComponent implements OnInit {
 
   @Input() obj;
 
+  public SPECIAL_TYPES = SpecialTypes;
   public PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
   public PROPERTY_TYPES: string[] = [];
   public key_value_pairs: KeyTypePair[] = [];
@@ -71,6 +72,9 @@ export class JsonEditorComponent implements OnInit {
       case PROPERTY_TYPES.OBJECT:
         this.obj[keyTypePair.key] = {};
         break;
+      case PROPERTY_TYPES.SPECIAL:
+        this.obj[keyTypePair.key] = SpecialTypes[0].value;
+        break;
 
       default:
         break;
@@ -86,6 +90,12 @@ function getPropertyType(property: any): PROPERTY_TYPES {
   if (isArray(property)) {
     return PROPERTY_TYPES.ARRAY;
   } else if (typeof property == 'string') {
+    for (let i = 0; i < SpecialTypes.length; i++) {
+      const specialType = SpecialTypes[i];
+      if (property == specialType.value) {
+        return PROPERTY_TYPES.SPECIAL;
+      }
+    }
     return PROPERTY_TYPES.STRING;
   } else if (typeof property == 'number') {
     return PROPERTY_TYPES.NUMBER;
@@ -96,15 +106,44 @@ function getPropertyType(property: any): PROPERTY_TYPES {
   }
 }
 
-interface KeyTypePair {
+export var SpecialTypes: SpecialType[] = [
+  {
+    name: 'Anything',
+    value: "%anything%"
+  },
+  {
+    name: 'Any String',
+    value: "%any_string%"
+  },
+  {
+    name: 'Any Number',
+    value: "%any_number%"
+  },
+  {
+    name: 'Any Boolean',
+    value: "%any_boolean%"
+  },
+  {
+    name: 'Any Array',
+    value: "%any_array%"
+  },
+]
+
+interface SpecialType {
+  name: string;
+  value: string;
+}
+
+export interface KeyTypePair {
   key: string;
   type: PROPERTY_TYPES;
 }
 
-enum PROPERTY_TYPES {
+export enum PROPERTY_TYPES {
   STRING,
   NUMBER,
   BOOLEAN,
   ARRAY,
   OBJECT,
+  SPECIAL,
 } 

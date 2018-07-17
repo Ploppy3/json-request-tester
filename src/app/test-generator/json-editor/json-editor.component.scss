@@ -16,10 +16,8 @@ input{
   &:last-child{
     margin-right: 0;
   }
-  .input-key{
-    max-width: 100px;
-  }
-  &[type="number"]{
+  &.input-key
+  {
     max-width: 100px;
   }
 }

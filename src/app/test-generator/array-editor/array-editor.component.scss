@@ -15,9 +15,6 @@ input{
   &:last-child{
     margin-right: 0;
   }
-  &[type="number"]{
-    max-width: 100px;
-  }
 }
 select{
   margin: 0 8px;

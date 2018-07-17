@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { isArray } from 'util';
+import { PROPERTY_TYPES, SpecialTypes } from '../json-editor/json-editor.component';
 
 @Component({
   selector: 'app-array-editor',
@@ -10,9 +11,10 @@ export class ArrayEditorComponent implements OnInit {
 
   @Input() array: any[];
 
+  public SPECIAL_TYPES = SpecialTypes;
   public PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
   public PROPERTY_TYPES: string[] = [];
-  public key_value_pairs: KeyTypePair[] = [];
+  public key_value_pairs: ArrayKeyTypePair[] = [];
 
   constructor() { }
 
@@ -48,7 +50,7 @@ export class ArrayEditorComponent implements OnInit {
     this.init();
   }
 
-  public onTypeChange(keyTypePair: KeyTypePair) {
+  public onTypeChange(keyTypePair: ArrayKeyTypePair) {
     //console.log(keyTypePair.key, keyTypePair.type)
     switch (keyTypePair.type) {
       case PROPERTY_TYPES.STRING:
@@ -66,13 +68,16 @@ export class ArrayEditorComponent implements OnInit {
       case PROPERTY_TYPES.OBJECT:
         this.array[keyTypePair.key] = {};
         break;
+      case PROPERTY_TYPES.SPECIAL:
+        this.array[keyTypePair.key] = SpecialTypes[0].value;
+        break;
 
       default:
         break;
     }
   }
 
-  public trackByFn(i, keyTypePair: KeyTypePair) {
+  public trackByFn(i, keyTypePair: ArrayKeyTypePair) {
     return i;
   }
 }
@@ -81,6 +86,12 @@ function getPropertyType(property: any): PROPERTY_TYPES {
   if (isArray(property)) {
     return PROPERTY_TYPES.ARRAY;
   } else if (typeof property == 'string') {
+    for (let i = 0; i < SpecialTypes.length; i++) {
+      const specialType = SpecialTypes[i];
+      if (property == specialType.value) {
+        return PROPERTY_TYPES.SPECIAL;
+      }
+    }
     return PROPERTY_TYPES.STRING;
   } else if (typeof property == 'number') {
     return PROPERTY_TYPES.NUMBER;
@@ -91,15 +102,7 @@ function getPropertyType(property: any): PROPERTY_TYPES {
   }
 }
 
-interface KeyTypePair {
+interface ArrayKeyTypePair {
   key: number;
   type: PROPERTY_TYPES;
 }
-
-enum PROPERTY_TYPES {
-  STRING,
-  NUMBER,
-  BOOLEAN,
-  ARRAY,
-  OBJECT,
-} 
