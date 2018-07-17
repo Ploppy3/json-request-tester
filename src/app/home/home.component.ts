@@ -52,8 +52,8 @@ export class HomeComponent implements OnInit {
   ]
 
   constructor(
+    public sessionsService: SessionService,
     private testService: TestService,
-    private sessionsService: SessionService,
     private zone: NgZone,
   ) { }
 

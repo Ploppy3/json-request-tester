@@ -1,13 +1,18 @@
-<form [formGroup]="formTest" class="horizontal-spacer vertical-spacer">
-  <input type="text" placeholder="url" formControlName="url">
-  <select name="selectMethod" formControlName="method">
-    <option value="GET">GET</option>
-    <option value="POST">POST</option>
-    <option value="PUT">PUT</option>
-    <option value="DELETE">DELETE</option>
-  </select>
-  <input type="hidden" [value]="testObj" formControlName="url">
+<form (ngSubmit)="onSubmit($event)" [formGroup]="formTest" class="horizontal-spacer vertical-spacer">
+  <div class="flex">
+    <select name="selectMethod" formControlName="method">
+      <option value="GET">GET</option>
+      <option value="POST">POST</option>
+      <option value="PUT">PUT</option>
+      <option value="DELETE">DELETE</option>
+    </select>
+    <input class="flex-grow" type="text" placeholder="https://..." formControlName="url">
+  </div>
+  <div class="flex">
+    <span class="self-center">Status:</span>
+    <input class="flex-grow" type="number" placeholder="200" formControlName="status">
+  </div>
   <app-json-viewer [obj]="testObj"></app-json-viewer>
-  <pre class="roboto-mono">{{formTest.value | json}}</pre>
+  <!--<pre class="roboto-mono">{{formTest.value | json}}</pre>-->
   <button>add</button>
 </form>

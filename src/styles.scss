@@ -19,6 +19,13 @@ body {
   color: rgba(0, 0, 0, .87)
 }
 button {
+  background-color: #FF9E80;
+  height: 39px;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: inherit;
   cursor: pointer;
   &:disabled{
     cursor: default;
