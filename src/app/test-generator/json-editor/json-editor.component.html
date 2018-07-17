@@ -17,7 +17,7 @@
       <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
       <span>:</span>
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
-      <select [(ngModel)]="obj[property.key]">
+      <select class="boolean" [(ngModel)]="obj[property.key]">
         <option [ngValue]="true">true</option>
         <option [ngValue]="false">false</option>
       </select>
@@ -36,7 +36,7 @@
       <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
       <span>:</span>
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
-      <select [(ngModel)]="obj[property.key]">
+      <select class="special" [(ngModel)]="obj[property.key]">
         <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
       </select>
     </ng-container>

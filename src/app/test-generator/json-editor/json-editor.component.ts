@@ -10,8 +10,8 @@ export class JsonEditorComponent implements OnInit {
 
   @Input() obj;
 
-  public SPECIAL_TYPES = SpecialTypes;
-  public PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
+  public readonly SPECIAL_TYPES = SPECIAL_TYPES;
+  public readonly PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
   public PROPERTY_TYPES: string[] = [];
   public key_value_pairs: KeyTypePair[] = [];
 
@@ -73,7 +73,7 @@ export class JsonEditorComponent implements OnInit {
         this.obj[keyTypePair.key] = {};
         break;
       case PROPERTY_TYPES.SPECIAL:
-        this.obj[keyTypePair.key] = SpecialTypes[0].value;
+        this.obj[keyTypePair.key] = SPECIAL_TYPES[0].value;
         break;
 
       default:
@@ -90,8 +90,8 @@ export function getPropertyType(property: any): PROPERTY_TYPES {
   if (isArray(property)) {
     return PROPERTY_TYPES.ARRAY;
   } else if (typeof property == 'string') {
-    for (let i = 0; i < SpecialTypes.length; i++) {
-      const specialType = SpecialTypes[i];
+    for (let i = 0; i < SPECIAL_TYPES.length; i++) {
+      const specialType = SPECIAL_TYPES[i];
       if (property == specialType.value) {
         return PROPERTY_TYPES.SPECIAL;
       }
@@ -106,7 +106,7 @@ export function getPropertyType(property: any): PROPERTY_TYPES {
   }
 }
 
-export var SpecialTypes: SpecialType[] = [
+export var SPECIAL_TYPES: SpecialType[] = [
   {
     name: 'Anything',
     value: "%anything%"

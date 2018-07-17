@@ -21,6 +21,9 @@ select{
   &:first-child{
     margin-left: 0;
   }
+  &.special, &.boolean{
+    width: 200px;
+  }
 }
 button{
   border: none;

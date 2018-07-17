@@ -12,7 +12,7 @@
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.BOOLEAN">
       <!--<input type="string" [(ngModel)]="array[property.key]">-->
-      <select [(ngModel)]="array[property.key]">
+      <select class="boolean" [(ngModel)]="array[property.key]">
         <option [ngValue]="true">true</option>
         <option [ngValue]="false">false</option>
       </select>
@@ -27,7 +27,7 @@
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
-      <select [(ngModel)]="array[property.key]">
+      <select class="special" [(ngModel)]="array[property.key]">
         <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
       </select>
     </ng-container>
