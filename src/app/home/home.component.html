@@ -18,7 +18,7 @@
     </div>
   </div>
   <app-test-generator *ngIf="true"></app-test-generator>
-  <app-request-card *ngFor="let test of sessionsService.tests$ | async; let i = index; trackBy: trackByFn" [id]="'card-'+i" [test]="test">
+  <app-request-card *ngFor="let test of tests; let i = index; trackBy: trackByFn" [id]="'card-'+i" [test]="test">
     <i class="clickable material-icons" (click)="start(test)">play_arrow</i>
     <i *ngIf="test.response" class="clickable material-icons" (click)="test.response = null">close</i>
   </app-request-card>

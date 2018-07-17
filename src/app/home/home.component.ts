@@ -11,6 +11,7 @@ import { SessionService } from '../session.service';
 export class HomeComponent implements OnInit {
 
   public tests = [
+    /*
     <HttpTest>{
       body: null,
       headers: [],
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
       },
       url: 'https://reqres.in/api/users?page=2',
     },
+    //*/
     /*
     <HttpTest>{
       body: null,
@@ -58,6 +60,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.sessionsService.tests$.subscribe(tests => {
+      this.tests = tests;
+    })
   }
 
   public testAll() {
