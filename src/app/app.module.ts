@@ -13,6 +13,7 @@ import { TestGeneratorComponent } from './test-generator/test-generator.componen
 import { JsonEditorComponent } from './test-generator/json-editor/json-editor.component';
 import { ArrayEditorComponent } from './test-generator/array-editor/array-editor.component';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
+import { SessionService } from './session.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { JsonViewerComponent } from './json-viewer/json-viewer.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ TestService ],
+  providers: [ TestService, SessionService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
