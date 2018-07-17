@@ -15,7 +15,7 @@ export class AppComponent implements DoCheck, OnInit {
   public lastScrollY = 0; // used to keep track of fabToTop state
 
   constructor(
-    private zone: NgZone
+    private zone: NgZone,
   ) { }
 
   ngOnInit() {
@@ -37,12 +37,12 @@ export class AppComponent implements DoCheck, OnInit {
   }
 
   ngDoCheck(): void {
-    if(!environment.production)
+    if (!environment.production)
       console.log('check'); // writes 'check' in console to quickly identity performance issues
   }
 
   public scrollToTop() {
     window.scroll({ top: 0 });
   }
-  
+
 }

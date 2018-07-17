@@ -11,6 +11,7 @@ import { JsonComparator, JsonCmparatorObjectError } from './json-comparator';
 export class TestService {
 
   constructor(private _http: HttpClient) {
+    console.log('constructor');
     /*
     let expected = {
       status: 'ok',
