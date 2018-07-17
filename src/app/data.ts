@@ -2,7 +2,7 @@ import { JsonCmparatorObjectError } from "./json-comparator";
 
 export interface Data {
   version: number;
-  data: HttpTest[];
+  tests: HttpTest[];
 }
 
 export interface HttpTest{
