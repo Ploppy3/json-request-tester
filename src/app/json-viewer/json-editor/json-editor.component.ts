@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { isArray } from 'util';
 
 @Component({
@@ -9,6 +9,7 @@ import { isArray } from 'util';
 export class JsonEditorComponent implements OnInit {
 
   @Input() obj;
+  @Output() change = new EventEmitter<void>();
 
   public readonly SPECIAL_TYPES = SPECIAL_TYPES;
   public readonly PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
@@ -35,6 +36,10 @@ export class JsonEditorComponent implements OnInit {
       }
     }
     //console.log(this.key_value_pairs);
+  }
+
+  public onChange() {
+    this.change.emit();
   }
 
   public removeFromObject(key: string) {

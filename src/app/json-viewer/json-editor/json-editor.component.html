@@ -1,48 +1,48 @@
 <div class="spacer" *ngFor="let property of key_value_pairs; trackBy: trackByFn">
-  <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property)">
+  <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property); onChange()">
     <option *ngFor="let type of PROPERTY_TYPES; let i = index;" [ngValue]="i">{{type}}</option>
   </select>
   <ng-container [ngSwitch]="property.type">
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.STRING">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property); onChange()">
       <span>:</span>
-      <input type="text" [(ngModel)]="obj[property.key]">
+      <input type="text" [(ngModel)]="obj[property.key]" (ngModelChange)="onChange()">
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.NUMBER">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property); onChange()">
       <span>:</span>
-      <input type="number" [(ngModel)]="obj[property.key]">
+      <input type="number" [(ngModel)]="obj[property.key]" (ngModelChange)="onChange()">
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.BOOLEAN">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property); onChange()">
       <span>:</span>
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
-      <select class="boolean" [(ngModel)]="obj[property.key]">
+      <select class="boolean" [(ngModel)]="obj[property.key]" (ngModelChange)="onChange()">
         <option [ngValue]="true">true</option>
         <option [ngValue]="false">false</option>
       </select>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.ARRAY">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property); onChange()">
       <div class="wrapper-array">
-        <app-array-editor [array]="obj[property.key]"></app-array-editor>
+        <app-array-editor [array]="obj[property.key]" (change)="onChange()"></app-array-editor>
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.OBJECT">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
-      <app-json-editor [(obj)]="obj[property.key]"></app-json-editor>
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property); onChange()">
+      <app-json-editor [(obj)]="obj[property.key]" (change)="onChange()"></app-json-editor>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
-      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
+      <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property); onChange()">
       <span>:</span>
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
-      <select class="special" [(ngModel)]="obj[property.key]">
+      <select class="special" [(ngModel)]="obj[property.key]" (ngModelChange)="onChange()">
         <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
       </select>
     </ng-container>
   </ng-container>
-  <button class="circle secondary" (click)="removeFromObject(property.key)"><i class="material-icons">close</i></button>
+  <button class="circle secondary" (click)="removeFromObject(property.key); onChange()"><i class="material-icons">close</i></button>
 </div>
 <div class="spacer">
-  <button (click)="addToObject()" [disabled]="obj['newKey']"><i class="material-icons">add</i></button>
+  <button (click)="addToObject(); onChange()" [disabled]="obj['newKey']"><i class="material-icons">add</i></button>
 </div>
