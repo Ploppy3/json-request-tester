@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { TestService } from './test.service';
 import { RequestCardComponent } from './request-card/request-card.component';
 import { HomeComponent } from './home/home.component';
-import { ToJson } from './tojson.pipe';
 import { TestGeneratorComponent } from './test-generator/test-generator.component';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
 import { SessionService } from './session.service';
@@ -20,7 +19,6 @@ import { ArrayEditorComponent } from './json-viewer/array-editor/array-editor.co
     AppComponent,
     RequestCardComponent,
     HomeComponent,
-    ToJson,
     TestGeneratorComponent,
     JsonEditorComponent,
     ArrayEditorComponent,
