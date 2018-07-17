@@ -15,3 +15,14 @@
     display: inline-block;
   }
 }
+
+.test-delete {
+  opacity: .4;
+  transition: .2s opacity ease;
+  &:hover, &:active {
+    opacity: 1;
+  }
+}
+#raz-btn {
+  color: rgba(255,255,255,.87);
+}

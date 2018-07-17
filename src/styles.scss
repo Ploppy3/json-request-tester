@@ -19,7 +19,7 @@ body {
   color: rgba(0, 0, 0, .87)
 }
 button {
-  background-color: #FF9E80;
+  background: none;
   height: 39px;
   border: none;
   border-radius: 8px;
@@ -29,6 +29,24 @@ button {
   cursor: pointer;
   &:disabled{
     cursor: default;
+    color: gray;
+    &.raised {
+      background-color: darkgray;
+    }
+  }
+  &.raised {
+    background-color: #FF9E80;
+  }
+  &.big {
+    font-size: 1.2rem;
+  }
+  &.button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i, .icon {
+      padding: 8px;
+    }
   }
 }
 input,
@@ -76,4 +94,14 @@ hr {
   height: 1px;
   background-color: rgba(0, 0, 0, .24);
   border: none;
+}
+a:link, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+.thin {
+  font-weight: 300;
+}
+.flex-center {
+  margin: auto;
 }
