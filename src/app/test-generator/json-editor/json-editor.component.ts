@@ -86,7 +86,7 @@ export class JsonEditorComponent implements OnInit {
   }
 }
 
-function getPropertyType(property: any): PROPERTY_TYPES {
+export function getPropertyType(property: any): PROPERTY_TYPES {
   if (isArray(property)) {
     return PROPERTY_TYPES.ARRAY;
   } else if (typeof property == 'string') {

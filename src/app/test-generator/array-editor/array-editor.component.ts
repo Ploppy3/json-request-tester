@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { isArray } from 'util';
-import { PROPERTY_TYPES, SpecialTypes } from '../json-editor/json-editor.component';
+import { PROPERTY_TYPES, SpecialTypes, getPropertyType } from '../json-editor/json-editor.component';
 
 @Component({
   selector: 'app-array-editor',
@@ -11,6 +11,7 @@ export class ArrayEditorComponent implements OnInit {
 
   @Input() array: any[];
 
+  public getPropertyTypes = getPropertyType;
   public SPECIAL_TYPES = SpecialTypes;
   public PROPERTY_TYPES_ENUM = PROPERTY_TYPES;
   public PROPERTY_TYPES: string[] = [];
@@ -82,6 +83,7 @@ export class ArrayEditorComponent implements OnInit {
   }
 }
 
+/*
 function getPropertyType(property: any): PROPERTY_TYPES {
   if (isArray(property)) {
     return PROPERTY_TYPES.ARRAY;
@@ -101,6 +103,7 @@ function getPropertyType(property: any): PROPERTY_TYPES {
     return PROPERTY_TYPES.OBJECT;
   }
 }
+//*/
 
 interface ArrayKeyTypePair {
   key: number;
