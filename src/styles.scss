@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import '~CssFramework/styles.scss';
 * {
   font-family: 'Roboto', sans-serif;
@@ -9,9 +10,13 @@
 *:focus {
   outline: none;
 }
+.roboto-mono{
+  font-family: 'Roboto Mono', monospace;
+}
 body {
   background-color: #424242;
   overflow-y: scroll;
+  color: rgba(0, 0, 0, .87)
 }
 button {
   cursor: pointer;

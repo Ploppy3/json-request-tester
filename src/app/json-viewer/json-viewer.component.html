@@ -8,6 +8,6 @@
     <app-json-editor [obj]="obj"></app-json-editor>
   </div>
   <ng-template #showJson>
-    <pre class="overflow">{{ obj | json }}</pre>
+    <pre class="primary-text roboto-mono clickable overflow" (click)="editMode.enabled = true">{{ obj | json }}</pre>
   </ng-template>
 </div>
