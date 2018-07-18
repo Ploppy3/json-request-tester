@@ -4,11 +4,11 @@
     <span class="flex-grow"></span>
     <i #editMode (click)="editMode.enabled = !editMode.enabled" class="secondary clickable material-icons">{{editMode.enabled ? 'code' : 'edit'}}</i>
   </div>
-  <div class="flex" *ngIf="(obj | json) != (copyOfObj | json)">
+  <div class="flex" *ngIf="(obj | json) != (copyOfObj | json)" [@collapse]>
     <button class="edit flex-1" (click)="discardChanges()" type="button">revert</button>
     <button class="edit flex-1" (click)="saveChanges()" type="button">save</button>
   </div>
-  <div class="vertical-spacer" *ngIf="editMode.enabled" [@collapse]>
+  <div class="vertical-spacer" *ngIf="editMode.enabled">
     <app-object-editor [obj]="copyOfObj"></app-object-editor>
   </div>
   <div class="clickable flex" *ngIf="!editMode.enabled" (click)="editMode.enabled = true">

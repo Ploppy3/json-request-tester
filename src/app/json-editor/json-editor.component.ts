@@ -5,6 +5,7 @@ import { collapse } from '../animations';
   selector: 'app-json-editor',
   templateUrl: './json-editor.component.html',
   styleUrls: ['./json-editor.component.scss'],
+  animations: [collapse]
 })
 export class JsonEditorComponent implements OnInit, OnChanges {
 
