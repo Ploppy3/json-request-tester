@@ -3,11 +3,11 @@ import { HttpTest } from '../data';
 import { TestService } from '../test.service';
 
 @Component({
-  selector: 'app-request-card',
-  templateUrl: './request-card.component.html',
-  styleUrls: ['./request-card.component.scss']
+  selector: 'app-test-card',
+  templateUrl: './test-card.component.html',
+  styleUrls: ['./test-card.component.scss']
 })
-export class RequestCardComponent implements OnInit {
+export class TestCardComponent implements OnInit {
   @Input() test: HttpTest;
   @Input() result: any;
   

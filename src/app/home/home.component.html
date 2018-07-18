@@ -18,12 +18,12 @@
     </div>
   </div>
   <app-test-generator *ngIf="true"></app-test-generator>
-  <app-request-card *ngFor="let test of tests; let i = index; trackBy: trackByFn" [id]="'card-'+i" [test]="test">
+  <app-test-card *ngFor="let test of tests; let i = index; trackBy: trackByFn" [id]="'card-'+i" [test]="test">
     <i class="clickable material-icons" (click)="start(test)">play_arrow</i>
     <i *ngIf="test.response" class="clickable material-icons" (click)="test.response = null">close</i>
     <div class="flex-1"></div>
     <i class="clickable material-icons test-delete">delete</i>
-  </app-request-card>
+  </app-test-card>
 
   <button id="raz-btn" class="button-icon big thin flex-center" *ngIf="tests?.length > 0">
     <i class="material-icons">replay</i>

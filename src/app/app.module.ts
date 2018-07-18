@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TestService } from './test.service';
-import { RequestCardComponent } from './request-card/request-card.component';
+import { TestCardComponent } from './test-card/test-card.component';
 import { HomeComponent } from './home/home.component';
 import { TestGeneratorComponent } from './test-generator/test-generator.component';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
@@ -17,7 +17,7 @@ import { ArrayEditorComponent } from './json-viewer/array-editor/array-editor.co
 @NgModule({
   declarations: [
     AppComponent,
-    RequestCardComponent,
+    TestCardComponent,
     HomeComponent,
     TestGeneratorComponent,
     JsonEditorComponent,
