@@ -65,6 +65,13 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  public removeTest(test: HttpTest) {
+    let i = this.tests.indexOf(test);
+    if (i > -1) {
+      this.tests.splice(i, 1);
+    }
+  }
+
   public testAll() {
     for (let i = 0; i < this.tests.length; i++) {
       const test = this.tests[i];
