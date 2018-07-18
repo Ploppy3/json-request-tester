@@ -9,10 +9,10 @@ import { TestService } from './test.service';
 import { TestCardComponent } from './test-card/test-card.component';
 import { HomeComponent } from './home/home.component';
 import { TestGeneratorComponent } from './test-generator/test-generator.component';
-import { JsonViewerComponent } from './json-viewer/json-viewer.component';
+import { JsonEditorComponent } from './json-editor/json-editor.component';
 import { SessionService } from './session.service';
-import { ObjectEditorComponent } from './json-viewer/object-editor/object-editor.component';
-import { ArrayEditorComponent } from './json-viewer/array-editor/array-editor.component';
+import { ObjectEditorComponent } from './json-editor/object-editor/object-editor.component';
+import { ArrayEditorComponent } from './json-editor/array-editor/array-editor.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { ArrayEditorComponent } from './json-viewer/array-editor/array-editor.co
     TestGeneratorComponent,
     ObjectEditorComponent,
     ArrayEditorComponent,
-    JsonViewerComponent,
+    JsonEditorComponent,
   ],
   imports: [
     BrowserModule,

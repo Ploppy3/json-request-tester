@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JsonViewerComponent } from './json-viewer.component';
+import { JsonEditorComponent } from './json-editor.component';
 
 describe('JsonViewerComponent', () => {
-  let component: JsonViewerComponent;
-  let fixture: ComponentFixture<JsonViewerComponent>;
+  let component: JsonEditorComponent;
+  let fixture: ComponentFixture<JsonEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JsonViewerComponent ]
+      declarations: [ JsonEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JsonViewerComponent);
+    fixture = TestBed.createComponent(JsonEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

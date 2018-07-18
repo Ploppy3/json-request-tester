@@ -2,12 +2,11 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 import { collapse } from '../animations';
 
 @Component({
-  selector: 'app-json-viewer',
-  templateUrl: './json-viewer.component.html',
-  styleUrls: ['./json-viewer.component.scss'],
-  animations: [collapse]
+  selector: 'app-json-editor',
+  templateUrl: './json-editor.component.html',
+  styleUrls: ['./json-editor.component.scss'],
 })
-export class JsonViewerComponent implements OnInit, OnChanges {
+export class JsonEditorComponent implements OnInit, OnChanges {
 
   @Input() obj;
   @Output() objChange = new EventEmitter<{}>();
