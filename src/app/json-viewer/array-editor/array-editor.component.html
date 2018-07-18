@@ -23,7 +23,7 @@
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.OBJECT">
-      <app-json-editor [obj]="array[property.key]"></app-json-editor>
+      <app-object-editor [obj]="array[property.key]"></app-object-editor>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->

@@ -2,11 +2,11 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
 import { isArray } from 'util';
 
 @Component({
-  selector: 'app-json-editor',
-  templateUrl: './json-editor.component.html',
-  styleUrls: ['./json-editor.component.scss']
+  selector: 'app-object-editor',
+  templateUrl: './object-editor.component.html',
+  styleUrls: ['./object-editor.component.scss']
 })
-export class JsonEditorComponent implements OnInit, OnChanges {
+export class ObjectEditorComponent implements OnInit, OnChanges {
 
   @Input() obj;
 

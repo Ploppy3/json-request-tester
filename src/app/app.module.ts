@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { TestGeneratorComponent } from './test-generator/test-generator.component';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
 import { SessionService } from './session.service';
-import { JsonEditorComponent } from './json-viewer/json-editor/json-editor.component';
+import { ObjectEditorComponent } from './json-viewer/object-editor/object-editor.component';
 import { ArrayEditorComponent } from './json-viewer/array-editor/array-editor.component';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { ArrayEditorComponent } from './json-viewer/array-editor/array-editor.co
     TestCardComponent,
     HomeComponent,
     TestGeneratorComponent,
-    JsonEditorComponent,
+    ObjectEditorComponent,
     ArrayEditorComponent,
     JsonViewerComponent,
   ],

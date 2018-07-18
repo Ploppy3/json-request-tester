@@ -31,7 +31,7 @@
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.OBJECT">
       <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">
-      <app-json-editor [obj]="obj[property.key]"></app-json-editor>
+      <app-object-editor [obj]="obj[property.key]"></app-object-editor>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
       <input class="input-key" type="text" [ngModel]="property.key" (ngModelChange)="onRenameProperty(obj, property.key, $event, property)">

@@ -9,7 +9,7 @@
     <button class="edit flex-1" (click)="saveChanges()" type="button">save</button>
   </div>
   <div class="vertical-spacer" *ngIf="editMode.enabled" [@collapse]>
-    <app-json-editor [obj]="copyOfObj"></app-json-editor>
+    <app-object-editor [obj]="copyOfObj"></app-object-editor>
   </div>
   <div class="clickable flex" *ngIf="!editMode.enabled" (click)="editMode.enabled = true" [@collapse]>
     <pre class="flex-1 primary-text roboto-mono overflow">{{ obj | json }}</pre>
