@@ -1,19 +1,21 @@
 <div class="vertical-spacer horizontal-spacer">
   <div id="wrapper-statuses" class="vertical-spacer">
     <div class="flex wrap horizontal-spacer">
-      <button id="play-btn" class="icon fab" (click)="testAll()">
-        <i class="material-icons">play_arrow</i>
-      </button>
-      <ng-container *ngFor="let test of tests; let i = index">
-        <a [href]="'#card-'+i" class="self-center" *ngIf="!test.response">
-          <i class="material-icons">remove</i>
-        </a>
-        <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0">
-          <i class="material-icons">check</i>
-        </a>
-        <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
-          <i class="material-icons">close</i>
-        </a>
+      <ng-container *ngIf="tests?.length > 0">
+        <button id="play-btn" class="icon fab" (click)="testAll()">
+          <i class="material-icons">play_arrow</i>
+        </button>
+        <ng-container *ngFor="let test of tests; let i = index">
+          <a [href]="'#card-'+i" class="self-center" *ngIf="!test.response">
+            <i class="material-icons">remove</i>
+          </a>
+          <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0">
+            <i class="material-icons">check</i>
+          </a>
+          <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
+            <i class="material-icons">close</i>
+          </a>
+        </ng-container>
       </ng-container>
     </div>
   </div>
