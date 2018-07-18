@@ -15,7 +15,7 @@
       <div class="title">Expected Status</div>
       <pre class="overflow">{{ test.expectedResponse.status }}</pre>
     </div>
-    <app-json-viewer [obj]="test.expectedResponse.body"></app-json-viewer>
+    <app-json-viewer [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event"></app-json-viewer>
     <!--
     <div class="code-wrapper">
       <div class="title flex">
