@@ -1,39 +1,39 @@
 <div class="spacer" *ngFor="let property of key_value_pairs; let i = index; trackBy: trackByFn">
-  <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property); onChange()">
+  <select [(ngModel)]="property.type" (ngModelChange)="onTypeChange(property)">
     <option *ngFor="let type of PROPERTY_TYPES; let j = index" [ngValue]="j">{{type}}</option>
   </select>
   <span>:</span>
   <ng-container [ngSwitch]="property.type">
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.STRING">
-      <input type="text" [(ngModel)]="array[property.key]" (ngModelChange)="onChange()">
+      <input type="text" [(ngModel)]="array[property.key]">
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.NUMBER">
-      <input class="input-key" type="number" [(ngModel)]="array[property.key]" (ngModelChange)="onChange()">
+      <input class="input-key" type="number" [(ngModel)]="array[property.key]">
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.BOOLEAN">
       <!--<input type="string" [(ngModel)]="array[property.key]">-->
-      <select class="boolean" [(ngModel)]="array[property.key]" (ngModelChange)="onChange()">
+      <select class="boolean" [(ngModel)]="array[property.key]">
         <option [ngValue]="true">true</option>
         <option [ngValue]="false">false</option>
       </select>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.ARRAY">
       <div class="wrapper-array">
-        <app-array-editor [array]="array[property.key]" (change)="onChange()"></app-array-editor>
+        <app-array-editor [array]="array[property.key]"></app-array-editor>
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.OBJECT">
-      <app-json-editor [obj]="array[property.key]" (change)="onChange()"></app-json-editor>
+      <app-json-editor [obj]="array[property.key]"></app-json-editor>
     </ng-container>
     <ng-container *ngSwitchCase="PROPERTY_TYPES_ENUM.SPECIAL">
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
-      <select class="special" [(ngModel)]="array[property.key]" (ngModelChange)="onChange()">
+      <select class="special" [(ngModel)]="array[property.key]">
         <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
       </select>
     </ng-container>
   </ng-container>
-  <button class="circle secondary" (click)="removeFromArray(i); onChange()"><i class="material-icons">close</i></button>
+  <button type="button" class="circle secondary" (click)="removeFromArray(i)"><i class="material-icons">close</i></button>
 </div>
 <div class="spacer">
-  <button (click)="addToArray(); onChange()"><i class="material-icons">add</i></button>
+  <button type="button" (click)="addToArray()"><i class="material-icons">add</i></button>
 </div>

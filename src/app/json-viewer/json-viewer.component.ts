@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { JsonEditorComponent } from './json-editor/json-editor.component';
 
 @Component({
   selector: 'app-json-viewer',
@@ -7,9 +8,9 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 })
 export class JsonViewerComponent implements OnInit, OnChanges {
 
-  @Input() obj: {};
+  @Input() obj;
   @Output() change = new EventEmitter<void>();
-  public copyOfObj: {};
+  public copyOfObj;
 
   constructor() { }
 
@@ -19,22 +20,17 @@ export class JsonViewerComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['obj']) {
       console.log('creating copy of obj');
-      this.copyOfObj = Object.assign({}, this.obj);
+      this.copyOfObj = JSON.parse(JSON.stringify(this.obj))
     }
-  }
-  
-  public onCopyChange() {
-    console.log('copy change detected');
-    //this.obj = this.copyOfObj;
-    this.change.emit();
   }
 
   public saveChanges() {
-    this.obj = Object.assign({}, this.copyOfObj);
+    this.obj = JSON.parse(JSON.stringify(this.copyOfObj));
+    this.change.emit();
   }
 
   public discardChanges() {
-    this.copyOfObj = Object.assign({}, this.obj);
+    this.copyOfObj = JSON.parse(JSON.stringify(this.obj));
   }
 
 }

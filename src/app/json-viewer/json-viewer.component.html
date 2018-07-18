@@ -4,14 +4,12 @@
     <span class="flex-grow"></span>
     <i #editMode (click)="editMode.enabled = !editMode.enabled" class="secondary clickable material-icons">{{editMode.enabled ? 'close' : 'edit'}}</i>
   </div>
-  <!---->
   <div class="flex" *ngIf="(obj | json) != (copyOfObj | json)">
     <button class="edit flex-1" (click)="discardChanges()" type="button">revert</button>
     <button class="edit flex-1" (click)="saveChanges()" type="button">save</button>
   </div>
-  <!---->
   <div class="vertical-spacer" *ngIf="editMode.enabled; else showJson;">
-    <app-json-editor [obj]="copyOfObj" (change)="onCopyChange()"></app-json-editor>
+    <app-json-editor [obj]="copyOfObj"></app-json-editor>
   </div>
   <ng-template #showJson>
     <div class="clickable flex" (click)="editMode.enabled = true">
@@ -19,4 +17,10 @@
       <pre class="flex-1 primary-text roboto-mono overflow" *ngIf="(obj | json) != (copyOfObj | json)">{{ copyOfObj | json }}</pre>
     </div>
   </ng-template>
+  <!--
+  <div class="clickable flex" (click)="editMode.enabled = true">
+    <pre class="flex-1 primary-text roboto-mono overflow">{{ obj | json }}</pre>
+    <pre class="flex-1 primary-text roboto-mono overflow">{{ copyOfObj | json }}</pre>
+  </div>
+  -->
 </div>

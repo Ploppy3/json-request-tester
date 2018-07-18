@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { isArray } from 'util';
 import { PROPERTY_TYPES, SPECIAL_TYPES, getPropertyType } from '../json-editor/json-editor.component';
 
@@ -10,7 +10,6 @@ import { PROPERTY_TYPES, SPECIAL_TYPES, getPropertyType } from '../json-editor/j
 export class ArrayEditorComponent implements OnInit {
 
   @Input() array: any[];
-  @Output() change = new EventEmitter<void>();
 
   public getPropertyTypes = getPropertyType;
   public readonly SPECIAL_TYPES = SPECIAL_TYPES;
@@ -40,10 +39,6 @@ export class ArrayEditorComponent implements OnInit {
       }
     }
     //console.log(this.key_value_pairs);
-  }
-
-  public onChange() {
-    this.change.emit();
   }
 
   public removeFromArray(index: number) {
