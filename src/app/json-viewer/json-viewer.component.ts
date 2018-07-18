@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { collapse } from '../animations';
 
 @Component({
   selector: 'app-json-viewer',
   templateUrl: './json-viewer.component.html',
-  styleUrls: ['./json-viewer.component.scss']
+  styleUrls: ['./json-viewer.component.scss'],
+  animations: [collapse]
 })
 export class JsonViewerComponent implements OnInit, OnChanges {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { isArray } from 'util';
 import { PROPERTY_TYPES, SPECIAL_TYPES, getPropertyType } from '../json-editor/json-editor.component';
 
@@ -7,7 +7,7 @@ import { PROPERTY_TYPES, SPECIAL_TYPES, getPropertyType } from '../json-editor/j
   templateUrl: './array-editor.component.html',
   styleUrls: ['./array-editor.component.scss']
 })
-export class ArrayEditorComponent implements OnInit {
+export class ArrayEditorComponent implements OnInit, OnChanges {
 
   @Input() array: any[];
 
@@ -21,6 +21,12 @@ export class ArrayEditorComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['array']) {
+      this.init();
+    }
   }
 
   public init() {

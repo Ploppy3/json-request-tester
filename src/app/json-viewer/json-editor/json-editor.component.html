@@ -45,5 +45,5 @@
   <button class="circle secondary" (click)="removeFromObject(property.key)"><i class="material-icons">close</i></button>
 </div>
 <div class="spacer">
-  <button (click)="addToObject()" [disabled]="obj && obj['newKey']"><i class="material-icons">add</i></button>
+  <button (click)="addToObject()" [disabled]="obj && obj['newKey'] != null"><i class="material-icons">add</i></button>
 </div>

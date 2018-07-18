@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { isArray } from 'util';
 
 @Component({
@@ -6,7 +6,7 @@ import { isArray } from 'util';
   templateUrl: './json-editor.component.html',
   styleUrls: ['./json-editor.component.scss']
 })
-export class JsonEditorComponent implements OnInit {
+export class JsonEditorComponent implements OnInit, OnChanges {
 
   @Input() obj;
 
@@ -19,6 +19,12 @@ export class JsonEditorComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['obj']) {
+      this.init();
+    }
   }
 
   public init() {
