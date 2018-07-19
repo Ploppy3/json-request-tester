@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpTest } from '../data';
-import { TestService } from '../test.service';
+import { JsonComparatorErrorType } from '../json-comparator';
 
 @Component({
   selector: 'app-test-card',
@@ -8,11 +8,13 @@ import { TestService } from '../test.service';
   styleUrls: ['./test-card.component.scss']
 })
 export class TestCardComponent implements OnInit {
+
   @Input() test: HttpTest;
   @Input() result: any;
   
+  public errorTypes = JsonComparatorErrorType;
+
   constructor(
-    private requestService: TestService
   ) { }
 
   ngOnInit() {

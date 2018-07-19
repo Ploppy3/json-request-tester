@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angul
 import { Header, HttpTest } from './data';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { JsonComparator, JsonCmparatorObjectError } from './json-comparator';
+import { JsonComparator, JsonComparatorError } from './json-comparator';
 
 @Injectable({
   providedIn: 'root'
@@ -83,11 +83,11 @@ export class TestService {
     return httpHeaders;
   }
 
-  public findErrors(test: HttpTest, response: HttpResponse<any>): JsonCmparatorObjectError[] {
+  public findErrors(test: HttpTest, response: HttpResponse<any>): JsonComparatorError[] {
 
     console.log('fingind errors by comparing', test, response);
 
-    let errors: JsonCmparatorObjectError[] = [];
+    let errors: JsonComparatorError[] = [];
     let expected = test.expectedResponse.body;
     /*
     let expected;
@@ -109,5 +109,5 @@ export class TestService {
 
 export interface ProcessedRequest {
   response: HttpResponse<any>,
-  errors: JsonCmparatorObjectError[],
+  errors: JsonComparatorError[],
 }

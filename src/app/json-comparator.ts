@@ -3,7 +3,7 @@ import { isArray, isNull, isNullOrUndefined } from "util";
 export abstract class JsonComparator {
 
   static compareObjects(expected: any, response: any, depth?: string[]) {
-    let errors: JsonCmparatorObjectError[] = [];
+    let errors: JsonComparatorError[] = [];
 
     console.log('expected', expected);
     console.log('got', response);
@@ -18,34 +18,34 @@ export abstract class JsonComparator {
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // use json to compare if values are object
         console.log(expected[key], '!=', response[key]);
         if (!depth) { depth = [] }
-        let error: JsonCmparatorObjectError = {
+        let error: JsonComparatorError = {
           depth: depth,
           key: key,
-          type: 'DIFFERENT_VALUE',
+          type:  JsonComparatorErrorType.DIFFERENT_VALUE,
         }
         if (expected[key] == '%anything%' && !isArray(expected[key]) && !isNullOrUndefined(response[key])) {
           // allow %any% values, also check for type array because ["%any%"] == "%any%"
-          error.type = 'ALLOWED';
+          error.type = JsonComparatorErrorType.ALLOWED;
           console.log('allowed, %anything%');
         }
         else if (expected[key] == '%any_array%' && isArray(response[key])) { // allow %anyArray%
-          error.type = 'ALLOWED';
+          error.type = JsonComparatorErrorType.ALLOWED;
           console.log('allowed, %any_array%');
         }
         else if (expected[key] == '%any_object%' && typeof response[key] === 'object' && !isArray(response[key])) { // allow %anyObject%
-          error.type = 'ALLOWED';
+          error.type = JsonComparatorErrorType.ALLOWED;
           console.log('allowed, %any_object%');
         }
         else if (expected[key] == '%any_number%' && typeof response[key] === 'number' && !isArray(response[key])) { // allow %anyNumber%
-          error.type = 'ALLOWED';
+          error.type = JsonComparatorErrorType.ALLOWED;
           console.log('allowed, %any_number%');
         }
         else if (expected[key] == '%any_string%' && typeof response[key] === 'string' && !isArray(response[key])) { // allow %anyString%
-          error.type = 'ALLOWED';
+          error.type = JsonComparatorErrorType.ALLOWED;
           console.log('allowed, %any_string%');
         }
         else if (expected[key] == '%any_boolean%' && typeof response[key] === 'boolean' && !isArray(response[key])) { // allow %anyBoolean%
-          error.type = 'ALLOWED';
+          error.type = JsonComparatorErrorType.ALLOWED;
           console.log('allowed, %any_boolean%');
         }
         /** if both values are object, compare them */
@@ -57,18 +57,18 @@ export abstract class JsonComparator {
         }
         /** if key missing */
         else if (!(key in response)) {
-          error.type = 'MISSING_KEY';
+          error.type = JsonComparatorErrorType.MISSING_KEY;;
         }
         //-------------------------------
-        if (error.type != 'ALLOWED')
+        if (error.type != JsonComparatorErrorType.ALLOWED)
           errors.push(error);
       }
     })
     Object.keys(response).forEach(key => {
-      let error: JsonCmparatorObjectError = {
+      let error: JsonComparatorError = {
         depth: depth,
         key: key,
-        type: 'UNEXPECTED_KEY_VALUE_PAIR',
+        type: JsonComparatorErrorType.UNEXPECTED_KEY_VALUE_PAIR,
       }
       if (!(key in expected)) {
         errors.push(error);
@@ -79,9 +79,16 @@ export abstract class JsonComparator {
   }
 }
 
-export interface JsonCmparatorObjectError {
+export interface JsonComparatorError {
   /** the depth from original object */
   depth: string[];
   key: string;
-  type: 'ALLOWED' | 'MISSING_KEY' | 'DIFFERENT_VALUE' | 'UNEXPECTED_KEY_VALUE_PAIR'; // ALLOWED type is used to skip trusted fields
+  type: JsonComparatorErrorType; 
+}
+
+export enum JsonComparatorErrorType{
+  ALLOWED,
+  MISSING_KEY,
+  DIFFERENT_VALUE,
+  UNEXPECTED_KEY_VALUE_PAIR,
 }

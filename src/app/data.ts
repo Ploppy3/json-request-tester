@@ -1,4 +1,4 @@
-import { JsonCmparatorObjectError } from "./json-comparator";
+import { JsonComparatorError } from "./json-comparator";
 
 export interface Data {
   version: number;
@@ -17,7 +17,7 @@ export interface HttpTest{
   response?: {
     body: string;
     status: number;
-    errors: JsonCmparatorObjectError[];
+    errors: JsonComparatorError[];
   }
 }
 
