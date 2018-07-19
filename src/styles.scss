@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import '~CssFramework/styles.scss';
+@import './variables.scss';
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
@@ -34,8 +35,10 @@ button {
       background-color: darkgray;
     }
   }
-  &.raised {
-    background-color: #FF9E80;
+  &.outline{
+    background-color: transparent;
+    border: 1px solid $accent;
+    color: $accent;
   }
   &.big {
     font-size: 1.2rem;
@@ -58,7 +61,12 @@ textarea {
   border-radius: 8px;
   max-width: 100%;
   resize: none;
+  transition: border-color .5s ease;
+  &:focus{
+    border-color: $primary;
+  }
 }
+
 input,
 select {
   height: 39px;
@@ -66,6 +74,12 @@ select {
 select{
   border-right-width: 4px;
   cursor: pointer;
+}
+.primary{
+  color: $primary;
+}
+.accent{
+  color: $accent;
 }
 .bold {
   font-weight: 700;
@@ -98,7 +112,6 @@ hr {
 a:link, a:visited, a:hover, a:active {
   color: inherit;
 }
-
 .thin {
   font-weight: 300;
 }
