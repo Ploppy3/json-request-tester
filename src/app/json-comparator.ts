@@ -1,4 +1,4 @@
-import { isArray } from "util";
+import { isArray, isNull, isNullOrUndefined } from "util";
 
 export abstract class JsonComparator {
 
@@ -23,7 +23,8 @@ export abstract class JsonComparator {
           key: key,
           type: 'DIFFERENT_VALUE',
         }
-        if (expected[key] == '%anything%' && !isArray(expected[key])) { // allow %any% values, also check for type array because ["%any%"] == "%any%"
+        if (expected[key] == '%anything%' && !isArray(expected[key]) && !isNullOrUndefined(response[key])) {
+          // allow %any% values, also check for type array because ["%any%"] == "%any%"
           error.type = 'ALLOWED';
           console.log('allowed, %anything%');
         }
