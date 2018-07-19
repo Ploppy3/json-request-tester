@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpTest } from '../data';
 import { SessionService } from '../session.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-test-generator',
@@ -29,14 +30,36 @@ export class TestGeneratorComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
+    private httpClient: HttpClient,
   ) { }
 
   ngOnInit() {
 
   }
-  
+
   public createTestFromUrl() {
-    console.warn('TO DO');
+    switch (this.formTest.controls['method'].value) {
+      case 'GET':
+        this.httpClient.get(this.formTest.controls['url'].value).pipe(
+        ).subscribe(res => {
+          if (typeof res == 'object') {
+            this.testObj = res;
+          }
+        });
+        break;
+      case 'POST':
+
+        break;
+      case 'PUT':
+        
+        break;
+      case 'DELETE':
+
+        break;
+
+      default:
+        break;
+    }
   }
 
   public onSubmit(event: any) {
