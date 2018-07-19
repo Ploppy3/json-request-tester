@@ -40,8 +40,8 @@
         <pre class="overflow">{{ test.response?.status }}</pre>
       </div>
       <ng-container *ngIf="test.response?.errors.length > 0">
-        <div class="error-wrapper" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
-          <div class="title">Error</div>
+        <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
+          <div class="title">{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</div>
           <div class="horizontal-spacer vertical-spacer">
             <div>
               <span class="secondary">Field:</span>
@@ -51,7 +51,15 @@
               </ng-container>
               <span class="field">{{error.key}}</span>
             </div>
-            <div><span class="secondary">Message:</span> {{error.type}}</div>
+            <div>
+              <span class="secondary">Message:</span>
+              <span [ngSwitch]="error.type">
+              <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
+              <span *ngSwitchCase="errorTypes.DIFFERENT_VALUE">Different value</span>
+              <span *ngSwitchCase="errorTypes.UNEXPECTED_KEY_VALUE_PAIR">Found unexpected key-value pair</span>
+              <span *ngSwitchDefault>Unkown error</span>
+              </span>
+            </div>
           </div>
         </div>
       </ng-container>

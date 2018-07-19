@@ -8,7 +8,7 @@
   max-width: 200px;
   width: 100%;
   justify-content: space-between;
-  background-color: #B0BEC5; // blue gray 200
+  background-color: #78909C; // blue gray 400
   transition: .4s background-color ease;
   color: white;
   transition: background-color .5s ease-out;
@@ -42,6 +42,12 @@ pre {
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid #F4511E;
+  &.warning{
+    border-color: #BA68C8;
+    .title{
+      background-color: #BA68C8;
+    }
+  }
   .title {
     background-color: #F4511E;
     color: #fff;
