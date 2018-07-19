@@ -1,12 +1,14 @@
-:host{
+:host {
   display: block;
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
 }
-form select{
+span {
   margin-right: 16px;
 }
-span{
-  margin-right: 16px;
+#url-wrapper {
+  input {
+    margin: 0 8px;
+  }
 }

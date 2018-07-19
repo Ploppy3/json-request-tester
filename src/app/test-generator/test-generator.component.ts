@@ -34,6 +34,10 @@ export class TestGeneratorComponent implements OnInit {
   ngOnInit() {
 
   }
+  
+  public createTestFromUrl() {
+    console.warn('TO DO');
+  }
 
   public onSubmit(event: any) {
     let test: HttpTest = {
