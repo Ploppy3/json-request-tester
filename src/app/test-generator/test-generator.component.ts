@@ -43,7 +43,7 @@ export class TestGeneratorComponent implements OnInit {
     let test: HttpTest = {
       body: null,
       expectedResponse: {
-        body: Object.assign({}, this.testObj), // create a copy to prevent back-propagation of changes
+        body: JSON.parse(JSON.stringify(this.testObj)), // create a copy to prevent back-propagation of changes
         status: this.formTest.controls['status'].value,
       },
       headers: [],
