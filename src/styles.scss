@@ -80,6 +80,9 @@ input,
 select {
   height: 39px;
 }
+input{
+  min-width: 100px;
+}
 select {
   border-right-width: 4px;
   cursor: pointer;
