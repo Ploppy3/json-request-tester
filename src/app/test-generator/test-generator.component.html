@@ -1,19 +1,32 @@
-<form (ngSubmit)="onSubmit($event)" [formGroup]="formTest" class="horizontal-spacer vertical-spacer">
+<form (ngSubmit)="onSubmit($event)" class="horizontal-spacer vertical-spacer">
   <div id="url-wrapper" class="flex overflow">
-    <select name="selectMethod" formControlName="method">
+    <select name="selectMethod" [(ngModel)]="model.method" name="method">
       <option value="GET">GET</option>
       <option value="POST">POST</option>
       <option value="PUT">PUT</option>
       <option value="DELETE">DELETE</option>
     </select>
-    <input class="flex-grow" type="text" placeholder="https://..." formControlName="url">
+    <input class="flex-grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url">
     <button type="button" class="outline" (click)="createTestFromUrl()">create</button>
   </div>
-  <div class="flex">
-    <span class="self-center">Status:</span>
-    <input class="flex-grow" type="number" placeholder="200" formControlName="status">
+  <div>
+    <div>Headers:</div>
+    <div class="flex" *ngFor="let header of model.headers; let i = index">
+      <input class="flex-grow" type="text" [(ngModel)]="header.key" name="header-key" placeholder="key">
+      <input class="flex-grow" type="text" [(ngModel)]="header.value" name="header-value" placeholder="value">
+      <button type="text" class="outline" (close)="removeHeader(i)"><i class="material-icons">close</i></button>
+    </div>
+    <div>
+      <button type="text" class="outline" (click)="model.headers.push({ key: '', value: '' })">Add header</button>
+    </div>
   </div>
-  <app-json-editor [obj]="testObj" (objChange)="testObj = $event"></app-json-editor>
+  <div>
+    <div>Status:</div>
+    <div class="flex">
+      <input class="flex-grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status">
+    </div>
+  </div>
+  <app-json-editor [obj]="model.expectedResponse.body" (objChange)="model.expectedResponse.body = $event"></app-json-editor>
   <!--<pre class="roboto-mono">{{formTest.value | json}}</pre>-->
   <button>add</button>
 </form>

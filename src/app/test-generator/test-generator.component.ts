@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { HttpTest } from '../data';
 import { SessionService } from '../session.service';
 import { HttpClient } from '@angular/common/http';
+import { jsonpCallbackContext } from '@angular/common/http/src/module';
 
 @Component({
   selector: 'app-test-generator',
@@ -10,23 +10,28 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./test-generator.component.scss']
 })
 export class TestGeneratorComponent implements OnInit {
-
-  public formVisible = false;
-
-  public testObj = {};
-  /*
-  public testObj = {
-    "status": 200,
-    "description": "%any_string%",
-    "data": "%any_array%"
+  
+  //public response = {};
+  
+  public model: HttpTest = {
+    body: null,
+    expectedResponse: {
+      body: {},
+      status: 200,
+    },
+    headers: [],
+    method: 'GET',
+    url: 'https://api.travian.engin9tools.com/api/global/servers',
   }
-  //*/
 
+  /*
   public formTest = new FormGroup({
     url: new FormControl('https://api.travian.engin9tools.com/api/global/servers'),
     method: new FormControl('GET'),
     status: new FormControl(200),
+    headers: new FormGroup({ a: new FormControl('test')})
   })
+  //*/
 
   constructor(
     private sessionService: SessionService,
@@ -38,12 +43,12 @@ export class TestGeneratorComponent implements OnInit {
   }
 
   public createTestFromUrl() {
-    switch (this.formTest.controls['method'].value) {
+    switch (this.model.method) {
       case 'GET':
-        this.httpClient.get(this.formTest.controls['url'].value).pipe(
+        this.httpClient.get(this.model.url).pipe(
         ).subscribe(res => {
           if (typeof res == 'object') {
-            this.testObj = res;
+            this.model.expectedResponse.body = res;
           }
         });
         break;
@@ -62,18 +67,14 @@ export class TestGeneratorComponent implements OnInit {
     }
   }
 
+  public removeHeader(i: number) {
+    this.model.headers.slice(i, 1);
+  }
+
   public onSubmit(event: any) {
-    let test: HttpTest = {
-      body: null,
-      expectedResponse: {
-        body: JSON.parse(JSON.stringify(this.testObj)), // create a copy to prevent back-propagation of changes
-        status: this.formTest.controls['status'].value,
-      },
-      headers: [],
-      method: this.formTest.controls['method'].value,
-      url: this.formTest.controls['url'].value,
-    }
-    this.sessionService.addTest(test);
+    console.log(this.model);
+    //this.sessionService.addTest(this.model);
+    this.sessionService.addTest(JSON.parse(JSON.stringify(this.model)));
   }
 
 }

@@ -39,7 +39,7 @@
         <div class="title">Response Status</div>
         <pre class="overflow">{{ test.response?.status }}</pre>
       </div>
-      <ng-container *ngIf="test.response?.errors.length > 0">
+      <ng-container *ngIf="test.response?.errors?.length > 0">
         <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
           <div class="title">{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</div>
           <div class="horizontal-spacer vertical-spacer">
