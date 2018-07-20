@@ -1,8 +1,8 @@
 :host{
   display: block;
+  overflow: auto;
 }
 .wrapper-array{
-  overflow: hidden;
   margin-left: 19px;
   padding-left: 16px;
   border-left: 1px solid rgba($color: #000000, $alpha: .12);
