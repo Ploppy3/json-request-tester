@@ -75,6 +75,18 @@ select{
   border-right-width: 4px;
   cursor: pointer;
 }
+pre {
+  padding: 16px;
+  margin: 0;
+}
+hr {
+  height: 1px;
+  background-color: rgba(0, 0, 0, .24);
+  border: none;
+}
+a:link, a:visited, a:hover, a:active {
+  color: inherit;
+}
 .primary{
   color: $primary;
 }
@@ -97,20 +109,8 @@ select{
     font-size: 32px;
   }
 }
-pre {
-  padding: 16px;
-  margin: 0;
-}
 .secondary {
   color: rgba(0, 0, 0, .54);
-}
-hr {
-  height: 1px;
-  background-color: rgba(0, 0, 0, .24);
-  border: none;
-}
-a:link, a:visited, a:hover, a:active {
-  color: inherit;
 }
 .thin {
   font-weight: 300;
