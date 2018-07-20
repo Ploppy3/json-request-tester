@@ -2,11 +2,13 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { TestService } from '../test.service';
 import { HttpTest } from '../data';
 import { SessionService } from '../session.service';
+import { fadeInOut } from '../animations';
 
 @Component({
   selector: 'app-tester',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [fadeInOut]
 })
 export class HomeComponent implements OnInit {
 
