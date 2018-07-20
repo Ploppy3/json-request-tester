@@ -36,7 +36,6 @@ export class ArrayEditorComponent implements OnInit, OnChanges {
     if (this.array) {
       if (isArray(this.array)) {
         for (let i = 0; i < this.array.length; i++) {
-          const element = this.array[i];
           this.key_value_pairs.push({
             key: i,
             type: getPropertyType(this.array[i]),

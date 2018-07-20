@@ -28,7 +28,7 @@ export class ObjectEditorComponent implements OnInit, OnChanges {
   }
 
   public init() {
-    console.log('init', this.obj);
+    //console.log('init', this.obj);
     this.PROPERTY_TYPES = Object.keys(this.PROPERTY_TYPES_ENUM).filter(key => isNaN(Number(key)));
     this.key_value_pairs = [];
     if (this.obj) {
