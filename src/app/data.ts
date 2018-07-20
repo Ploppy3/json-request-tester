@@ -8,7 +8,7 @@ export interface Data {
 export interface HttpTest{
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  headers: Header[];
+  headers: HeaderTest[];
   body: any;
   expectedResponse: {
     body: {};
@@ -21,7 +21,7 @@ export interface HttpTest{
   }
 }
 
-export interface Header{
+export interface HeaderTest{
   key: string;
   value: string;
 }

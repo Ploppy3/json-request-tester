@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Header, HttpTest } from './data';
+import { HeaderTest, HttpTest } from './data';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JsonComparator, JsonComparatorError } from './json-comparator';
@@ -75,7 +75,7 @@ export class TestService {
   };
   //*/
 
-  private formatHeaders(headers: Header[]) {
+  private formatHeaders(headers: HeaderTest[]) {
     let httpHeaders = new HttpHeaders();
     headers.forEach(header => {
       httpHeaders = httpHeaders.set(header.key, header.value);
