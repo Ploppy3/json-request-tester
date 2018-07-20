@@ -11,7 +11,7 @@
 *:focus {
   outline: none;
 }
-.roboto-mono{
+.roboto-mono {
   font-family: 'Roboto Mono', monospace;
 }
 body {
@@ -28,14 +28,20 @@ button {
   font-weight: bold;
   color: inherit;
   cursor: pointer;
-  &:disabled{
+  transition: box-shadow .25s ease-out;
+  background-color: $accent;
+  &:disabled {
     cursor: default;
     color: gray;
-    &.raised {
-      background-color: darkgray;
+    background-color: darkgray;
+    &:hover{
+      box-shadow: none;
     }
   }
-  &.outline{
+  &:hover{
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  }
+  &.outline {
     background-color: transparent;
     border: 1px solid $accent;
     color: $accent;
@@ -47,7 +53,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    i, .icon {
+    i,
+    .icon {
       padding: 8px;
     }
   }
@@ -62,16 +69,18 @@ textarea {
   max-width: 100%;
   resize: none;
   transition: border-color .5s ease;
-  &:focus{
+  &:focus {
     border-color: $primary;
   }
+  &:disabled {
+    background-color: rgba(0, 0, 0, .12);
+  }
 }
-
 input,
 select {
   height: 39px;
 }
-select{
+select {
   border-right-width: 4px;
   cursor: pointer;
 }
@@ -84,13 +93,16 @@ hr {
   background-color: rgba(0, 0, 0, .24);
   border: none;
 }
-a:link, a:visited, a:hover, a:active {
+a:link,
+a:visited,
+a:hover,
+a:active {
   color: inherit;
 }
-.primary{
+.primary {
   color: $primary;
 }
-.accent{
+.accent {
   color: $accent;
 }
 .bold {
@@ -111,10 +123,4 @@ a:link, a:visited, a:hover, a:active {
 }
 .secondary {
   color: rgba(0, 0, 0, .54);
-}
-.thin {
-  font-weight: 300;
-}
-.flex-center {
-  margin: auto;
 }
