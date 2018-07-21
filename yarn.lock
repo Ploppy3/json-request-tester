@@ -357,7 +357,7 @@
 
 "CssFramework@https://github.com/Ploppy3/CssFramework":
   version "0.0.0"
-  resolved "https://github.com/Ploppy3/CssFramework#12d904597e10ff894691d917bff7f745fc9606bb"
+  resolved "https://github.com/Ploppy3/CssFramework#74a4da2a240447af72b1e6de5f110dc7d3127a23"
 
 abbrev@1:
   version "1.1.1"
