@@ -1,6 +1,6 @@
 <div [class.good]="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0" [class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
   class="card-request row spacer">
-  <div class="column spacer">
+  <div class="col spacer">
     <span class="request-method no-shrink bold">{{ test?.method }}</span>
     <div class="row">
       <ng-content></ng-content>
@@ -10,7 +10,7 @@
 </div>
 <div class="card-result">
   <div class="row spacer">
-    <div class="column spacer">
+    <div class="col spacer">
       <div class="code-wrapper">
         <div class="title">Expected Status</div>
         <pre class="overflow">{{ test.expectedResponse.status }}</pre>
@@ -21,7 +21,7 @@
   <ng-container *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
     <hr>
     <div class="row spacer">
-      <div class="column spacer">
+      <div class="col spacer">
         <div class="code-wrapper">
           <div class="title">Response Status</div>
           <pre class="overflow">{{ test.response?.status }}</pre>
@@ -30,7 +30,7 @@
           <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
             <div class="title">{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</div>
             <div class="row spacer">
-              <div class="column spacer">
+              <div class="col spacer">
                 <div>
                   <span class="secondary">Field:</span>
                   <ng-container *ngFor="let property of error.depth">

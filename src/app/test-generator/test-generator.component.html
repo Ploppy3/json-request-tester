@@ -1,5 +1,5 @@
 <form (ngSubmit)="onSubmit($event)" class="row spacer">
-  <div class="column spacer">
+  <div class="col spacer">
     <div id="url-wrapper" class="row overflow">
       <select name="selectMethod" [(ngModel)]="model.method" name="method">
         <option value="GET">GET</option>
@@ -10,7 +10,7 @@
       <input class="grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url">
       <button type="button" class="outline" (click)="createTestFromUrl()">create</button>
     </div>
-    <div class="column inner-spacer">
+    <div class="col inner-spacer">
       <div>Headers:</div>
       <div class="row inner-spacer" *ngFor="let header of model.headers; let i = index">
         <input class="grow" type="text" [(ngModel)]="header.key" name="header-key" placeholder="key">
@@ -21,7 +21,7 @@
         <button type="button" class="button outline" (click)="model.headers.push({ key: '', value: '' })">Add header</button>
       </div>
     </div>
-    <div class="column inner-spacer">
+    <div class="col inner-spacer">
       <div>Status:</div>
       <div class="row">
         <input class="grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status">
