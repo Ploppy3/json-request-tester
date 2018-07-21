@@ -5,7 +5,7 @@ import { SessionService } from '../session.service';
 import { fadeInOut } from '../animations';
 
 @Component({
-  selector: 'app-tester',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [fadeInOut]

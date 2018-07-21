@@ -1,71 +1,61 @@
 <div [class.good]="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0" [class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
-  class="card-request horizontal-spacer vertical-spacer">
-  <span class="request-method no-shrink bold">{{ test?.method }}</span>
-
-  <div class="request-actions flex">
-    <ng-content></ng-content>
+  class="card-request flex spacer">
+  <div class="flex column spacer">
+    <span class="request-method no-shrink bold">{{ test?.method }}</span>
+    <div class="flex">
+      <ng-content></ng-content>
+    </div>
+    <span class="request-url">{{ test?.url }}</span>
   </div>
-
-  <span class="request-url">{{ test?.url }}</span>
 </div>
-
 <div class="card-result">
-  <div class="horizontal-spacer vertical-spacer">
-    <div class="code-wrapper">
-      <div class="title">Expected Status</div>
-      <pre class="overflow">{{ test.expectedResponse.status }}</pre>
-    </div>
-    <app-json-editor [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event"></app-json-editor>
-    <!--
-    <div class="code-wrapper">
-      <div class="title flex">
-        <span class="self-center">Expected Body</span>
-        <span class="flex-grow"></span>
-        <i #editMode (click)="editMode.enabled = !editMode.enabled" class="secondary clickable material-icons">{{editMode.enabled ? 'close' : 'edit'}}</i>
+  <div class="flex spacer">
+    <div class="flex column spacer">
+      <div class="code-wrapper">
+        <div class="title">Expected Status</div>
+        <pre class="overflow">{{ test.expectedResponse.status }}</pre>
       </div>
-      <div class="vertical-spacer" *ngIf="editMode.enabled; else showJson;">
-        <app-object-editor [obj]="test.expectedResponse.body"></app-object-editor>
-      </div>
-      <ng-template #showJson>
-        <pre class="overflow">{{ test.expectedResponse.body | json }}</pre>
-      </ng-template>
+      <app-json-editor [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event"></app-json-editor>
     </div>
-    -->
   </div>
   <ng-container *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
     <hr>
-    <div class="horizontal-spacer vertical-spacer">
-      <div class="code-wrapper">
-        <div class="title">Response Status</div>
-        <pre class="overflow">{{ test.response?.status }}</pre>
-      </div>
-      <ng-container *ngIf="test.response?.errors?.length > 0">
-        <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
-          <div class="title">{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</div>
-          <div class="horizontal-spacer vertical-spacer">
-            <div>
-              <span class="secondary">Field:</span>
-              <ng-container *ngFor="let property of error.depth">
-                <span class="field">{{property}}</span>
-                <span class="separator secondary">></span>
-              </ng-container>
-              <span class="field">{{error.key}}</span>
-            </div>
-            <div>
-              <span class="secondary">Message:</span>
-              <span [ngSwitch]="error.type">
-              <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
-              <span *ngSwitchCase="errorTypes.DIFFERENT_VALUE">Different value</span>
-              <span *ngSwitchCase="errorTypes.UNEXPECTED_KEY_VALUE_PAIR">Found unexpected key-value pair</span>
-              <span *ngSwitchDefault>Unkown error</span>
-              </span>
+    <div class="flex spacer">
+      <div class="flex column spacer">
+        <div class="code-wrapper">
+          <div class="title">Response Status</div>
+          <pre class="overflow">{{ test.response?.status }}</pre>
+        </div>
+        <ng-container *ngIf="test.response?.errors?.length > 0">
+          <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
+            <div class="title">{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</div>
+            <div class="flex spacer">
+              <div class="flex column spacer">
+                <div>
+                  <span class="secondary">Field:</span>
+                  <ng-container *ngFor="let property of error.depth">
+                    <span class="field">{{property}}</span>
+                    <span class="separator secondary">></span>
+                  </ng-container>
+                  <span class="field">{{error.key}}</span>
+                </div>
+                <div>
+                  <span class="secondary">Message:</span>
+                  <span [ngSwitch]="error.type">
+                      <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
+                  <span *ngSwitchCase="errorTypes.DIFFERENT_VALUE">Different value</span>
+                  <span *ngSwitchCase="errorTypes.UNEXPECTED_KEY_VALUE_PAIR">Found unexpected key-value pair</span>
+                  <span *ngSwitchDefault>Unkown error</span>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+        </ng-container>
+        <div class="code-wrapper">
+          <div class="title">Response Body</div>
+          <pre class="overflow">{{ test.response?.body | json }}</pre>
         </div>
-      </ng-container>
-      <div class="code-wrapper">
-        <div class="title">Response Body</div>
-        <pre class="overflow">{{ test.response?.body | json }}</pre>
       </div>
     </div>
   </ng-container>

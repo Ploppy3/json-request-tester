@@ -5,8 +5,8 @@
     <i #editMode (click)="editMode.enabled = !editMode.enabled" class="secondary clickable material-icons">{{editMode.enabled ? 'code' : 'edit'}}</i>
   </div>
   <div class="flex" *ngIf="(obj | json) != (copyOfObj | json)" [@collapse]>
-    <button class="edit flex-grow" (click)="discardChanges()" type="button">revert</button>
-    <button class="edit flex-grow" (click)="saveChanges()" type="button">save</button>
+    <button class="button edit flex-grow" (click)="discardChanges()" type="button">revert</button>
+    <button class="button edit flex-grow" (click)="saveChanges()" type="button">save</button>
   </div>
   <div class="clickable flex" *ngIf="!editMode.enabled" (click)="editMode.enabled = true">
     <pre class="flex-grow primary-text roboto-mono overflow">{{ obj | json }}</pre>

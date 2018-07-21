@@ -66,11 +66,7 @@ export class TestGeneratorComponent implements OnInit {
         break;
     }
   }
-
-  public removeHeader(i: number) {
-    this.model.headers.slice(i, 1);
-  }
-
+  
   public onSubmit(event: any) {
     console.log(this.model);
     //this.sessionService.addTest(this.model);

@@ -4,8 +4,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import '~CssFramework/styles.scss';
 @import './variables.scss';
+//$spacer-padding: 8px;
 * {
-  font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
 *:focus {
@@ -15,31 +15,38 @@
   font-family: 'Roboto Mono', monospace;
 }
 body {
+  font-family: 'Roboto', sans-serif;
   background-color: #424242;
   overflow-y: scroll;
   color: rgba(0, 0, 0, .87)
 }
 button {
-  background: none;
-  height: 39px;
-  border: none;
-  border-radius: 8px;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: inherit;
   cursor: pointer;
-  transition: box-shadow .25s ease-out;
-  background-color: $accent;
-  &:disabled {
-    cursor: default;
-    color: gray;
-    background-color: darkgray;
-    &:hover{
-      box-shadow: none;
+  &.button,
+  &.outline {
+    background: none;
+    height: 39px;
+    border: none;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: inherit;
+    transition: box-shadow .25s ease-out;
+    background-color: $accent;
+    &>* {
+      vertical-align: middle;
+    }
+    &:disabled {
+      cursor: default;
+      color: gray;
+      background-color: darkgray;
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
-  &:hover{
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  &:hover {
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
   }
   &.outline {
     background-color: transparent;
@@ -80,7 +87,7 @@ input,
 select {
   height: 39px;
 }
-input{
+input {
   min-width: 100px;
 }
 select {
