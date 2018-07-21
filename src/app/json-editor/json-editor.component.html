@@ -1,24 +1,24 @@
 <div class="code-wrapper">
-  <div class="title flex">
+  <div class="title row">
     <span class="self-center">Expected Body</span>
-    <span class="flex-grow"></span>
+    <span class="grow"></span>
     <i #editMode (click)="editMode.enabled = !editMode.enabled" class="secondary clickable material-icons">{{editMode.enabled ? 'code' : 'edit'}}</i>
   </div>
-  <div class="flex" *ngIf="(obj | json) != (copyOfObj | json)" [@collapse]>
-    <button class="button edit flex-grow" (click)="discardChanges()" type="button">revert</button>
-    <button class="button edit flex-grow" (click)="saveChanges()" type="button">save</button>
+  <div class="row" *ngIf="(obj | json) != (copyOfObj | json)" [@collapse]>
+    <button class="button edit grow" (click)="discardChanges()" type="button">revert</button>
+    <button class="button edit grow" (click)="saveChanges()" type="button">save</button>
   </div>
-  <div class="clickable flex" *ngIf="!editMode.enabled" (click)="editMode.enabled = true">
-    <pre class="flex-grow primary-text roboto-mono overflow">{{ obj | json }}</pre>
-    <pre class="flex-grow primary-text roboto-mono overflow" *ngIf="(obj | json) != (copyOfObj | json)">{{ copyOfObj | json }}</pre>
+  <div class="clickable row" *ngIf="!editMode.enabled" (click)="editMode.enabled = true">
+    <pre class="grow primary-text roboto-mono overflow">{{ obj | json }}</pre>
+    <pre class="grow primary-text roboto-mono overflow" *ngIf="(obj | json) != (copyOfObj | json)">{{ copyOfObj | json }}</pre>
   </div>
   <div *ngIf="editMode.enabled">
     <app-object-editor class="overflow" [obj]="copyOfObj"></app-object-editor>
   </div>
   <!--
-  <div class="clickable flex" (click)="editMode.enabled = true">
-    <pre class="flex-grow primary-text roboto-mono overflow">{{ obj | json }}</pre>
-    <pre class="flex-grow primary-text roboto-mono overflow">{{ copyOfObj | json }}</pre>
+  <div class="clickable row" (click)="editMode.enabled = true">
+    <pre class="grow primary-text roboto-mono overflow">{{ obj | json }}</pre>
+    <pre class="grow primary-text roboto-mono overflow">{{ copyOfObj | json }}</pre>
   </div>
   -->
 </div>

@@ -1,30 +1,30 @@
-<form (ngSubmit)="onSubmit($event)" class="flex spacer">
-  <div class="flex column spacer">
-    <div id="url-wrapper" class="flex overflow">
+<form (ngSubmit)="onSubmit($event)" class="row spacer">
+  <div class="column spacer">
+    <div id="url-wrapper" class="row overflow">
       <select name="selectMethod" [(ngModel)]="model.method" name="method">
         <option value="GET">GET</option>
         <option value="POST">POST</option>
         <option value="PUT">PUT</option>
         <option value="DELETE">DELETE</option>
       </select>
-      <input class="flex-grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url">
+      <input class="grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url">
       <button type="button" class="outline" (click)="createTestFromUrl()">create</button>
     </div>
-    <div class="flex column inner-spacer">
+    <div class="column inner-spacer">
       <div>Headers:</div>
-      <div class="flex inner-spacer" *ngFor="let header of model.headers; let i = index">
-        <input class="flex-grow" type="text" [(ngModel)]="header.key" name="header-key" placeholder="key">
-        <input class="flex-grow" type="text" [(ngModel)]="header.value" name="header-value" placeholder="value">
+      <div class="row inner-spacer" *ngFor="let header of model.headers; let i = index">
+        <input class="grow" type="text" [(ngModel)]="header.key" name="header-key" placeholder="key">
+        <input class="grow" type="text" [(ngModel)]="header.value" name="header-value" placeholder="value">
         <button type="button" class="button outline" (click)="model.headers.splice(i, 1)"><i class="material-icons">close</i></button>
       </div>
       <div>
         <button type="button" class="button outline" (click)="model.headers.push({ key: '', value: '' })">Add header</button>
       </div>
     </div>
-    <div class="flex column inner-spacer">
+    <div class="column inner-spacer">
       <div>Status:</div>
-      <div class="flex">
-        <input class="flex-grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status">
+      <div class="row">
+        <input class="grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status">
       </div>
     </div>
     <app-json-editor [obj]="model.expectedResponse.body" (objChange)="model.expectedResponse.body = $event"></app-json-editor>
