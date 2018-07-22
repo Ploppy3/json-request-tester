@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.sessionsService.tests$.subscribe(tests => {
       this.tests = tests;
-    })
+    });
   }
 
   public removeTest(test: HttpTest) {
@@ -72,6 +72,11 @@ export class HomeComponent implements OnInit {
     if (i > -1) {
       this.tests.splice(i, 1);
     }
+    this.sessionsService.saveData(this.tests);
+  }
+
+  public onTestChange() {
+    this.sessionsService.saveData(this.tests);
   }
 
   public testAll() {

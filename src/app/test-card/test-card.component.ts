@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { HttpTest } from '../data';
 import { JsonComparatorErrorType } from '../json-comparator';
 
@@ -11,6 +11,8 @@ export class TestCardComponent implements OnInit {
 
   @Input() test: HttpTest;
   @Input() result: any;
+
+  @Output() onChange = new EventEmitter<void>();
   
   public errorTypes = JsonComparatorErrorType;
 
