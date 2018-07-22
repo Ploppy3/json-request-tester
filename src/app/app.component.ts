@@ -58,7 +58,10 @@ export class AppComponent implements DoCheck, OnInit {
     this.handleJSONUpload(files).subscribe(
       (data: Data) => {
         console.log(data);
-        this.sessionservice.tests$.next(data.tests);
+        if (data.version == environment.version) {
+          this.sessionservice.tests$.next(data.tests);
+          this.sessionservice.saveData(data.tests);
+        }
       },
       err => {
         console.log(err);
