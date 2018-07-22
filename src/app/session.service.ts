@@ -3,6 +3,7 @@ import { HttpTest, Data } from './data';
 import { BehaviorSubject } from 'rxjs';
 import { Storage } from './storage';
 import { isArray } from 'util';
+import { environment } from '../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,16 @@ import { isArray } from 'util';
 export class SessionService {
 
   public tests$ = new BehaviorSubject<HttpTest[]>([]);
-  private data: Data = {
+  /*private data: Data = {
     version: 1,
     tests: [],
-  }
+  }*/
 
   constructor() {
     console.log('constructor');
-    let data = Storage.get<Data>(Storage.KEY_TESTS, null);
+    let data: Data = Storage.get<Data>(Storage.KEY_TESTS, null);
     if (data) {
-      if (data.version == 1) {
+      if (data.version == environment.version) {
         if (data.tests) {
           if (isArray(data.tests)) {
             // TODO typecheck httpTests
@@ -38,8 +39,11 @@ export class SessionService {
   }
 
   public saveData(tests: HttpTest[]) {
-    this.data.tests = tests;
-    Storage.set(Storage.KEY_TESTS, this.data);
+    let data: Data = {
+      version: environment.version,
+      tests: tests
+    };
+    Storage.set(Storage.KEY_TESTS, data);
   }
 
   public exportTests() {
@@ -51,9 +55,12 @@ export class SessionService {
       return new Uint8Array(out);
     }
 
-    var data = encode(JSON.stringify({...this.data, ...{tests: this.tests$.getValue()}}, null, 4) );
+    let data: Data = {
+      version: environment.version,
+      tests: this.tests$.getValue()
+    };
   
-    var blob = new Blob([ data ], {
+    var blob = new Blob([ encode(JSON.stringify(data, null, 4)) ], {
       type: 'application/octet-stream'
     });
 
