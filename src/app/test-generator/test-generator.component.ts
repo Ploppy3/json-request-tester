@@ -86,4 +86,8 @@ export class TestGeneratorComponent implements OnInit {
     this.sessionService.addTest(JSON.parse(JSON.stringify(this.model)));
   }
 
+  public trackByFn(i, test: HttpTest) {
+    return i;
+  }
+
 }
