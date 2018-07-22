@@ -5,6 +5,7 @@
     <div class="row">
       <ng-content></ng-content>
     </div>
+    <div class="grow"></div>
     <span class="request-url">{{ test?.url }}</span>
   </div>
 </div>
@@ -42,7 +43,7 @@
                 <div>
                   <span class="secondary">Message:</span>
                   <span [ngSwitch]="error.type">
-                      <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
+                  <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
                   <span *ngSwitchCase="errorTypes.DIFFERENT_VALUE">Different value</span>
                   <span *ngSwitchCase="errorTypes.UNEXPECTED_KEY_VALUE_PAIR">Found unexpected key-value pair</span>
                   <span *ngSwitchDefault>Unkown error</span>
