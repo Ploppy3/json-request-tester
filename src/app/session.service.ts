@@ -34,17 +34,11 @@ export class SessionService {
     let tests = this.tests$.value;
     tests.push(test);
     this.tests$.next(tests);
+    this.saveData(tests);
   }
 
-  public saveTests(tests: HttpTest[]) {
+  public saveData(tests: HttpTest[]) {
     this.data.tests = tests;
-    this.tests$.next(this.data.tests);
-    Storage.set(Storage.KEY_TESTS, this.data);
-  }
-
-  public saveData(data: Data) {
-    this.data = data;
-    this.tests$.next(data.tests);
     Storage.set(Storage.KEY_TESTS, this.data);
   }
 
