@@ -1,7 +1,7 @@
 <div [class.good]="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0" [class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
   class="card-request col">
   <span class="request-method no-shrink bold">{{ test?.method }}</span>
-  <div class="row">
+  <div class="request-actions row">
     <ng-content></ng-content>
   </div>
   <div class="grow"></div>
