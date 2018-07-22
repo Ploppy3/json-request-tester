@@ -13,18 +13,6 @@ import { Data } from "./data";
 })
 
 export class AppComponent implements DoCheck, OnInit {
-  inWindow: boolean;
-  inDropZone: boolean;
-
-  @HostListener('window:dragenter', ['$event'])
-  private onDragEnter(event) {
-    this.inWindow = true;
-  }
-  @HostListener('window:dragleave', ['$event'])
-  private onDragEnd(event) {
-    this.inWindow = false;
-  }
-
   public showFabToTop = false;
   public lastScrollY = 0; // used to keep track of fabToTop state
 
@@ -60,18 +48,14 @@ export class AppComponent implements DoCheck, OnInit {
   }
 
   public stopDragoverEventPropagation(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    this.zone.runOutsideAngular(() => {
+      e.preventDefault();
+      e.stopPropagation();
+    })
   }
 
-  public onDrop(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.inWindow = false;
-    this.inDropZone = false;
-    console.log(e.dataTransfer.files);
-
-    this.handleJSONUpload(e.dataTransfer.files).subscribe(
+  public onDrop(files: FileList) {
+    this.handleJSONUpload(files).subscribe(
       (data: Data) => {
         console.log(data);
         this.sessionservice.tests$.next(data.tests);
@@ -89,7 +73,7 @@ export class AppComponent implements DoCheck, OnInit {
     return new Observable((observer) => {
       for(let i = 0; i < files.length; i++) {
         let file = files[i];
-        let last = i == files.length - 1;
+        let last = (i == files.length - 1) ? true : false;
   
         if ( /\.(json)$/i.test(file.name) ) {
           var reader = new FileReader();
@@ -97,10 +81,8 @@ export class AppComponent implements DoCheck, OnInit {
           reader.addEventListener("load", function () {
             try {
               observer.next(JSON.parse(this.result));
-              if (last) observer.complete();
-            } catch(e) {
-              if (last) observer.complete();
-            }
+            } catch(e) {}
+            if (last) observer.complete();
           }, false);
   
           reader.readAsText(file);

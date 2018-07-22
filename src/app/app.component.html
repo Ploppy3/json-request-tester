@@ -3,10 +3,6 @@
   <i class="material-icons">keyboard_arrow_up</i>
 </button>
 
-<div id="drop-zone" [hidden]="!(inWindow || inDropZone)"
- (dragenter)="inDropZone = true" 
- (dragleave)="inDropZone = false" 
- (dragover)="stopDragoverEventPropagation($event)" 
- (drop)="onDrop($event)">
+<div id="drop-zone" dropfile (filedroped)="onDrop($event)">
  Drop your file on this area
 </div>
