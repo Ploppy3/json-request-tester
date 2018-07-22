@@ -3,7 +3,7 @@ import { fadeInOut } from "./animations";
 import { environment } from "../environments/environment";
 import { Observable } from "rxjs";
 import { SessionService } from "./session.service";
-import { HttpTest } from "./data";
+import { Data } from "./data";
 
 @Component({
   selector: 'app-root',
@@ -48,11 +48,11 @@ export class AppComponent implements DoCheck, OnInit {
     window.scroll({ top: 0 });
   }
 
-  onDrop(e: FileList) {
+  public onDrop(e: FileList) {
     this.handleJSONUpload(e).subscribe(
-      (data: HttpTest[]) => {
+      (data: Data) => {
         console.log(data);
-        this.sessionservice.tests$.next(data);
+        this.sessionservice.tests$.next(data.tests);
       },
       err => {
         console.log(err);
@@ -63,8 +63,7 @@ export class AppComponent implements DoCheck, OnInit {
     );
   }
 
-
-  handleJSONUpload (files: FileList): Observable<Object> {
+  public handleJSONUpload (files: FileList): Observable<Object> {
     return new Observable((observer) => {
       for(let i = 0; i < files.length; i++) {
         let file = files[i];

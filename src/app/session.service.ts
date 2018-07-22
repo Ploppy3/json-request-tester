@@ -42,6 +42,12 @@ export class SessionService {
     Storage.set(Storage.KEY_TESTS, this.data);
   }
 
+  public saveData(data: Data) {
+    this.data = data;
+    this.tests$.next(data.tests);
+    Storage.set(Storage.KEY_TESTS, this.data);
+  }
+
   public exportTests() {
     let encode = function( s ) {
       var out = [];
@@ -51,7 +57,7 @@ export class SessionService {
       return new Uint8Array( out );
     }
 
-    var data = encode( JSON.stringify(this.tests$.getValue(), null, 4) );
+    var data = encode( JSON.stringify({...this.data, ...{tests: this.tests$.getValue()}}, null, 4) );
   
     var blob = new Blob( [ data ], {
       type: 'application/octet-stream'

@@ -11,16 +11,18 @@ export class DropfileDirective {
   dragEnter_evt: string[] = ['dragover', 'dragenter'];
   dragLeave_evt: string[] = ['dragleave', 'dragend', 'drop'];
 
-  constructor(private _el: ElementRef) { 
+  constructor(private _el: ElementRef) {
     let preventDefault = (e: any) => {
       e.preventDefault();
       e.stopPropagation();
     }
     let dragEnter = (e: any) => {
-      this.classes = true;
+      //console.log(e.type);
+      if (!this.classes) this.classes = true;
     }
     let dragLeave = (e: any) => {
-     this.classes = false;
+      //console.log(e.type);
+      if (this.classes) this.classes = false;
     }
     let ondrop = (e) => {
       this.filedroped.next(e.dataTransfer.files);

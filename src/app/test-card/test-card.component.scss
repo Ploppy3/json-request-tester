@@ -24,6 +24,10 @@
   &.good {
     background-color: #4CAF50; // green 500
   }
+
+  .col.spacer > *:not(.row) {
+    margin: 0;
+  }
 }
 .card-result {
   flex: 1;
