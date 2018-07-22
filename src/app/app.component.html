@@ -1,8 +1,12 @@
-<div id="dragzone" dropfile (filedroped)="onDrop($event)">
-  <app-home></app-home>
-  <button *ngIf="showFabToTop" (click)="scrollToTop()" id="fab-toTop" class="icon fab" [@fadeInOut]>
-    <i class="material-icons">keyboard_arrow_up</i>
-  </button>
+<app-home></app-home>
+<button *ngIf="showFabToTop" (click)="scrollToTop()" id="fab-toTop" class="icon fab" [@fadeInOut]>
+  <i class="material-icons">keyboard_arrow_up</i>
+</button>
 
-  <div id="dragzone-msg">Drop your file on this area</div>
+<div id="drop-zone" [hidden]="!(inWindow || inDropZone)"
+ (dragenter)="inDropZone = true" 
+ (dragleave)="inDropZone = false" 
+ (dragover)="stopDragoverEventPropagation($event)" 
+ (drop)="onDrop($event)">
+ Drop your file on this area
 </div>

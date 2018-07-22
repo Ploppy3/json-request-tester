@@ -13,6 +13,17 @@ import { Data } from "./data";
 })
 
 export class AppComponent implements DoCheck, OnInit {
+  inWindow: boolean;
+  inDropZone: boolean;
+
+  @HostListener('window:dragenter', ['$event'])
+  private onDragEnter(event) {
+    this.inWindow = true;
+  }
+  @HostListener('window:dragleave', ['$event'])
+  private onDragEnd(event) {
+    this.inWindow = false;
+  }
 
   public showFabToTop = false;
   public lastScrollY = 0; // used to keep track of fabToTop state
@@ -48,8 +59,19 @@ export class AppComponent implements DoCheck, OnInit {
     window.scroll({ top: 0 });
   }
 
-  public onDrop(e: FileList) {
-    this.handleJSONUpload(e).subscribe(
+  public stopDragoverEventPropagation(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  public onDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.inWindow = false;
+    this.inDropZone = false;
+    console.log(e.dataTransfer.files);
+
+    this.handleJSONUpload(e.dataTransfer.files).subscribe(
       (data: Data) => {
         console.log(data);
         this.sessionservice.tests$.next(data.tests);
