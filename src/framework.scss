@@ -44,9 +44,6 @@ body {
       margin-right: 0;
     }
   }
-  &>col {
-    width: calc(100% - $spacer-padding * 2);
-  }
 }
 /// Quick flex display column
 .col {
