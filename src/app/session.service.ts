@@ -20,7 +20,7 @@ export class SessionService {
     console.log('constructor');
     let data: Data = Storage.get<Data>(Storage.KEY_TESTS, null);
     if (data) {
-      if (data.version == environment['version']) {
+      if (data.version == environment.version) {
         if (data.tests) {
           if (isArray(data.tests)) {
             // TODO typecheck httpTests
@@ -40,7 +40,7 @@ export class SessionService {
 
   public saveData(tests: HttpTest[]) {
     let data: Data = {
-      version: environment['version'],
+      version: environment.version,
       tests: tests
     };
     Storage.set(Storage.KEY_TESTS, data);
@@ -56,7 +56,7 @@ export class SessionService {
     }
 
     let data: Data = {
-      version: environment['version'],
+      version: environment.version,
       tests: this.tests$.getValue()
     };
   
