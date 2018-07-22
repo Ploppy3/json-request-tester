@@ -49,26 +49,24 @@ export class SessionService {
   }
 
   public exportTests() {
-    let encode = function( s ) {
+    let encode = function (s) {
       var out = [];
-      for ( var i = 0; i < s.length; i++ ) {
+      for (var i = 0; i < s.length; i++) {
         out[i] = s.charCodeAt(i);
       }
-      return new Uint8Array( out );
+      return new Uint8Array(out);
     }
 
-    var data = encode( JSON.stringify({...this.data, ...{tests: this.tests$.getValue()}}, null, 4) );
+    var data = encode(JSON.stringify({...this.data, ...{tests: this.tests$.getValue()}}, null, 4) );
   
-    var blob = new Blob( [ data ], {
+    var blob = new Blob([ data ], {
       type: 'application/octet-stream'
     });
-    
-    var url = URL.createObjectURL( blob );
-    var link = document.createElement( 'a' );
-    link.setAttribute( 'href', url );
-    link.setAttribute( 'download', 'data.json' );
-    var event = document.createEvent( 'MouseEvents' );
-    event.initMouseEvent( 'click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-    link.dispatchEvent( event );
+
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'data.json');
+    link.click();
   }
 }
