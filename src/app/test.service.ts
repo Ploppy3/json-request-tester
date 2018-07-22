@@ -12,23 +12,6 @@ export class TestService {
 
   constructor(private _http: HttpClient) {
     console.log('constructor');
-    /*
-    let expected = {
-      status: 'ok',
-      customObject: {
-        myKey: 'myVal',
-        param: 'test'
-      }
-    };
-    let response = {
-      status: 'not ok',
-      customObject: {
-        myKey: 'myValu',
-      }
-    };
-    let errors = this.compareObjects(expected, response);
-    console.log('errors', errors);
-    //*/
   }
 
   public test(test: HttpTest) {
@@ -45,11 +28,10 @@ export class TestService {
         break;
     }
     if (!httpRequest) return;
-    //<{ response: HttpResponse<any>, errors: HttpComparatorObjectError[] }>(next);
     return httpRequest.pipe(
       map(
         res => {
-          console.log('res', res);
+          //console.log('res', res);
           let errors = this.findErrors(test, res);
           let finalRes: ProcessedRequest = {
             response: res,
@@ -79,30 +61,20 @@ export class TestService {
     let httpHeaders = new HttpHeaders();
     headers.forEach(header => {
       httpHeaders = httpHeaders.set(header.key, header.value);
+      //console.log('setting an header');
     });
     return httpHeaders;
   }
 
   public findErrors(test: HttpTest, response: HttpResponse<any>): JsonComparatorError[] {
-
-    console.log('fingind errors by comparing', test, response);
-
+    //console.log('fingind errors by comparing', test, response);
     let errors: JsonComparatorError[] = [];
     let expected = test.expectedResponse.body;
-    /*
-    let expected;
-
-    try {
-      expected = JSON.parse(test.expectedResponse.body);
-    } catch (error) { }
-
-    if (!expected) { console.warn('could not parse expected response json'); return []; }
-    //*/
     if (test.expectedResponse.status != response.status) {
-      console.log('different status');
+      //console.log('different status');
     }
     errors = JsonComparator.compareObjects(expected, response.body || response['error'] /* fallback when HttpErrorResponse */);
-    console.log('errors', errors);
+    //console.log('errors', errors);
     return errors;
   }
 }

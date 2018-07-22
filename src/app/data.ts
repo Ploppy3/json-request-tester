@@ -6,6 +6,7 @@ export interface Data {
 }
 
 export interface HttpTest{
+  id: number;
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   headers: HeaderTest[];

@@ -14,6 +14,7 @@ export class TestGeneratorComponent implements OnInit {
   //public response = {};
   
   public model: HttpTest = {
+    id: -1,
     body: null,
     expectedResponse: {
       body: {},
@@ -45,12 +46,19 @@ export class TestGeneratorComponent implements OnInit {
   public createTestFromUrl() {
     switch (this.model.method) {
       case 'GET':
-        this.httpClient.get(this.model.url).pipe(
-        ).subscribe(res => {
-          if (typeof res == 'object') {
-            this.model.expectedResponse.body = res;
+        this.httpClient.get(this.model.url, { observe: 'response' }).pipe(
+        ).subscribe(
+          res => {
+            //console.log(res);
+            this.model.expectedResponse.status = res.status;
+            this.model.expectedResponse.body = res.body;
+          },
+          err => {
+            //console.log(err);
+            this.model.expectedResponse.status = err.status;
+            this.model.expectedResponse.body = typeof err.error == 'object' ? err.error : {};
           }
-        });
+        );
         break;
       case 'POST':
 
@@ -69,6 +77,7 @@ export class TestGeneratorComponent implements OnInit {
   
   public onSubmit(event: any) {
     console.log(this.model);
+    this.model.id = new Date().getTime();
     //this.sessionService.addTest(this.model);
     this.sessionService.addTest(JSON.parse(JSON.stringify(this.model)));
   }

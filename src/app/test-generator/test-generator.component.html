@@ -1,20 +1,20 @@
-<form (ngSubmit)="onSubmit($event)" class="row spacer">
+<form #formTest="ngForm" (ngSubmit)="onSubmit($event)" class="row spacer">
   <div class="col spacer">
-    <div id="url-wrapper" class="row overflow">
+    <div class="row inner-spacer overflow">
       <select name="selectMethod" [(ngModel)]="model.method" name="method">
         <option value="GET">GET</option>
         <option value="POST">POST</option>
         <option value="PUT">PUT</option>
         <option value="DELETE">DELETE</option>
       </select>
-      <input class="grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url">
+      <input class="grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url" required>
       <button type="button" class="outline" (click)="createTestFromUrl()">create</button>
     </div>
     <div class="col inner-spacer">
       <div>Headers:</div>
       <div class="row inner-spacer" *ngFor="let header of model.headers; let i = index">
-        <input class="grow" type="text" [(ngModel)]="header.key" name="header-key" placeholder="key">
-        <input class="grow" type="text" [(ngModel)]="header.value" name="header-value" placeholder="value">
+        <input class="grow" type="text" [(ngModel)]="header.key" [name]="'header-key' + i" placeholder="key" required>
+        <input class="grow" type="text" [(ngModel)]="header.value" [name]="'header-value' + i" placeholder="value" required>
         <button type="button" class="button outline" (click)="model.headers.splice(i, 1)"><i class="material-icons">close</i></button>
       </div>
       <div>
@@ -24,11 +24,11 @@
     <div class="col inner-spacer">
       <div>Status:</div>
       <div class="row">
-        <input class="grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status">
+        <input class="grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status" required>
       </div>
     </div>
     <app-json-editor [obj]="model.expectedResponse.body" (objChange)="model.expectedResponse.body = $event"></app-json-editor>
     <!--<pre class="roboto-mono">{{formTest.value | json}}</pre>-->
-    <button class="button">add</button>
+    <button class="button" [disabled]="formTest.invalid">add</button>
   </div>
 </form>
