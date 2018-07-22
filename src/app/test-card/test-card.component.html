@@ -14,7 +14,7 @@
         <div class="title">Expected Status</div>
         <pre class="overflow">{{ test.expectedResponse.status }}</pre>
       </div>
-      <app-json-editor [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event">
+      <app-json-editor [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event; onChange.next()">
         Expected Body
       </app-json-editor>
     </div>
