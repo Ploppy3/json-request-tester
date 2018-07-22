@@ -35,9 +35,6 @@
   flex: 1;
   background-color: white;
   overflow: hidden;
-  .fields {
-    background-color: red;
-  }
 }
 pre {
   max-height: 200px;
@@ -45,15 +42,15 @@ pre {
 .error-wrapper {
   overflow: hidden;
   border-radius: 8px;
-  border: 1px solid #F4511E;
-  &.warning{
+  border: 1px solid #FF5722;
+  &.warning {
     border-color: #BA68C8;
-    .title{
+    .title {
       background-color: #BA68C8;
     }
   }
   .title {
-    background-color: #F4511E;
+    background-color: #FF5722;
     color: #fff;
     padding: 8px 16px;
   }
@@ -67,7 +64,7 @@ pre {
   }
   span {
     display: inline-block;
-    &:nth-child(2){
+    &:nth-child(2) {
       margin-left: 8px;
     }
   }
@@ -85,7 +82,7 @@ pre {
   :host {
     flex-direction: column;
   }
-  .card-request{
+  .card-request {
     max-width: 100%;
   }
 }
