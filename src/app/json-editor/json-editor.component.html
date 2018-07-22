@@ -1,6 +1,8 @@
 <div class="code-wrapper">
   <div class="title row">
-    <span class="self-center">Expected Body</span>
+    <span class="self-center">
+      <ng-content></ng-content>
+    </span>
     <span class="grow"></span>
     <i #editMode (click)="editMode.enabled = !editMode.enabled" class="secondary clickable material-icons">{{editMode.enabled ? 'code' : 'edit'}}</i>
   </div>

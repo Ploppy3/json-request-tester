@@ -27,7 +27,9 @@
         <input class="grow" type="number" [(ngModel)]="model.expectedResponse.status" placeholder="200" name="expected-status" required>
       </div>
     </div>
-    <app-json-editor [obj]="model.expectedResponse.body" (objChange)="model.expectedResponse.body = $event"></app-json-editor>
+    <app-json-editor [obj]="model.expectedResponse.body" (objChange)="model.expectedResponse.body = $event">
+      Expected Body
+    </app-json-editor>
     <!--<pre class="roboto-mono">{{formTest.value | json}}</pre>-->
     <button class="button" [disabled]="formTest.invalid">add</button>
   </div>
