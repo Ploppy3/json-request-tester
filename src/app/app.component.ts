@@ -1,6 +1,9 @@
 import { Component, HostListener, DoCheck, NgZone, OnInit } from "@angular/core";
 import { fadeInOut } from "./animations";
 import { environment } from "../environments/environment";
+import { Observable } from "rxjs";
+import { SessionService } from "./session.service";
+import { HttpTest } from "./data";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +18,7 @@ export class AppComponent implements DoCheck, OnInit {
   public lastScrollY = 0; // used to keep track of fabToTop state
 
   constructor(
-    private zone: NgZone,
+    private zone: NgZone, private sessionservice: SessionService
   ) { }
 
   ngOnInit() {
@@ -45,4 +48,45 @@ export class AppComponent implements DoCheck, OnInit {
     window.scroll({ top: 0 });
   }
 
+  onDrop(e: FileList) {
+    this.handleJSONUpload(e).subscribe(
+      (data: HttpTest[]) => {
+        console.log(data);
+        this.sessionservice.tests$.next(data);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log("complete");
+      }
+    );
+  }
+
+
+  handleJSONUpload (files: FileList): Observable<Object> {
+    return new Observable((observer) => {
+      for(let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let last = i == files.length - 1;
+  
+        if ( /\.(json)$/i.test(file.name) ) {
+          var reader = new FileReader();
+  
+          reader.addEventListener("load", function () {
+            try {
+              observer.next(JSON.parse(this.result));
+              if (last) observer.complete();
+            } catch(e) {
+              if (last) observer.complete();
+            }
+          }, false);
+  
+          reader.readAsText(file);
+        } else {
+          if (last) observer.complete();
+        }  
+      };
+    })
+  }
 }

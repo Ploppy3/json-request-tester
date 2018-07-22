@@ -7,7 +7,7 @@ pre {
   max-height: 50vh;
 }
 pre:first-child {
-  border-right: 1px solid rgba($color: #000000, $alpha: .12);
+  border-right: 1px solid rgba($color: #000000, $alpha: .24);
 }
 pre:only-child {
   border-right: none;
@@ -19,10 +19,10 @@ app-object-editor {
 }
 .code-wrapper {
   overflow: hidden;
-  border: 1px solid rgba($color: #000000, $alpha: .12);
+  border: 1px solid rgba($color: #000000, $alpha: .24);
   border-radius: 8px;
   .title {
-    background-color: rgba($color: #000000, $alpha: .12);
+    background-color: rgba($color: #000000, $alpha: .24);
     padding: 8px 16px;
   }
 }

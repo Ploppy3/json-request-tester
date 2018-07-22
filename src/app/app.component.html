@@ -1,4 +1,6 @@
-<app-home></app-home>
-<button *ngIf="showFabToTop" (click)="scrollToTop()" id="fab-toTop" class="icon fab" [@fadeInOut]>
-  <i class="material-icons">keyboard_arrow_up</i>
-</button>
+<div dropfile (filedroped)="onDrop($event)">
+  <app-home></app-home>
+  <button *ngIf="showFabToTop" (click)="scrollToTop()" id="fab-toTop" class="icon fab" [@fadeInOut]>
+    <i class="material-icons">keyboard_arrow_up</i>
+  </button>
+</div>

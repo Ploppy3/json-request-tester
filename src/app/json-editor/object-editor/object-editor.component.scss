@@ -6,7 +6,7 @@
 .wrapper-array{
   margin-left: 19px;
   padding-left: 16px;
-  border-left: 1px solid rgba($color: #000000, $alpha: .12);
+  border-left: 1px solid rgba($color: #000000, $alpha: .24);
 }
 .spacer{
   margin: 8px 0;
@@ -36,7 +36,7 @@ button{
   height: 39px;
   width: 39px;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(0, 0, 0, 0.24);
   .material-icons{
     vertical-align: middle;
   }
@@ -44,6 +44,6 @@ button{
     height: 39px;
     width: 39px;
     background-color: transparent;
-    border: 1px solid rgba($color: #000000, $alpha: .12);
+    border: 1px solid rgba($color: #000000, $alpha: .24);
   }
 }

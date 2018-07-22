@@ -114,4 +114,8 @@ export class HomeComponent implements OnInit {
   public trackByFn(i, test: HttpTest) {
     return i;
   }
+
+  public export() {
+    this.sessionsService.exportTests();
+  }
 }
