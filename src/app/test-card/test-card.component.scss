@@ -12,6 +12,7 @@
   transition: .4s background-color ease;
   color: white;
   transition: background-color .5s ease-out;
+  padding: 16px;
   .request-method {
     font-size: 2rem;
   }
@@ -24,10 +25,11 @@
   &.good {
     background-color: #4CAF50; // green 500
   }
-
+  /*
   .col.spacer > *:not(.row) {
     margin: 0;
   }
+  //*/
 }
 .card-result {
   flex: 1;

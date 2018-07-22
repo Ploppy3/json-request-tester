@@ -1,13 +1,11 @@
 <div [class.good]="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0" [class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
-  class="card-request row spacer">
-  <div class="col spacer">
-    <span class="request-method no-shrink bold">{{ test?.method }}</span>
-    <div class="row">
-      <ng-content></ng-content>
-    </div>
-    <div class="grow"></div>
-    <span class="request-url">{{ test?.url }}</span>
+  class="card-request col">
+  <span class="request-method no-shrink bold">{{ test?.method }}</span>
+  <div class="row">
+    <ng-content></ng-content>
   </div>
+  <div class="grow"></div>
+  <span class="request-url">{{ test?.url }}</span>
 </div>
 <div class="card-result">
   <div class="row spacer">
