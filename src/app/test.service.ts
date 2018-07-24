@@ -10,7 +10,9 @@ import { JsonComparator, JsonComparatorError } from './json-comparator';
 })
 export class TestService {
 
-  constructor(private _http: HttpClient) {
+  constructor(
+    private _http: HttpClient
+  ) {
     console.log('constructor');
   }
 
