@@ -38,8 +38,10 @@ button {
     }
     &:disabled {
       cursor: default;
-      color: gray;
-      background-color: darkgray;
+      color: rgba(0, 0, 0, .54);
+      background-color: #9E9E9E;
+      border-color: #9E9E9E;
+      cursor: not-allowed;
       &:hover {
         box-shadow: none;
       }
