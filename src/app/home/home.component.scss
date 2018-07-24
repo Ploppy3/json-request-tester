@@ -3,22 +3,32 @@
   overflow-y: visible;
   margin-bottom: 64px;
 }
+.button-delete-test {
+  opacity: .4;
+  transition: .2s opacity ease;
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
+}
+#classes-editor {
+  background-color: #fff;
+  border-radius: 8px;
+  .variable {
+    background-color: rgba(0, 0, 0, 0.24);
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+}
 #play-btn {
   background-color: #FF7274;
   color: white;
 }
-#wrapper-statuses{
+#wrapper-statuses {
   background-color: #fff;
   border-radius: 8px;
   font-size: 2em;
-  a{
+  a {
     display: inline-block;
-  }
-}
-.button-delete-test {
-  opacity: .4;
-  transition: .2s opacity ease;
-  &:hover, &:active {
-    opacity: 1;
   }
 }
