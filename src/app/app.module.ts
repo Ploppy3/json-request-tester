@@ -14,6 +14,7 @@ import { SessionService } from './session.service';
 import { ObjectEditorComponent } from './json-editor/object-editor/object-editor.component';
 import { ArrayEditorComponent } from './json-editor/array-editor/array-editor.component';
 import { DropfileDirective } from './dropfile.directive';
+import { SegmentEditorDirective } from './segment-editor.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DropfileDirective } from './dropfile.directive';
     ObjectEditorComponent,
     ArrayEditorComponent,
     JsonEditorComponent,
-    DropfileDirective
+    DropfileDirective,
+    SegmentEditorDirective
   ],
   imports: [
     BrowserModule,

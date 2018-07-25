@@ -18,6 +18,30 @@
         </ng-container>
       </div>
     </div>
+    <form id="classes-editor" #formVariable="ngForm" (ngSubmit)="onSubmit_FormVariable()">
+      <div class="row spacer">
+        <div class="col spacer">Define global variables</div>
+      </div>
+      <hr class="full-width">
+      <div *ngIf="(sessionsService.globalVariables$ | async).length > 0" class="row spacer">
+        <div class="col spacer">
+          <div class="row inner-spacer" *ngFor="let variable of globalVariables; let i = index;">
+            <div class="variable self-center">{{ variable.name }}</div>
+            <!--<div class="secondary self-center">{{ variable.key }}</div>-->
+            <i class="material-icons clickable" (click)="sessionsService.removeGlobalVariable(i)">close</i>
+          </div>
+        </div>
+      </div>
+      <hr class="full-width" *ngIf="(sessionsService.globalVariables$ | async).length > 0">
+      <div class="row spacer">
+        <div class="col spacer">
+          <div class="row inner-spacer">
+            <input type="text" placeholder="key" [(ngModel)]="modelVariable.key" name="variable-key" autocomplete="off" required>
+            <button type="submit" class="outline" [disabled]="formVariable.invalid">define variable</button>
+          </div>
+        </div>
+      </div>
+    </form>
     <app-test-generator></app-test-generator>
     <app-test-card *ngFor="let test of tests; let i = index; trackBy: trackByFn" [id]="'card-'+i" [test]="test" (onChange)="onTestChange()">
       <i class="clickable material-icons" (click)="start(test)">play_arrow</i>

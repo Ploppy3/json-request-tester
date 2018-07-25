@@ -1,8 +1,10 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { TestService } from '../test.service';
-import { HttpTest } from '../data';
+import { HttpTest, GlobalVariable } from '../data';
 import { SessionService } from '../session.service';
 import { fadeInOut } from '../animations';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -12,48 +14,12 @@ import { fadeInOut } from '../animations';
 })
 export class HomeComponent implements OnInit {
 
-  public tests = [
-    /*
-    <HttpTest>{
-      body: null,
-      headers: [],
-      method: 'GET',
-      expectedResponse: {
-        body: {
-          'data': '%anything%',
-          "total_pages": "%any_number%",
-          "per_page": "%any_number%",
-          "page": 2,
-          "total": "%any_number%"
-        },
-        status: 200,
-      },
-      url: 'https://reqres.in/api/users?page=2',
-    },
-    //*/
-    /*
-    <HttpTest>{
-      body: null,
-      headers: [],
-      method: 'GET',
-      expectedResponse: {
-        body: '{"status":200,"description":"%anyString%","data":"%anyArray%"}',
-        status: 200,
-      },
-      url: 'https://api.travian.engin9tools.com/api/global/servers',
-    },
-    <HttpTest>{
-      body: null,
-      headers: [],
-      method: 'GET',
-      expectedResponse: {
-        body: '{"status": 400, "description": "pretty bad request", "message": "this route does not exist"}',
-        status: 400,
-      },
-      url: 'https://api.travian.engin9tools.com/api/global/testststs',
-    },
-    //*/
-  ]
+  public onDestroy$ = new Subject();
+  public tests: HttpTest[] = [];
+  public globalVariables: GlobalVariable[] = [];
+  public modelVariable = {
+    key: null,
+  }
 
   constructor(
     public sessionsService: SessionService,
@@ -62,9 +28,21 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.sessionsService.tests$.subscribe(tests => {
+    this.sessionsService.tests$.pipe(
+      takeUntil(this.onDestroy$)
+    ).subscribe(tests => {
       this.tests = tests;
     });
+    this.globalVariables = this.sessionsService.globalVariables$.value;
+    this.sessionsService.globalVariables$.pipe(
+      takeUntil(this.onDestroy$)
+    ).subscribe(res => {
+      this.globalVariables = res;
+    });
+  }
+
+  public onSubmit_FormVariable() {
+    this.sessionsService.addGlobalVariable(this.modelVariable.key);
   }
 
   public removeTest(test: HttpTest) {
@@ -122,5 +100,9 @@ export class HomeComponent implements OnInit {
 
   public export() {
     this.sessionsService.exportTests();
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
   }
 }

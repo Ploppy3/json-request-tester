@@ -38,7 +38,14 @@
       <span>:</span>
       <!--<input type="string" [(ngModel)]="obj[property.key]">-->
       <select class="special" [(ngModel)]="obj[property.key]">
-        <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
+        <optgroup label="Special Types">
+          <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
+        </optgroup>
+        <optgroup *ngIf="(sessionService.globalVariables$ | async).length > 0" label="Variables">
+          <option *ngFor="let variable of sessionService.globalVariables$ | async" [ngValue]="variable.key">
+            {{ variable.name }}
+          </option>
+        </optgroup>
       </select>
     </ng-container>
   </ng-container>

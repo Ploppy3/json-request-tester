@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { isArray } from 'util';
+import { SessionService } from '../../session.service';
 
 @Component({
   selector: 'app-object-editor',
@@ -15,7 +16,9 @@ export class ObjectEditorComponent implements OnInit, OnChanges {
   public PROPERTY_TYPES: string[] = [];
   public key_value_pairs: KeyTypePair[] = [];
 
-  constructor() { }
+  constructor(
+    public sessionService: SessionService,
+  ) { }
 
   ngOnInit() {
     this.init();
