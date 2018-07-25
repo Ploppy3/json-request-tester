@@ -25,8 +25,8 @@
       <hr class="full-width">
       <div *ngIf="(sessionsService.globalVariables$ | async).length > 0" class="row spacer">
         <div class="col spacer">
-          <div class="row inner-spacer" *ngFor="let variable of globalVariables; let i = index;">
-            <div class="variable self-center">{{ variable.name }}</div>
+          <div class="row inner-spacer" *ngFor="let variable of (sessionsService.globalVariables$ | async); let i = index;">
+            <div class="variable self-center">{{variable.name}} = {{variable.value}}</div>
             <!--<div class="secondary self-center">{{ variable.key }}</div>-->
             <i class="material-icons clickable" (click)="sessionsService.removeGlobalVariable(i)">close</i>
           </div>

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { HeaderTest, HttpTest } from './data';
+import { HeaderTest, HttpTest, GlobalVariable } from './data';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { JsonComparator, JsonComparatorError } from './json-comparator';
+import { JsonComparator, JsonComparatorError, JsonComparisonResult } from './json-comparator';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class TestService {
     console.log('constructor');
   }
 
-  public test(test: HttpTest) {
+  public test(test: HttpTest, globalVariables: GlobalVariable[]) {
     let httpRequest: Observable<any>;
     let httpOptions = {
       headers: this.formatHeaders(test.headers)
@@ -34,10 +34,10 @@ export class TestService {
       map(
         res => {
           //console.log('res', res);
-          let errors = this.findErrors(test, res);
+          let comparisonResults = this.findErrors(test, res, globalVariables);
           let finalRes: ProcessedRequest = {
             response: res,
-            errors: errors,
+            errors: comparisonResults.errors,
           };
           return finalRes;
         }
@@ -68,16 +68,15 @@ export class TestService {
     return httpHeaders;
   }
 
-  public findErrors(test: HttpTest, response: HttpResponse<any>): JsonComparatorError[] {
+  public findErrors(test: HttpTest, response: HttpResponse<any>, globalVariables: GlobalVariable[]): JsonComparisonResult {
     //console.log('fingind errors by comparing', test, response);
-    let errors: JsonComparatorError[] = [];
     let expected = test.expectedResponse.body;
     if (test.expectedResponse.status != response.status) {
       //console.log('different status');
     }
-    errors = JsonComparator.compareObjects(expected, response.body || response['error'] /* fallback when HttpErrorResponse */);
+    let res = JsonComparator.compareObjects(expected, response.body || response['error'] /* fallback when HttpErrorResponse */, globalVariables);
     //console.log('errors', errors);
-    return errors;
+    return res;
   }
 }
 

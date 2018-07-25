@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { TestService } from '../test.service';
-import { HttpTest, GlobalVariable } from '../data';
+import { HttpTest } from '../data';
 import { SessionService } from '../session.service';
 import { fadeInOut } from '../animations';
 import { Subject } from 'rxjs';
@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   public onDestroy$ = new Subject();
   public tests: HttpTest[] = [];
-  public globalVariables: GlobalVariable[] = [];
   public modelVariable = {
     key: null,
   }
@@ -33,12 +32,14 @@ export class HomeComponent implements OnInit {
     ).subscribe(tests => {
       this.tests = tests;
     });
+    /*
     this.globalVariables = this.sessionsService.globalVariables$.value;
     this.sessionsService.globalVariables$.pipe(
       takeUntil(this.onDestroy$)
     ).subscribe(res => {
       this.globalVariables = res;
     });
+    //*/
   }
 
   public onSubmit_FormVariable() {
@@ -73,7 +74,7 @@ export class HomeComponent implements OnInit {
 
   public start(test: HttpTest) {
     test.response = null;
-    this.testService.test(test).pipe(
+    this.testService.test(test, this.sessionsService.globalVariables$.value).pipe(
     ).subscribe(
       res => {
         test.response = {
@@ -84,11 +85,12 @@ export class HomeComponent implements OnInit {
       },
       err => {
         console.log('error', err)
-        let errors = this.testService.findErrors(test, err);
+        let comparisonResults = this.testService.findErrors(test, err, this.sessionsService.globalVariables$.value);
+        console.log(comparisonResults);
         test.response = {
           body: err.error,
           status: err.status,
-          errors: errors,
+          errors: comparisonResults.errors,
         }
       }
     );

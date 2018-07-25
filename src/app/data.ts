@@ -32,7 +32,6 @@ export interface HeaderTest{
 export interface GlobalVariable{
   /** the visible name of the variable, to be user-friendly */
   name: string;
-  key: string;
   value: any;
 }
 

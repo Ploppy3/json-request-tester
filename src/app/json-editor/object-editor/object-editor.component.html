@@ -42,9 +42,14 @@
           <option *ngFor="let type of SPECIAL_TYPES" [ngValue]="type.value">{{type.name}}</option>
         </optgroup>
         <optgroup *ngIf="(sessionService.globalVariables$ | async).length > 0" label="Variables">
-          <option *ngFor="let variable of sessionService.globalVariables$ | async" [ngValue]="variable.key">
-            {{ variable.name }}
-          </option>
+          <ng-container *ngFor="let variable of sessionService.globalVariables$ | async">
+            <option [ngValue]="'/set@'+variable.name+'/'">
+              set - {{ variable.name }}
+            </option>
+            <option [ngValue]="'/compare@'+variable.name+'/'">
+              compare - {{ variable.name }}
+            </option>
+          </ng-container>
         </optgroup>
       </select>
     </ng-container>

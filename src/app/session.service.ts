@@ -40,7 +40,6 @@ export class SessionService {
     let globalVariables = this.globalVariables$.value;
     let globalVariable: GlobalVariable = {
       name: name,
-      key: '%var@'+name+'%',
       value: null
     }
     globalVariables.push(globalVariable);
