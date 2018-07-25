@@ -25,6 +25,11 @@ export abstract class JsonComparator {
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // use json to compare if values are object
         //console.log(expected[key], '!=', response[key]);
         if (!depth) { depth = [] }
+        let error: JsonComparatorError = {
+          depth: depth,
+          key: key,
+          type:  JsonComparatorErrorType.DIFFERENT_VALUE,
+        }
         //--------------------------------------
         /** Assign values to global variables */
         globalVariables.forEach(variable => {
@@ -32,14 +37,10 @@ export abstract class JsonComparator {
           if (expected[key] == variableKey) {
             variable.value = response[key];
             console.log(variableKey, '-set-', response[key]);
+            error.type = JsonComparatorErrorType.ALLOWED;
           }
         });
         //--------------------------------------
-        let error: JsonComparatorError = {
-          depth: depth,
-          key: key,
-          type:  JsonComparatorErrorType.DIFFERENT_VALUE,
-        }
         if (expected[key] == '%anything%' && !isArray(expected[key]) && !isNullOrUndefined(response[key])) {
           // allow %any% values, also check for type array because ["%any%"] == "%any%"
           error.type = JsonComparatorErrorType.ALLOWED;
