@@ -23,9 +23,9 @@
     <hr>
     <div class="row spacer">
       <div class="col spacer">
-        <div class="code-wrapper">
+        <div class="code-wrapper" [class.success]="test.expectedResponse.status == test.response.status">
           <div class="title">Response Status</div>
-          <pre class="overflow">{{ test.response?.status }}</pre>
+          <pre class="overflow" *ngIf="(test.expectedResponse.status != test.response.status)">{{ test.response?.status }}</pre>
         </div>
         <ng-container *ngIf="test.response?.errors?.length > 0">
           <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
