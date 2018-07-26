@@ -61,6 +61,8 @@ export class AppComponent implements DoCheck, OnInit {
         if (data.version == environment.version) {
           this.sessionservice.tests$.next(data.tests);
           this.sessionservice.saveData(data.tests);
+        } else {
+          // TODO: show alert
         }
       },
       err => {
