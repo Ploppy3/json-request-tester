@@ -1,5 +1,6 @@
 <form #formTest="ngForm" (ngSubmit)="onSubmit($event)" class="row spacer">
   <div class="col spacer">
+    
     <div class="row inner-spacer overflow">
       <select name="selectMethod" [(ngModel)]="model.method" name="method">
         <option value="GET">GET</option>
@@ -10,9 +11,10 @@
       <input class="grow" type="text" [(ngModel)]="model.url" placeholder="https://..." name="url" required>
       <button type="button" class="outline" (click)="createTestFromUrl()">create</button>
     </div>
+
     <div class="col inner-spacer">
       <div>Headers:</div>
-      <div class="row inner-spacer" *ngFor="let header of model.headers; let i = index">
+      <div class="row inner-spacer" *ngFor="let header of model.headers; let i = index; trackBy: trackById">
         <input class="grow" type="text" [(ngModel)]="header.key" [name]="'header-key' + i" placeholder="key" required>
         <input class="grow" type="text" [(ngModel)]="header.value" [name]="'header-value' + i" placeholder="value" required>
         <button type="button" class="button outline" (click)="model.headers.splice(i, 1)"><i class="material-icons">close</i></button>
@@ -21,6 +23,7 @@
         <button type="button" class="button outline" (click)="model.headers.push({ key: '', value: '' })">Add header</button>
       </div>
     </div>
+
     <div class="col inner-spacer">
       <div>Status:</div>
       <div class="row">
@@ -30,6 +33,38 @@
     <app-json-editor [obj]="model.expectedResponse.body" (objChange)="model.expectedResponse.body = $event">
       Expected Body
     </app-json-editor>
+    <!--
+    <div class="col spacer">
+      <div>Assign response's fields to global variables</div>
+      <div class="row inner-spacer" *ngFor="let variablePath of model.expectedResponse.variablePaths; let i = index; trackBy: trackById">
+        <div #wrapperPath class="wrapper-path">
+          <div class="secondary">Value's path</div>
+          <div class="row inner-spacer">
+            <ng-container *ngFor="let segment of variablePath.path; let j = index; trackBy: trackById">
+              <span class="self-center">/</span>
+              <span class="segment self-center" data-placeholder="..." appSegmentEditor [value]="segment" (valueChange)="variablePath.path[j] = $event" (push)="variablePath.path.push(''); focusSegment(wrapperPath)" (pop)="variablePath.path.splice(j > 0 ? j : 1, 1); focusSegment(wrapperPath, j-1)"></span>
+            </ng-container>
+            <i *ngIf="variablePath.path[variablePath.path.length - 1].length > 0" class="material-icons self-center secondary clickable" (click)="variablePath.path.push('')">add</i>
+          </div>
+        </div>
+        <div class="self-center"><i class="material-icons secondary">chevron_right</i></div>
+        <select class="self-center" [(ngModel)]="variablePath.key" name="variablePath">
+          <optgroup label="Global variables">
+            <option *ngFor="let variable of sessionService.globalVariables$ | async;" [ngValue]="variable.key">
+              {{ variable.name }}
+            </option>
+          </optgroup>
+        </select>
+        <i class="material-icons self-center secondary clickable" (click)="model.expectedResponse.variablePaths.splice(i, 1)">close</i>
+      </div>
+      <div>
+        <button class="outline" [disabled]="(sessionService.globalVariables$ | async).length == 0" type="button" (click)="model.expectedResponse.variablePaths.push({ key: '', path: [''] })">
+        create a value attribution
+      </button>
+      </div>
+      <div>{{ model.expectedResponse.variablePaths | json }}</div>
+    </div>
+    -->
     <!--<pre class="roboto-mono">{{formTest.value | json}}</pre>-->
     <button class="button" [disabled]="formTest.invalid">add</button>
   </div>

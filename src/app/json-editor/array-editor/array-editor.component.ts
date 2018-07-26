@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { isArray } from 'util';
 import { PROPERTY_TYPES, SPECIAL_TYPES, getPropertyType } from '../object-editor/object-editor.component';
+import { SessionService } from '../../session.service';
 
 @Component({
   selector: 'app-array-editor',
@@ -17,7 +18,9 @@ export class ArrayEditorComponent implements OnInit, OnChanges {
   public PROPERTY_TYPES: string[] = [];
   public key_value_pairs: ArrayKeyTypePair[] = [];
 
-  constructor() { }
+  constructor(
+    public sessionService: SessionService,
+  ) { }
 
   ngOnInit() {
     this.init();

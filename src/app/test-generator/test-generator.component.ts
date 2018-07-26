@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpTest } from '../data';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { HttpTest, VariablePath } from '../data';
 import { SessionService } from '../session.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { jsonpCallbackContext } from '@angular/common/http/src/module';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,24 +19,17 @@ export class TestGeneratorComponent implements OnInit {
     expectedResponse: {
       body: {},
       status: 200,
+      variablePaths: []
     },
     headers: [],
     method: 'GET',
     url: 'https://api.travian.engin9tools.com/api/global/servers',
   }
 
-  /*
-  public formTest = new FormGroup({
-    url: new FormControl('https://api.travian.engin9tools.com/api/global/servers'),
-    method: new FormControl('GET'),
-    status: new FormControl(200),
-    headers: new FormGroup({ a: new FormControl('test')})
-  })
-  //*/
-
   constructor(
-    private sessionService: SessionService,
+    public sessionService: SessionService,
     private httpClient: HttpClient,
+    private zone: NgZone,
   ) { }
 
   ngOnInit() {
@@ -84,6 +76,23 @@ export class TestGeneratorComponent implements OnInit {
     this.model.id = new Date().getTime();
     //this.sessionService.addTest(this.model);
     this.sessionService.addTest(JSON.parse(JSON.stringify(this.model)));
+  }
+
+  public trackById(i, test: HttpTest) {
+    return i;
+  }
+
+  public focusSegment(wrapperSegment: HTMLElement, id?: number) {
+    requestAnimationFrame(() => {
+      let segments = wrapperSegment.querySelectorAll('.segment');
+      if (id == null) {
+        let lastSegment: any = segments[segments.length - 1];
+        lastSegment.focus();
+      } else if(id >= 0) {
+        let segment: any = segments[id];
+        segment.focus();
+      }
+    });
   }
 
 }

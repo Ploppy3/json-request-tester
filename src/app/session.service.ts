@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpTest, Data } from './data';
+import { HttpTest, Data, GlobalVariable } from './data';
 import { BehaviorSubject } from 'rxjs';
 import { Storage } from './storage';
 import { isArray } from 'util';
@@ -11,10 +11,7 @@ import { environment } from '../environments/environment.prod';
 export class SessionService {
 
   public tests$ = new BehaviorSubject<HttpTest[]>([]);
-  /*private data: Data = {
-    version: 1,
-    tests: [],
-  }*/
+  public globalVariables$ = new BehaviorSubject<GlobalVariable[]>([]);
 
   constructor() {
     console.log('constructor');
@@ -27,8 +24,27 @@ export class SessionService {
             this.tests$.next(data.tests);
           }
         }
+        this.globalVariables$.next(data.globalVariables || []);
       }
     }
+  }
+
+  public removeGlobalVariable(i: number){
+    let globalVariables = this.globalVariables$.value;
+    globalVariables.splice(i, 1);
+    this.globalVariables$.next(globalVariables);
+    this.saveData(this.tests$.value);
+  }
+
+  public addGlobalVariable(name: string) {
+    let globalVariables = this.globalVariables$.value;
+    let globalVariable: GlobalVariable = {
+      name: name,
+      value: null
+    }
+    globalVariables.push(globalVariable);
+    this.globalVariables$.next(globalVariables);
+    this.saveData(this.tests$.value);
   }
 
   public addTest(test: HttpTest) {
@@ -41,7 +57,8 @@ export class SessionService {
   public saveData(tests: HttpTest[]) {
     let data: Data = {
       version: environment.version,
-      tests: tests
+      tests: tests,
+      globalVariables: this.globalVariables$.getValue(),
     };
     Storage.set(Storage.KEY_TESTS, data);
   }
@@ -57,7 +74,8 @@ export class SessionService {
 
     let data: Data = {
       version: environment.version,
-      tests: this.tests$.getValue()
+      tests: this.tests$.getValue(),
+      globalVariables: this.globalVariables$.getValue(),
     };
   
     var blob = new Blob([ encode(JSON.stringify(data, null, 4)) ], {

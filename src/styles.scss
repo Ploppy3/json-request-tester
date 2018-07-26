@@ -7,6 +7,7 @@
 @import './framework.scss';
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 *:focus {
   outline: none;
@@ -38,8 +39,10 @@ button {
     }
     &:disabled {
       cursor: default;
-      color: gray;
-      background-color: darkgray;
+      color: rgba(0, 0, 0, .54);
+      background-color: #9E9E9E;
+      border-color: #9E9E9E;
+      cursor: not-allowed;
       &:hover {
         box-shadow: none;
       }
@@ -106,6 +109,7 @@ hr {
   height: 1px;
   background-color: rgba(0, 0, 0, .24);
   border: none;
+  margin: 0;
 }
 a:link,
 a:visited,

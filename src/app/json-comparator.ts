@@ -1,9 +1,16 @@
-import { isArray, isNull, isNullOrUndefined } from "util";
+import { isArray, isNullOrUndefined } from "util";
+import { GlobalVariable } from "./data";
+import { all } from "q";
 
 export abstract class JsonComparator {
 
-  static compareObjects(expected: any, response: any, depth?: string[]) {
-    let errors: JsonComparatorError[] = [];
+  static compareObjects(expected: any, response: any, globalVariables: GlobalVariable[], depth?: string[]): JsonComparisonResult {
+    //let errors: JsonComparatorError[] = [];
+
+    let comparisonResults: JsonComparisonResult = {
+      errors: [],
+      variableAssignments: [],
+    }
 
     //console.log('expected', expected);
     //console.log('got', response);
@@ -23,6 +30,17 @@ export abstract class JsonComparator {
           key: key,
           type:  JsonComparatorErrorType.DIFFERENT_VALUE,
         }
+        //--------------------------------------
+        /** Assign values to global variables */
+        globalVariables.forEach(variable => {
+          let variableKey = '/set@' + variable.name + '/';
+          if (expected[key] == variableKey) {
+            variable.value = response[key];
+            console.log(variableKey, '-set-', response[key]);
+            error.type = JsonComparatorErrorType.ALLOWED;
+          }
+        });
+        //--------------------------------------
         if (expected[key] == '%anything%' && !isArray(expected[key]) && !isNullOrUndefined(response[key])) {
           // allow %any% values, also check for type array because ["%any%"] == "%any%"
           error.type = JsonComparatorErrorType.ALLOWED;
@@ -51,19 +69,31 @@ export abstract class JsonComparator {
         /** if both values are object, compare them */
         else if (typeof expected[key] === 'object' && typeof response[key] === 'object') {
           //error.type = 'ALLOWED';
-          let newErrors = this.compareObjects(expected[key], response[key], [...depth, key]);
+          let comparisonResults = this.compareObjects(expected[key], response[key], globalVariables, [...depth, key]);
           //console.log('newErrors', newErrors);
-          errors = errors.concat(newErrors);
+          comparisonResults.errors.concat(comparisonResults.errors);
+          comparisonResults.variableAssignments.concat(comparisonResults.variableAssignments);
         }
         /** if key missing */
         else if (!(key in response)) {
           error.type = JsonComparatorErrorType.MISSING_KEY;;
         }
+        /** global variables comparison */
+        globalVariables.forEach(variable => {
+          let variableKey = '/compare@' + variable.name + '/';
+          if (expected[key] == variableKey) {
+            console.log(variableKey, variable.value, '-==-', key, response[key])
+            if (response[key] == variable.value) {
+              error.type = JsonComparatorErrorType.ALLOWED;
+            }
+          }
+        });
         //-------------------------------
         if (error.type != JsonComparatorErrorType.ALLOWED)
-          errors.push(error);
+          comparisonResults.errors.push(error);
       }
     })
+
     Object.keys(response).forEach(key => {
       let error: JsonComparatorError = {
         depth: depth,
@@ -71,19 +101,19 @@ export abstract class JsonComparator {
         type: JsonComparatorErrorType.UNEXPECTED_KEY_VALUE_PAIR,
       }
       if (!(key in expected)) {
-        errors.push(error);
+        comparisonResults.errors.push(error);
       }
     })
 
-    return errors;
+    return comparisonResults;
   }
 }
 
 export interface JsonComparatorError {
   /** the depth from original object */
-  depth: string[];
-  key: string;
-  type: JsonComparatorErrorType; 
+  depth: string[],
+  key: string,
+  type: JsonComparatorErrorType,
 }
 
 export enum JsonComparatorErrorType{
@@ -91,4 +121,14 @@ export enum JsonComparatorErrorType{
   MISSING_KEY,
   DIFFERENT_VALUE,
   UNEXPECTED_KEY_VALUE_PAIR,
+}
+
+export interface VariableAssignement{
+  variableKey: string,
+  value: any,
+}
+
+export interface JsonComparisonResult{
+  errors: JsonComparatorError[],
+  variableAssignments: VariableAssignement[],
 }

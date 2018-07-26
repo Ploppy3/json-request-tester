@@ -24,7 +24,7 @@ import { DropfileDirective } from './dropfile.directive';
     ObjectEditorComponent,
     ArrayEditorComponent,
     JsonEditorComponent,
-    DropfileDirective
+    DropfileDirective,
   ],
   imports: [
     BrowserModule,
