@@ -12,6 +12,7 @@ import { JsonEditorComponent } from './json-editor/json-editor.component';
 import { ObjectEditorComponent } from './json-editor/object-editor/object-editor.component';
 import { ArrayEditorComponent } from './json-editor/array-editor/array-editor.component';
 import { DropfileDirective } from './dropfile.directive';
+import { CodeWrapperComponent } from './code-wrapper/code-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DropfileDirective } from './dropfile.directive';
     ArrayEditorComponent,
     JsonEditorComponent,
     DropfileDirective,
+    CodeWrapperComponent,
   ],
   imports: [
     BrowserModule,

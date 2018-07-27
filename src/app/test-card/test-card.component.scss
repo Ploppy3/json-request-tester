@@ -3,6 +3,9 @@
   border-radius: 8px;
   overflow: hidden;
 }
+pre {
+  max-height: 200px;
+}
 .card-request {
   word-break: break-all;
   max-width: 200px;
@@ -28,66 +31,11 @@
   &.good {
     background-color: #4CAF50; // green 500
   }
-  /*
-  .col.spacer > *:not(.row) {
-    margin: 0;
-  }
-  //*/
 }
 .card-result {
   flex: 1;
   background-color: white;
   overflow: hidden;
-}
-pre {
-  max-height: 200px;
-}
-.error-wrapper {
-  overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid #FF5722;
-  &.warning {
-    border-color: #BA68C8;
-    .title {
-      background-color: #BA68C8;
-    }
-  }
-  .title {
-    background-color: #FF5722;
-    color: #fff;
-    padding: 8px 16px;
-  }
-  .field,
-  .separator {
-    border-radius: 4px;
-    padding: 0 4px;
-  }
-  .field {
-    background-color: rgba($color: #000000, $alpha: .24);
-  }
-  span {
-    display: inline-block;
-    &:nth-child(2) {
-      margin-left: 8px;
-    }
-  }
-}
-.code-wrapper {
-  overflow: hidden;
-  border: 1px solid rgba($color: #000000, $alpha: .24);
-  border-radius: 8px;
-  &.success{
-    border-color: #558B2F;
-    color: #ffffff;
-    .title{
-      background-color: #558B2F;
-    }
-
-  }
-  .title {
-    background-color: rgba($color: #000000, $alpha: .24);
-    padding: 8px 16px;
-  }
 }
 @media screen and (max-width: 640px) {
   :host {
