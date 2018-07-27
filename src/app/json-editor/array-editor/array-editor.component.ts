@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { isArray } from 'util';
 import { PROPERTY_TYPES, SPECIAL_TYPES, getPropertyType } from '../object-editor/object-editor.component';
 import { SessionService } from '../../session.service';
+import { isArray } from '../../util';
 
 @Component({
   selector: 'app-array-editor',

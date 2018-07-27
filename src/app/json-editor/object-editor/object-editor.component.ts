@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { isArray } from 'util';
 import { SessionService } from '../../session.service';
+import { isArray } from '../../util';
 
 @Component({
   selector: 'app-object-editor',

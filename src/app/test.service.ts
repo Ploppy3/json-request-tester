@@ -4,6 +4,7 @@ import { HeaderTest, HttpTest, GlobalVariable } from './data';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JsonComparator, JsonComparatorError, JsonComparisonResult } from './json-comparator';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,10 @@ import { JsonComparator, JsonComparatorError, JsonComparisonResult } from './jso
 export class TestService {
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private logger: LoggerService,
   ) {
-    console.log('constructor');
+    logger.log('constructor SessionService');
   }
 
   public test(test: HttpTest, globalVariables: GlobalVariable[]) {

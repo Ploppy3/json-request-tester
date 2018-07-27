@@ -8,7 +8,9 @@ export class LoggerService {
 
   constructor(
     private errorHandler: ErrorHandler
-  ) { }
+  ) {
+    this.log('constructor LoggerService');
+  }
 
   public log(value: any, ...rest: any[]) {
     if (!environment.production) {

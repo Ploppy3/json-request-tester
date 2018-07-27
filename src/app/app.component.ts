@@ -4,6 +4,7 @@ import { environment } from "../environments/environment";
 import { Observable } from "rxjs";
 import { SessionService } from "./session.service";
 import { Data } from "./data";
+import { LoggerService } from "./logger.service";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements DoCheck, OnInit {
   public lastScrollY = 0; // used to keep track of fabToTop state
 
   constructor(
-    private zone: NgZone, private sessionservice: SessionService
+    private zone: NgZone, private sessionservice: SessionService,
+    private logger: LoggerService,
   ) { }
 
   ngOnInit() {
@@ -39,8 +41,7 @@ export class AppComponent implements DoCheck, OnInit {
   }
 
   ngDoCheck(): void {
-    if (!environment.production)
-      console.log('check'); // writes 'check' in console to quickly identity performance issues
+    this.logger.log('check'); // writes 'check' in console to quickly identity performance issues
   }
 
   public scrollToTop() {
@@ -57,17 +58,17 @@ export class AppComponent implements DoCheck, OnInit {
   public onDrop(files: FileList) {
     this.handleJSONUpload(files).subscribe(
       (data: Data) => {
-        console.log(data);
+        this.logger.log(data);
         if (data.version == environment.version) {
           this.sessionservice.tests$.next(data.tests);
           this.sessionservice.saveData(data.tests);
         }
       },
       err => {
-        console.log(err);
+        this.logger.log(err);
       },
       () => {
-        console.log("complete");
+        this.logger.log("complete");
       }
     );
   }

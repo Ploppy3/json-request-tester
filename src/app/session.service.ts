@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpTest, Data, GlobalVariable } from './data';
 import { BehaviorSubject } from 'rxjs';
 import { Storage } from './storage';
-import { isArray } from 'util';
 import { environment } from '../environments/environment.prod';
+import { isObject, isNumber, isString, isArray } from './util';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,27 @@ export class SessionService {
   public tests$ = new BehaviorSubject<HttpTest[]>([]);
   public globalVariables$ = new BehaviorSubject<GlobalVariable[]>([]);
 
-  constructor() {
-    console.log('constructor');
+  constructor(
+    private logger: LoggerService,
+  ) {
+    logger.log('constructor SessionService');
     let data: Data = Storage.get<Data>(Storage.KEY_TESTS, null);
     if (data) {
       if (data.version == environment.version) {
         if (data.tests) {
           if (isArray(data.tests)) {
             // TODO typecheck httpTests
-            this.tests$.next(data.tests);
+            let tests: HttpTest[] = [];
+            data.tests.forEach(test => {
+              if (this.typeCheckTest(test)) {
+                tests.push(test);
+              } else {
+                logger.log('test failes typeCheck', test);
+              }
+            })
+            this.tests$.next(tests);
+          } else {
+            logger.log('data.tests is not an array');
           }
         }
         this.globalVariables$.next(data.globalVariables || []);
@@ -29,7 +42,27 @@ export class SessionService {
     }
   }
 
-  public removeGlobalVariable(i: number){
+  private typeCheckTest(test: any): boolean {
+    if (!isObject(test)) { return false; }
+    if (!isNumber(test.id)) { return false; }
+    if (!isString(test.url)) { return false; }
+    if (!isString(test.method)) {
+      return false;
+    } else {
+      let httpMethods = ['GET', 'POST', 'PUT', 'DELETE'];
+      if (httpMethods.indexOf(test.method) == -1) { return false; }
+    }
+    if (!isObject(test.expectedResponse)) {
+      return false;
+    } else {
+      if (!isObject(test.expectedResponse.body)) { return false; }
+      if (!isNumber(test.expectedResponse.status)) { return false; }
+      if (!isArray(test.expectedResponse.variablePaths)) { return false; }
+    }
+    return true;
+  }
+
+  public removeGlobalVariable(i: number) {
     let globalVariables = this.globalVariables$.value;
     globalVariables.splice(i, 1);
     this.globalVariables$.next(globalVariables);
@@ -77,8 +110,8 @@ export class SessionService {
       tests: this.tests$.getValue(),
       globalVariables: this.globalVariables$.getValue(),
     };
-  
-    var blob = new Blob([ encode(JSON.stringify(data, null, 4)) ], {
+
+    var blob = new Blob([encode(JSON.stringify(data, null, 4))], {
       type: 'application/octet-stream'
     });
 
