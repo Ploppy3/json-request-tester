@@ -16,12 +16,8 @@ export abstract class JsonComparator {
 
     let expectedKeys = Object.keys(expected);
     //console.log(expectedKeys);
-    /*
     for (let i = 0; i < expectedKeys.length + 1; i++) {
       let key = expectedKeys[i];
-    }
-    //*/
-    Object.keys(expected).forEach(key => {
       //console.log(key, expected[key]);
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // use json to compare if values are object
         //console.log(expected[key], '!=', response[key]);
@@ -93,7 +89,7 @@ export abstract class JsonComparator {
         if (error.type != JsonComparatorErrorType.ALLOWED)
           comparisonResults.errors.push(error);
       }
-    })
+    }
 
     Object.keys(response).forEach(key => {
       let error: JsonComparatorError = {
