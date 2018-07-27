@@ -16,7 +16,7 @@ export abstract class JsonComparator {
 
     let expectedKeys = Object.keys(expected);
     //console.log(expectedKeys);
-    for (let i = 0; i < expectedKeys.length + 1; i++) {
+    for (let i = 0; i < expectedKeys.length; i++) {
       let key = expectedKeys[i];
       //console.log(key, expected[key]);
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // use json to compare if values are object
