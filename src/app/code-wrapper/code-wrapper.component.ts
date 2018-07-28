@@ -6,8 +6,7 @@ import { Component, OnInit, Input, HostBinding, SimpleChanges } from '@angular/c
   styleUrls: ['./code-wrapper.component.scss']
 })
 export class CodeWrapperComponent implements OnInit {
-
-  @Input() title: string;
+  
   @Input() status: 'DEFAULT' | 'SUCCESS' | 'WARNING' | 'ERROR' = 'DEFAULT';
   @HostBinding('class.success') successClass = false;
   @HostBinding('class.error') errorClass = false;
