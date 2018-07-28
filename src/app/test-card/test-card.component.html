@@ -33,7 +33,7 @@
             <ng-container wrapper-title>{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</ng-container>
             <div class="row spacer">
               <div class="col spacer">
-                <div>
+                <div class="row inner-spacer">
                   <span class="secondary">Field:</span>
                   <ng-container *ngFor="let property of error.depth">
                     <span class="field">{{ property }}</span>
@@ -41,7 +41,7 @@
                   </ng-container>
                   <span class="field">{{ error.key }}</span>
                 </div>
-                <div>
+                <div class="row inner-spacer">
                   <span class="secondary">Message:</span>
                   <span [ngSwitch]="error.type">
                   <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
