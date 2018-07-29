@@ -18,7 +18,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #424242;
-  overflow-y: scroll;
+  overflow-y: visible;
   color: rgba(0, 0, 0, .87)
 }
 button {
@@ -60,12 +60,21 @@ button {
     font-size: 1.2rem;
   }
   &.icon-button {
-    display: row;
+    display: flex;
     justify-content: center;
     align-items: center;
-    i,
-    .icon {
-      padding: 8px;
+    border: none;
+    width: 36px; height: 36px;
+    span {
+      padding-left: 8px;
+    }
+
+    &.rounded {
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    &:hover {
+      background: rgba(0, 0, 0, .24);
     }
   }
 }
@@ -134,7 +143,7 @@ a:active {
   height: 48px;
   border-radius: 50%;
   border: 0;
-  display: row;
+  display: flex;
   align-items: center;
   justify-content: center;
   .icons,

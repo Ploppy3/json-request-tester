@@ -1,23 +1,5 @@
-<div class="row spacer">
+<div id="home-content" class="row spacer">
   <div class="col spacer">
-    <div id="wrapper-statuses" class="col spacer" *ngIf="tests?.length > 0">
-      <div class="row spacer wrap">
-        <button id="play-btn" class="icon fab" (click)="testAll()">
-          <i class="material-icons">play_arrow</i>
-        </button>
-        <ng-container *ngFor="let test of tests; let i = index">
-          <a [href]="'#card-'+i" class="self-center" *ngIf="!test.response">
-            <i class="material-icons">remove</i>
-          </a>
-          <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0">
-            <i class="material-icons">check</i>
-          </a>
-          <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
-            <i class="material-icons">close</i>
-          </a>
-        </ng-container>
-      </div>
-    </div>
     <form id="classes-editor" #formVariable="ngForm" (ngSubmit)="onSubmit_FormVariable()">
       <div class="row spacer">
         <div class="col spacer">Define global variables</div>
@@ -55,15 +37,31 @@
       <div class="grow"></div>
       <i class="clickable material-icons button-delete-test" (click)="removeTest(test)">delete</i>
     </app-test-card>
-    <div class="row inner-spacer justify-center">
-      <button class="outline row" *ngIf="tests?.length > 0">
-        <i class="material-icons">replay</i>
-        <span class="self-center">RESET</span>
-      </button>
-      <button class="outline row" *ngIf="tests?.length > 0" (click)="export()">
-        <i class="material-icons">save</i>
-        <span class="self-center">EXPORT</span>
-      </button>
-    </div>
   </div>
+</div>
+
+<div id="wrapper-statuses" class="row spacer wrap">
+  <button id="play-btn" class="icon fab" (click)="testAll()" *ngIf="tests?.length > 0">
+    <i class="material-icons">play_arrow</i>
+  </button>
+  <ng-container *ngFor="let test of tests; let i = index">
+    <a [href]="'#card-'+i" class="self-center" *ngIf="!test.response">
+      <i class="material-icons">remove</i>
+    </a>
+    <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0">
+      <i class="material-icons">check</i>
+    </a>
+    <a [href]="'#card-'+i" class="self-center" *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
+      <i class="material-icons">close</i>
+    </a>
+  </ng-container>
+
+  <!--<button class="outline row" *ngIf="tests?.length > 0">
+    <i class="material-icons">replay</i>
+    <span class="self-center">RESET</span>
+  </button>-->
+  <div class="spacer"></div>
+  <button class="icon-button rounded" *ngIf="tests?.length > 0" (click)="export()">
+    <i class="material-icons">save</i>
+  </button>
 </div>

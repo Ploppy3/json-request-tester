@@ -1,7 +1,5 @@
 :host {
   display: block;
-  overflow-y: visible;
-  margin-bottom: 64px;
 }
 .button-delete-test {
   opacity: .4;
@@ -11,24 +9,43 @@
     opacity: 1;
   }
 }
-#classes-editor {
-  background-color: #fff;
-  border-radius: 8px;
-  .variable {
-    background-color: rgba(0, 0, 0, 0.24);
-    border-radius: 12px;
-    padding: 0 8px;
+
+#home-content {
+  max-width: 1200px;
+  margin: auto;
+  margin-bottom: 64px;
+
+  #classes-editor {
+    background-color: #fff;
+    border-radius: 8px;
+    .variable {
+      background-color: rgba(0, 0, 0, 0.24);
+      border-radius: 12px;
+      padding: 0 8px;
+    }
   }
 }
-#play-btn {
-  background-color: #FF7274;
-  color: white;
-}
+
 #wrapper-statuses {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+  z-index: 10;
   background-color: #fff;
-  border-radius: 8px;
   font-size: 2em;
+  align-items: center;
+
+  #play-btn {
+    background-color: #FF7274;
+    color: white;
+  }
+
   a {
     display: inline-block;
+  }
+
+  .spacer {
+    flex: 1;
   }
 }
