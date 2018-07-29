@@ -2,12 +2,18 @@ import { trigger, state, transition, style, animate, query, group } from "@angul
 
 export const fadeInOut = trigger('fadeInOut', [
   state('void', style({
-    opacity: '0',
+    opacity: 0,
   })),
-  transition(':enter', [
+  state('hidden', style({
+    opacity: 0,
+  })),
+  state('visible', style({
+    opacity: 1,
+  })),
+  transition(':enter, hidden => visible', [
     animate('500ms ease-out', style({ opacity: 1, })),
   ]),
-  transition(':leave', [
+  transition(':leave, visible => hidden', [
     animate('500ms ease-out', style({ opacity: 0, })),
   ]),
 ]);

@@ -5,6 +5,7 @@ import { SessionService } from '../session.service';
 import { fadeInOut } from '../animations';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
     public sessionsService: SessionService,
     private testService: TestService,
     private zone: NgZone,
+    private logger: LoggerService,
   ) { }
 
   ngOnInit(): void {
@@ -84,9 +86,9 @@ export class HomeComponent implements OnInit {
         }
       },
       err => {
-        console.log('error', err)
+        this.logger.log('error', err)
         let comparisonResults = this.testService.findErrors(test, err, this.sessionsService.globalVariables$.value);
-        console.log(comparisonResults);
+        this.logger.log(comparisonResults);
         test.response = {
           body: err.error,
           status: err.status,

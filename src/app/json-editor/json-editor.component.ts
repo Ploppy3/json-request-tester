@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { collapse } from '../animations';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-json-editor',
@@ -13,14 +14,16 @@ export class JsonEditorComponent implements OnInit, OnChanges {
   @Output() objChange = new EventEmitter<{}>();
   public copyOfObj;
 
-  constructor() { }
+  constructor(
+    private logger: LoggerService,
+  ) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['obj']) {
-      console.log('creating copy of obj');
+      this.logger.log('creating copy of obj');
       this.copyOfObj = JSON.parse(JSON.stringify(this.obj))
     }
   }

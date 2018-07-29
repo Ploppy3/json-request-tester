@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba($color: #000000, $alpha: .24);
+  border-radius: 8px;
+  &.success,
+  &.error,
+  &.warning {
+    color: #ffffff;
+  }
+  &.success {
+    border-color: #4CAF50;
+    .title {
+      background-color: #4CAF50;
+    }
+  }
+  &.error {
+    border-color: #FF5722;
+    .title {
+      background-color: #FF5722;
+    }
+  }
+  &.warning {
+    border-color: #BA68C8;
+    .title {
+      background-color: #BA68C8;
+    }
+  }
+}
+.title {
+  background-color: rgba($color: #000000, $alpha: .24);
+  padding: 8px 16px;
+}
+.content{
+  color: rgba($color: #000000, $alpha: .87);
+}

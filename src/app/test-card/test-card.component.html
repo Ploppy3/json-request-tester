@@ -10,10 +10,10 @@
 <div class="card-result">
   <div class="row spacer">
     <div class="col spacer">
-      <div class="code-wrapper">
-        <div class="title">Expected Status</div>
+      <app-code-wrapper>
+        <ng-container wrapper-title>Expected Status</ng-container>
         <pre class="overflow">{{ test.expectedResponse.status }}</pre>
-      </div>
+      </app-code-wrapper>
       <app-json-editor [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event; onChange.next()">
         Expected Body
       </app-json-editor>
@@ -23,24 +23,25 @@
     <hr>
     <div class="row spacer">
       <div class="col spacer">
-        <div class="code-wrapper">
-          <div class="title">Response Status</div>
-          <pre class="overflow">{{ test.response?.status }}</pre>
-        </div>
+        <app-code-wrapper [status]="test.response?.status == test.expectedResponse.status ? 'SUCCESS' : 'ERROR'">
+          <ng-container wrapper-title>Response Status</ng-container>
+          <pre class="overflow" *ngIf="(test.expectedResponse.status != test.response.status)">{{ test.response?.status }}</pre>
+        </app-code-wrapper>
         <ng-container *ngIf="test.response?.errors?.length > 0">
-          <div class="error-wrapper" [class.warning]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR" *ngFor="let error of test.response?.errors; trackBy: trackByFn">
-            <div class="title">{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</div>
+          <app-code-wrapper *ngFor="let error of test.response?.errors; trackBy: trackByFn" 
+          [status]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'WARNING' : 'ERROR'">
+            <ng-container wrapper-title>{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</ng-container>
             <div class="row spacer">
               <div class="col spacer">
-                <div>
+                <div class="row inner-spacer">
                   <span class="secondary">Field:</span>
                   <ng-container *ngFor="let property of error.depth">
-                    <span class="field">{{property}}</span>
+                    <span class="field">{{ property }}</span>
                     <span class="separator secondary">></span>
                   </ng-container>
-                  <span class="field">{{error.key}}</span>
+                  <span class="field">{{ error.key }}</span>
                 </div>
-                <div>
+                <div class="row inner-spacer">
                   <span class="secondary">Message:</span>
                   <span [ngSwitch]="error.type">
                   <span *ngSwitchCase="errorTypes.MISSING_KEY">Missing key</span>
@@ -51,12 +52,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </app-code-wrapper>
         </ng-container>
-        <div class="code-wrapper">
-          <div class="title">Response Body</div>
+        <app-code-wrapper>
+          <ng-container wrapper-title>Response Body</ng-container>
           <pre class="overflow">{{ test.response?.body | json }}</pre>
-        </div>
+        </app-code-wrapper>
       </div>
     </div>
   </ng-container>

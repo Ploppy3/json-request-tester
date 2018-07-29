@@ -3,6 +3,7 @@ import { HttpTest, VariablePath } from '../data';
 import { SessionService } from '../session.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-test-generator',
@@ -29,7 +30,7 @@ export class TestGeneratorComponent implements OnInit {
   constructor(
     public sessionService: SessionService,
     private httpClient: HttpClient,
-    private zone: NgZone,
+    private logger: LoggerService,
   ) { }
 
   ngOnInit() {
@@ -72,7 +73,7 @@ export class TestGeneratorComponent implements OnInit {
   }
 
   public onSubmit(event: any) {
-    console.log(this.model);
+    this.logger.log(this.model);
     this.model.id = new Date().getTime();
     //this.sessionService.addTest(this.model);
     this.sessionService.addTest(JSON.parse(JSON.stringify(this.model)));

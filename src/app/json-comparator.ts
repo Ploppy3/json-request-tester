@@ -1,6 +1,5 @@
-import { isArray, isNullOrUndefined } from "util";
+import { isArray, isNullOrUndefined, isObject, isNumber, isBoolean, isString } from "./util";
 import { GlobalVariable } from "./data";
-import { all } from "q";
 
 export abstract class JsonComparator {
 
@@ -17,10 +16,8 @@ export abstract class JsonComparator {
 
     let expectedKeys = Object.keys(expected);
     //console.log(expectedKeys);
-    for (let i = 0; i < expectedKeys.length + 1; i++) {
+    for (let i = 0; i < expectedKeys.length; i++) {
       let key = expectedKeys[i];
-    }
-    Object.keys(expected).forEach(key => {
       //console.log(key, expected[key]);
       if (JSON.stringify(expected[key]) != JSON.stringify(response[key])) { // use json to compare if values are object
         //console.log(expected[key], '!=', response[key]);
@@ -36,7 +33,7 @@ export abstract class JsonComparator {
           let variableKey = '/set@' + variable.name + '/';
           if (expected[key] == variableKey) {
             variable.value = response[key];
-            console.log(variableKey, '-set-', response[key]);
+            //console.log(variableKey, '-set-', response[key]);
             error.type = JsonComparatorErrorType.ALLOWED;
           }
         });
@@ -50,24 +47,24 @@ export abstract class JsonComparator {
           error.type = JsonComparatorErrorType.ALLOWED;
           //console.log('allowed, %any_array%');
         }
-        else if (expected[key] == '%any_object%' && typeof response[key] === 'object' && !isArray(response[key])) { // allow %anyObject%
+        else if (expected[key] == '%any_object%' && isObject(response[key]) && !isArray(response[key])) { // allow %anyObject%
           error.type = JsonComparatorErrorType.ALLOWED;
           //console.log('allowed, %any_object%');
         }
-        else if (expected[key] == '%any_number%' && typeof response[key] === 'number' && !isArray(response[key])) { // allow %anyNumber%
+        else if (expected[key] == '%any_number%' && isNumber(response[key]) && !isArray(response[key])) { // allow %anyNumber%
           error.type = JsonComparatorErrorType.ALLOWED;
           //console.log('allowed, %any_number%');
         }
-        else if (expected[key] == '%any_string%' && typeof response[key] === 'string' && !isArray(response[key])) { // allow %anyString%
+        else if (expected[key] == '%any_string%' && isString(response[key]) && !isArray(response[key])) { // allow %anyString%
           error.type = JsonComparatorErrorType.ALLOWED;
           //console.log('allowed, %any_string%');
         }
-        else if (expected[key] == '%any_boolean%' && typeof response[key] === 'boolean' && !isArray(response[key])) { // allow %anyBoolean%
+        else if (expected[key] == '%any_boolean%' && isBoolean(response[key]) && !isArray(response[key])) { // allow %anyBoolean%
           error.type = JsonComparatorErrorType.ALLOWED;
           //console.log('allowed, %any_boolean%');
         }
         /** if both values are object, compare them */
-        else if (typeof expected[key] === 'object' && typeof response[key] === 'object') {
+        else if (isObject(expected[key]) && isObject(response[key])) {
           //error.type = 'ALLOWED';
           let comparisonResults = this.compareObjects(expected[key], response[key], globalVariables, [...depth, key]);
           //console.log('newErrors', newErrors);
@@ -82,7 +79,7 @@ export abstract class JsonComparator {
         globalVariables.forEach(variable => {
           let variableKey = '/compare@' + variable.name + '/';
           if (expected[key] == variableKey) {
-            console.log(variableKey, variable.value, '-==-', key, response[key])
+            //console.log(variableKey, variable.value, '-==-', key, response[key])
             if (response[key] == variable.value) {
               error.type = JsonComparatorErrorType.ALLOWED;
             }
@@ -92,7 +89,7 @@ export abstract class JsonComparator {
         if (error.type != JsonComparatorErrorType.ALLOWED)
           comparisonResults.errors.push(error);
       }
-    })
+    }
 
     Object.keys(response).forEach(key => {
       let error: JsonComparatorError = {

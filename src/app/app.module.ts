@@ -5,15 +5,14 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { TestService } from './test.service';
 import { TestCardComponent } from './test-card/test-card.component';
 import { HomeComponent } from './home/home.component';
 import { TestGeneratorComponent } from './test-generator/test-generator.component';
 import { JsonEditorComponent } from './json-editor/json-editor.component';
-import { SessionService } from './session.service';
 import { ObjectEditorComponent } from './json-editor/object-editor/object-editor.component';
 import { ArrayEditorComponent } from './json-editor/array-editor/array-editor.component';
 import { DropfileDirective } from './dropfile.directive';
+import { CodeWrapperComponent } from './code-wrapper/code-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +24,7 @@ import { DropfileDirective } from './dropfile.directive';
     ArrayEditorComponent,
     JsonEditorComponent,
     DropfileDirective,
+    CodeWrapperComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import { DropfileDirective } from './dropfile.directive';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ TestService, SessionService ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

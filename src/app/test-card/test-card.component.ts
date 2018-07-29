@@ -11,7 +11,6 @@ export class TestCardComponent implements OnInit {
 
   @Input() test: HttpTest;
   @Input() result: any;
-
   @Output() onChange = new EventEmitter<void>();
   
   public errorTypes = JsonComparatorErrorType;
