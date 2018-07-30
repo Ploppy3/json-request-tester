@@ -65,6 +65,7 @@ button {
     align-items: center;
     border: none;
     width: 36px; height: 36px;
+    background: none;
     span {
       padding-left: 8px;
     }
@@ -74,7 +75,7 @@ button {
       overflow: hidden;
     }
     &:hover {
-      background: rgba(0, 0, 0, .24);
+      background: rgba(0, 0, 0, .12);
     }
   }
 }
