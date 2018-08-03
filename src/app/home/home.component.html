@@ -1,10 +1,10 @@
 <div id="home-content" class="row spacer">
-  <div class="col spacer">
+  <div class="col spacer max-width">
     <form id="classes-editor" #formVariable="ngForm" (ngSubmit)="onSubmit_FormVariable()">
       <div class="row spacer">
         <div class="col spacer">Define global variables</div>
       </div>
-      <hr class="full-width">
+      <hr class="max-width">
       <div *ngIf="(sessionsService.globalVariables$ | async).length > 0" class="row spacer">
         <div class="col spacer">
           <div class="row inner-spacer" *ngFor="let variable of (sessionsService.globalVariables$ | async); let i = index;">
@@ -14,13 +14,13 @@
                 <span class="self-center">=</span>
                 <span class="self-center">{{variable.value}}</span>
               </ng-container>
-              <i class="material-icons secondary clickable" (click)="sessionsService.removeGlobalVariable(i)">close</i>
+              <i class="material-icons secondary clickable" (click)="sessionsService.removeGlobalVariable(i)">delete</i>
             </div>
             <!--<div class="secondary self-center">{{ variable.key }}</div>-->
           </div>
         </div>
       </div>
-      <hr class="full-width" *ngIf="(sessionsService.globalVariables$ | async).length > 0">
+      <hr class="max-width" *ngIf="(sessionsService.globalVariables$ | async).length > 0">
       <div class="row spacer">
         <div class="col spacer">
           <div class="row inner-spacer">

@@ -6,7 +6,6 @@
 @import './variables.scss';
 @import './framework.scss';
 * {
-  box-sizing: border-box;
   user-select: none;
 }
 *:focus {
@@ -64,12 +63,12 @@ button {
     justify-content: center;
     align-items: center;
     border: none;
-    width: 36px; height: 36px;
+    width: 36px;
+    height: 36px;
     background: none;
     span {
       padding-left: 8px;
     }
-
     &.rounded {
       border-radius: 50%;
       overflow: hidden;
@@ -102,7 +101,7 @@ select {
 }
 input {
   min-width: 100px;
-  &.ng-invalid{
+  &.ng-invalid {
     border-color: #FF5722;
     &:focus {
       border-color: #E040FB;

@@ -7,6 +7,9 @@ body {
 body {
   margin: 0;
 }
+* {
+  box-sizing: border-box;
+}
 /// Transform text to uppercase
 .uppercase {
   text-transform: uppercase;
@@ -49,7 +52,6 @@ body {
 .col {
   display: flex;
   flex-direction: column;
-  width: 100%;
   overflow: auto;
   &.spacer {
     padding-top: $spacer-padding;
@@ -94,11 +96,11 @@ body {
   }
 }
 /// Sets the element to 100% width
-.full-width {
+.max-width {
   width: 100%;
 }
 /// Sets the element to 100% height
-.full-height {
+.max-height {
   height: 100%;
 }
 /// Pushes element to a unique GPU layer.

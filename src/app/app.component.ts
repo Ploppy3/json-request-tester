@@ -75,26 +75,26 @@ export class AppComponent implements DoCheck, OnInit {
     );
   }
 
-  public handleJSONUpload (files: FileList): Observable<Object> {
+  public handleJSONUpload(files: FileList): Observable<Object> {
     return new Observable((observer) => {
-      for(let i = 0; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
         let file = files[i];
         let last = (i == files.length - 1) ? true : false;
-  
-        if ( /\.(json)$/i.test(file.name) ) {
+
+        if (/\.(json)$/i.test(file.name)) {
           var reader = new FileReader();
-  
+
           reader.addEventListener("load", function () {
             try {
               observer.next(JSON.parse(this.result));
-            } catch(e) {}
+            } catch (e) { }
             if (last) observer.complete();
           }, false);
-  
+
           reader.readAsText(file);
         } else {
           if (last) observer.complete();
-        }  
+        }
       };
     })
   }

@@ -1,28 +1,30 @@
-#fab-toTop{
+:host {
+  display: block;
+}
+#fab-toTop {
   background-color: #fafafa;
   position: fixed;
   z-index: 1;
   right: 16px;
   bottom: 80px;
-  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
 }
-
 #drop-zone {
-    position: fixed;
-    width: 100%; height: 100vh;
-    top: 0; left: 0;
-    background: rgba(0,0,0,.6);
-    color: white;
-    text-align: center;
-    padding: calc(50vh - 1rem) 0;
-    line-height: 1;
-    font-size: 2rem;
-    font-weight: 700;
-    border: 8px white dashed;
-
-    display: none;
-
-    &.drophover {
-      display: block;
-    }
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .6);
+  color: white;
+  text-align: center;
+  padding: calc(50vh - 1rem) 0;
+  line-height: 1;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 8px white dashed;
+  display: none;
+  &.drophover {
+    display: block;
+  }
 }
