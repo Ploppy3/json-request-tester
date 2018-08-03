@@ -1,4 +1,4 @@
-<div [class.good]="test.response && test.response?.status == test.expectedResponse?.status && test.response?.errors.length == 0" [class.error]="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0"
+<div [class.good]="test?.response && test?.response?.status == test?.expectedResponse?.status && test?.response?.errors.length == 0" [class.error]="test?.response && test?.response?.status != test?.expectedResponse?.status || test?.response?.errors.length > 0"
   class="card-request col">
   <span class="request-method no-shrink bold">{{ test?.method }}</span>
   <div class="request-actions row">
@@ -9,27 +9,26 @@
 </div>
 <div class="card-result">
   <div class="row spacer">
-    <div class="col spacer">
+    <div class="col spacer max-width">
       <app-code-wrapper>
         <ng-container wrapper-title>Expected Status</ng-container>
-        <pre class="overflow">{{ test.expectedResponse.status }}</pre>
+        <pre class="overflow">{{ test?.expectedResponse.status }}</pre>
       </app-code-wrapper>
-      <app-json-editor [obj]="test.expectedResponse.body" (objChange)="test.expectedResponse.body = $event; onChange.next()">
+      <app-json-editor [obj]="test?.expectedResponse.body" (objChange)="test?.expectedResponse.body = $event; onChange.next()">
         Expected Body
       </app-json-editor>
     </div>
   </div>
-  <ng-container *ngIf="test.response && test.response?.status != test.expectedResponse?.status || test.response?.errors.length > 0">
+  <ng-container *ngIf="test?.response && test?.response?.status != test?.expectedResponse?.status || test?.response?.errors.length > 0">
     <hr>
     <div class="row spacer">
-      <div class="col spacer">
-        <app-code-wrapper [status]="test.response?.status == test.expectedResponse.status ? 'SUCCESS' : 'ERROR'">
+      <div class="col spacer max-width">
+        <app-code-wrapper [status]="test?.response?.status == test?.expectedResponse.status ? 'SUCCESS' : 'ERROR'">
           <ng-container wrapper-title>Response Status</ng-container>
-          <pre class="overflow" *ngIf="(test.expectedResponse.status != test.response.status)">{{ test.response?.status }}</pre>
+          <pre class="overflow" *ngIf="(test?.expectedResponse.status != test?.response.status)">{{ test?.response?.status }}</pre>
         </app-code-wrapper>
-        <ng-container *ngIf="test.response?.errors?.length > 0">
-          <app-code-wrapper *ngFor="let error of test.response?.errors; trackBy: trackByFn" 
-          [status]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'WARNING' : 'ERROR'">
+        <ng-container *ngIf="test?.response?.errors?.length > 0">
+          <app-code-wrapper *ngFor="let error of test?.response?.errors; trackBy: trackByFn" [status]="error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'WARNING' : 'ERROR'">
             <ng-container wrapper-title>{{error.type == errorTypes.UNEXPECTED_KEY_VALUE_PAIR ? 'Warning' : 'Error'}}</ng-container>
             <div class="row spacer">
               <div class="col spacer">
@@ -56,7 +55,7 @@
         </ng-container>
         <app-code-wrapper>
           <ng-container wrapper-title>Response Body</ng-container>
-          <pre class="overflow">{{ test.response?.body | json }}</pre>
+          <pre class="overflow">{{ test?.response?.body | json }}</pre>
         </app-code-wrapper>
       </div>
     </div>

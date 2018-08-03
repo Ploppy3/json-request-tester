@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestGeneratorComponent } from './test-generator.component';
+import { FormsModule } from '@angular/forms';
+import { JsonEditorComponent } from '../json-editor/json-editor.component';
+import { ObjectEditorComponent } from '../json-editor/object-editor/object-editor.component';
+import { ArrayEditorComponent } from '../json-editor/array-editor/array-editor.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 describe('TestGeneratorComponent', () => {
   let component: TestGeneratorComponent;
@@ -8,9 +13,21 @@ describe('TestGeneratorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestGeneratorComponent ]
+      declarations: [
+        TestGeneratorComponent,
+        JsonEditorComponent,
+        ObjectEditorComponent,
+        ArrayEditorComponent,
+      ],
+      imports: [
+        FormsModule,
+        HttpClientModule,
+      ],
+      providers: [
+        HttpClient,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

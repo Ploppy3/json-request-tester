@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArrayEditorComponent } from './array-editor.component';
+import { FormsModule } from '@angular/forms';
+import { ObjectEditorComponent } from '../object-editor/object-editor.component';
 
 describe('ArrayEditorComponent', () => {
   let component: ArrayEditorComponent;
@@ -8,9 +10,15 @@ describe('ArrayEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArrayEditorComponent ]
+      declarations: [
+        ArrayEditorComponent,
+        ObjectEditorComponent,
+      ],
+      imports: [
+        FormsModule,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
