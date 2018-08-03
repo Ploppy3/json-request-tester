@@ -39,4 +39,11 @@ describe('TestGeneratorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('button-add should call onSubmit method', () => {
+    let button = fixture.nativeElement.querySelector('#button-add');
+    let spy = spyOn(component, 'onSubmit');
+    button.click();
+    expect(spy).toHaveBeenCalled();
+  })
 });
