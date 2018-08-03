@@ -9,6 +9,7 @@ import { ArrayEditorComponent } from '../json-editor/array-editor/array-editor.c
 import { ObjectEditorComponent } from '../json-editor/object-editor/object-editor.component';
 import { CodeWrapperComponent } from '../code-wrapper/code-wrapper.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -28,6 +29,7 @@ describe('HomeComponent', () => {
       imports: [
         FormsModule,
         HttpClientModule,
+        BrowserAnimationsModule,
       ],
       providers: [
         HttpClient, HttpClient
@@ -45,4 +47,5 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
