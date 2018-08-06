@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { TestService } from '../test.service';
 import { HttpTest } from '../data';
 import { SessionService } from '../session.service';
-import { fadeInOut } from '../animations';
+import { fadeInOut, collapse } from '../animations';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LoggerService } from '../logger.service';
@@ -11,15 +11,14 @@ import { LoggerService } from '../logger.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  animations: [fadeInOut]
+  animations: [fadeInOut, collapse]
 })
 export class HomeComponent implements OnInit {
 
   public onDestroy$ = new Subject();
   public tests: HttpTest[] = [];
-  public modelVariable = {
-    key: null,
-  }
+  public modelVariable = { key: null };
+  public showVariablesEditor = false;
 
   constructor(
     public sessionsService: SessionService,

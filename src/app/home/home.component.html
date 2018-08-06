@@ -1,42 +1,51 @@
 <div id="home-content" class="row spacer">
   <div class="col spacer max-width">
+
     <form id="classes-editor" #formVariable="ngForm" (ngSubmit)="onSubmit_FormVariable()">
-      <div class="row spacer">
-        <div class="col spacer">Define global variables</div>
+      <div class="row spacer center-items clickable" (click)="showVariablesEditor = !showVariablesEditor">
+        <span class="grow">Define global variables</span>
+        <button type="button" class="icon-button">
+          <i class="material-icons">{{ showVariablesEditor ? 'expand_less' : 'expand_more' }}</i>
+        </button>
       </div>
-      <hr class="max-width">
-      <div *ngIf="(sessionsService.globalVariables$ | async).length > 0" class="row spacer">
-        <div class="col spacer">
-          <div class="row inner-spacer" *ngFor="let variable of (sessionsService.globalVariables$ | async); let i = index;">
-            <div class="variable self-center row inner-spacer">
-              <span class="self-center">{{variable.name}}</span>
-              <ng-container *ngIf="variable.value != null">
-                <span class="self-center">=</span>
-                <span class="self-center">{{variable.value}}</span>
-              </ng-container>
-              <i class="material-icons secondary clickable" (click)="sessionsService.removeGlobalVariable(i)">delete</i>
+      <ng-container *ngIf="showVariablesEditor">
+        <hr class="max-width" [@collapse]>
+        <div *ngIf="(sessionsService.globalVariables$ | async).length > 0" class="row spacer" [@collapse]>
+          <div class="col spacer">
+            <div class="row inner-spacer" *ngFor="let variable of (sessionsService.globalVariables$ | async); let i = index;">
+              <div class="variable self-center row inner-spacer">
+                <span class="self-center">{{variable.name}}</span>
+                <ng-container *ngIf="variable.value != null">
+                  <span class="self-center">=</span>
+                  <span class="self-center">{{variable.value}}</span>
+                </ng-container>
+                <i class="material-icons secondary clickable" (click)="sessionsService.removeGlobalVariable(i)">delete</i>
+              </div>
+              <!--<div class="secondary self-center">{{ variable.key }}</div>-->
             </div>
-            <!--<div class="secondary self-center">{{ variable.key }}</div>-->
           </div>
         </div>
-      </div>
-      <hr class="max-width" *ngIf="(sessionsService.globalVariables$ | async).length > 0">
-      <div class="row spacer">
-        <div class="col spacer">
-          <div class="row inner-spacer">
-            <input type="text" placeholder="key" [(ngModel)]="modelVariable.key" name="variable-key" autocomplete="off" required>
-            <button type="submit" class="outline" [disabled]="formVariable.invalid">define variable</button>
+        <hr class="max-width" *ngIf="(sessionsService.globalVariables$ | async).length > 0" [@collapse]>
+        <div class="row spacer" [@collapse]>
+          <div class="col spacer">
+            <div class="row inner-spacer">
+              <input type="text" placeholder="key" [(ngModel)]="modelVariable.key" name="variable-key" autocomplete="off" required>
+              <button type="submit" class="outline" [disabled]="formVariable.invalid">define variable</button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </form>
-    <app-test-generator></app-test-generator>
-    <app-test-card *ngFor="let test of tests; let i = index; trackBy: trackByFn" [id]="'card-'+i" [test]="test" (onChange)="onTestChange()">
+
+    <app-test-generator class="gpu-layer"></app-test-generator>
+
+    <app-test-card [id]="'card-'+i" class="gpu-layer" *ngFor="let test of tests; let i = index; trackBy: trackByFn" [test]="test" (onChange)="onTestChange()">
       <i class="clickable material-icons" (click)="start(test)">play_arrow</i>
       <i class="clickable material-icons" (click)="test.response = null" [@fadeInOut]="test.response ? 'visible' : 'hidden'">replay</i>
       <div class="grow"></div>
       <i class="clickable material-icons button-delete-test" (click)="removeTest(test)">delete</i>
     </app-test-card>
+
   </div>
 </div>
 
@@ -60,8 +69,10 @@
     <i class="material-icons">replay</i>
     <span class="self-center">RESET</span>
   </button>-->
+
   <div class="spacer"></div>
   <button class="icon-button rounded" *ngIf="tests?.length > 0" (click)="export()">
     <i class="material-icons">save</i>
   </button>
+
 </div>
