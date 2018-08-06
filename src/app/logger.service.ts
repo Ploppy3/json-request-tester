@@ -9,12 +9,12 @@ export class LoggerService {
   constructor(
     private errorHandler: ErrorHandler
   ) {
-    this.log('constructor LoggerService');
+    this.log(this, 'constructor LoggerService');
   }
 
-  public log(value: any, ...rest: any[]) {
+  public log(obj: any, value: any, ...rest: any[]) {
     if (!environment.production) {
-      console.log(value, ...rest);
+      console.log("%c" + obj.constructor.name, "color:" + 'red', value, ...rest);
     }
   }
 

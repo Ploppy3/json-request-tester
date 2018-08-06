@@ -1,18 +1,21 @@
 import { Component, OnInit, Input, HostBinding, SimpleChanges } from '@angular/core';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-code-wrapper',
   templateUrl: './code-wrapper.component.html',
-  styleUrls: ['./code-wrapper.component.scss']
+  styleUrls: ['./code-wrapper.component.scss'],
 })
 export class CodeWrapperComponent implements OnInit {
-  
+
   @Input() status: 'DEFAULT' | 'SUCCESS' | 'WARNING' | 'ERROR' = 'DEFAULT';
   @HostBinding('class.success') successClass = false;
   @HostBinding('class.error') errorClass = false;
   @HostBinding('class.warning') warningClass = false;
 
-  constructor() { }
+  constructor(
+    private logger: LoggerService,
+  ) { }
 
   ngOnInit() {
   }

@@ -15,7 +15,7 @@ export class TestService {
     private _http: HttpClient,
     private logger: LoggerService,
   ) {
-    logger.log('constructor SessionService');
+    logger.log(this, 'constructor SessionService');
   }
 
   public test(test: HttpTest, globalVariables: GlobalVariable[]) {

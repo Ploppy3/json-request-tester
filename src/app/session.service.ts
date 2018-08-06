@@ -17,7 +17,7 @@ export class SessionService {
   constructor(
     private logger: LoggerService,
   ) {
-    logger.log('constructor SessionService');
+    logger.log(this, 'constructor SessionService');
     let data: Data = Storage.get<Data>(Storage.KEY_TESTS, null);
     if (data) {
       if (data.version == environment.version) {
@@ -29,12 +29,12 @@ export class SessionService {
               if (this.typeCheckTest(test)) {
                 tests.push(test);
               } else {
-                logger.log('test failes typeCheck', test);
+                logger.log(this, 'test fails typeCheck', test);
               }
             })
             this.tests$.next(tests);
           } else {
-            logger.log('data.tests is not an array');
+            logger.log(this, 'data.tests is not an array');
           }
         }
         this.globalVariables$.next(data.globalVariables || []);

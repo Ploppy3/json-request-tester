@@ -83,17 +83,17 @@ export class HomeComponent implements OnInit {
           body: res.response.body,
           status: res.response.status,
           errors: res.errors,
-        }
+        };
       },
       err => {
-        this.logger.log('error', err)
+        this.logger.log(this, 'error', err)
         let comparisonResults = this.testService.findErrors(test, err, this.sessionsService.globalVariables$.value);
-        this.logger.log(comparisonResults);
+        this.logger.log(this, comparisonResults);
         test.response = {
           body: err.error,
           status: err.status,
           errors: comparisonResults.errors,
-        }
+        };
       }
     );
   }

@@ -23,7 +23,7 @@ export class JsonEditorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['obj']) {
-      this.logger.log('creating copy of obj');
+      this.logger.log(this, 'creating copy of obj');
       this.copyOfObj = JSON.parse(JSON.stringify(this.obj))
     }
   }

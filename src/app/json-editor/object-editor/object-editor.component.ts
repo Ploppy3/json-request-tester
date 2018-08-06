@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { SessionService } from '../../session.service';
 import { isArray } from '../../util';
+import { LoggerService } from '../../logger.service';
 
 @Component({
   selector: 'app-object-editor',
   templateUrl: './object-editor.component.html',
-  styleUrls: ['./object-editor.component.scss']
+  styleUrls: ['./object-editor.component.scss'],
 })
 export class ObjectEditorComponent implements OnInit, OnChanges {
 
@@ -18,6 +19,7 @@ export class ObjectEditorComponent implements OnInit, OnChanges {
 
   constructor(
     public sessionService: SessionService,
+    private loggerService: LoggerService,
   ) { }
 
   ngOnInit() {

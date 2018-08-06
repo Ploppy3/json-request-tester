@@ -6,7 +6,7 @@ import { isArray } from '../../util';
 @Component({
   selector: 'app-array-editor',
   templateUrl: './array-editor.component.html',
-  styleUrls: ['./array-editor.component.scss']
+  styleUrls: ['./array-editor.component.scss'],
 })
 export class ArrayEditorComponent implements OnInit, OnChanges {
 

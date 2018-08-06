@@ -1,4 +1,4 @@
-import { Component, HostListener, DoCheck, NgZone, OnInit } from "@angular/core";
+import { Component, DoCheck, NgZone, OnInit } from "@angular/core";
 import { fadeInOut } from "./animations";
 import { environment } from "../environments/environment";
 import { Observable } from "rxjs";
@@ -14,11 +14,13 @@ import { LoggerService } from "./logger.service";
 })
 
 export class AppComponent implements DoCheck, OnInit {
+
   public showFabToTop = false;
   public lastScrollY = 0; // used to keep track of fabToTop state
 
   constructor(
-    private zone: NgZone, private sessionservice: SessionService,
+    private zone: NgZone,
+    private sessionservice: SessionService,
     private logger: LoggerService,
   ) { }
 
@@ -41,7 +43,7 @@ export class AppComponent implements DoCheck, OnInit {
   }
 
   ngDoCheck(): void {
-    this.logger.log('check'); // writes 'check' in console to quickly identity performance issues
+    this.logger.log(this, 'check'); // writes 'check' in console to quickly identity performance issues
   }
 
   public scrollToTop() {
@@ -58,7 +60,7 @@ export class AppComponent implements DoCheck, OnInit {
   public onDrop(files: FileList) {
     this.handleJSONUpload(files).subscribe(
       (data: Data) => {
-        this.logger.log(data);
+        this.logger.log(this, data);
         if (data.version == environment.version) {
           this.sessionservice.tests$.next(data.tests);
           this.sessionservice.saveData(data.tests);
@@ -67,10 +69,10 @@ export class AppComponent implements DoCheck, OnInit {
         }
       },
       err => {
-        this.logger.log(err);
+        this.logger.log(this, err);
       },
       () => {
-        this.logger.log("complete");
+        this.logger.log(this, "complete");
       }
     );
   }

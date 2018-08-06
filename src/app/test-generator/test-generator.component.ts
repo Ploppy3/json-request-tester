@@ -8,7 +8,7 @@ import { LoggerService } from '../logger.service';
 @Component({
   selector: 'app-test-generator',
   templateUrl: './test-generator.component.html',
-  styleUrls: ['./test-generator.component.scss']
+  styleUrls: ['./test-generator.component.scss'],
 })
 export class TestGeneratorComponent implements OnInit {
 
@@ -73,7 +73,7 @@ export class TestGeneratorComponent implements OnInit {
   }
 
   public onSubmit(event: any) {
-    this.logger.log(this.model);
+    this.logger.log(this, this.model);
     this.model.id = new Date().getTime();
     //this.sessionService.addTest(this.model);
     this.sessionService.addTest(JSON.parse(JSON.stringify(this.model)));
@@ -89,7 +89,7 @@ export class TestGeneratorComponent implements OnInit {
       if (id == null) {
         let lastSegment: any = segments[segments.length - 1];
         lastSegment.focus();
-      } else if(id >= 0) {
+      } else if (id >= 0) {
         let segment: any = segments[id];
         segment.focus();
       }
