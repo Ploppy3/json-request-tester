@@ -11,9 +11,6 @@
 *:focus {
   outline: none;
 }
-.roboto-mono {
-  font-family: 'Roboto Mono', monospace;
-}
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #424242;
@@ -128,6 +125,9 @@ a:visited,
 a:hover,
 a:active {
   color: inherit;
+}
+.roboto-mono {
+  font-family: 'Roboto Mono', monospace;
 }
 .primary {
   color: $primary;
