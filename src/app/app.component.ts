@@ -1,5 +1,5 @@
 import { Component, DoCheck, NgZone, OnInit } from "@angular/core";
-import { fadeInOut } from "./animations";
+import { trigger, state, transition, style, animate } from "@angular/animations";
 import { environment } from "../environments/environment";
 import { Observable } from "rxjs";
 import { SessionService } from "./session.service";
@@ -10,7 +10,29 @@ import { LoggerService } from "./logger.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [fadeInOut],
+  animations: [
+    //fadeInOut,
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0,
+      })),
+      state('hidden', style({
+        opacity: 0,
+      })),
+      state('visible', style({
+        opacity: 1,
+      })),
+      transition(':enter, hidden => visible', [
+        style({
+          transform: 'translate3d(0, 10px, 0)',
+        }),
+        animate('500ms ease-out', style({ opacity: 1, transform: 'translate3d(0, 0, 0)', })),
+      ]),
+      transition(':leave, visible => hidden', [
+        animate('500ms ease-out', style({ opacity: 0 })),
+      ]),
+    ])
+  ],
 })
 
 export class AppComponent implements DoCheck, OnInit {
