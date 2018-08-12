@@ -39,10 +39,6 @@ body {
   overflow: auto;
   will-change: transform;
 }
-/// Prevent content overflow, overflow is hidden
-.no-overflow {
-  overflow: hidden;
-}
 /// Quick flex display row
 .row {
   display: flex; //overflow: auto;
@@ -118,4 +114,8 @@ body {
   >.self-center {
     align-self: center;
   }
+}
+/// Prevent content overflow, overflow is hidden
+.no-overflow {
+  overflow: hidden;
 }
