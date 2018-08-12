@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { TestService } from '../test.service';
 import { HttpTest } from '../data';
 import { SessionService } from '../session.service';
-import { fadeInOut, collapse } from '../animations';
+import { fadeInOut, collapse, collapseByState } from '../animations';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LoggerService } from '../logger.service';
@@ -11,7 +11,7 @@ import { LoggerService } from '../logger.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  animations: [fadeInOut, collapse]
+  animations: [fadeInOut, collapse, collapseByState]
 })
 export class HomeComponent implements OnInit {
 
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   public tests: HttpTest[] = [];
   public modelVariable = { key: null };
   public showVariablesEditor = false;
+  public showTestEditor = false;
 
   constructor(
     public sessionsService: SessionService,

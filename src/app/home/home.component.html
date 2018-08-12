@@ -1,7 +1,20 @@
 <div id="home-content" class="row spacer">
-  <div class="col spacer max-width">
+  <div class="col spacer max-width no-overflow">
 
-    <form id="classes-editor" #formVariable="ngForm" (ngSubmit)="onSubmit_FormVariable()">
+    <div id="wrapper-test-generator">
+      <div class="row spacer center-items clickable" *ngIf="this.tests.length > 0" (click)="showTestEditor = !showTestEditor" [@collapse]>
+        <span class="grow">Create a new Test</span>
+        <button class="icon-button" type="button">
+          <i class="material-icons">{{ showTestEditor ? 'expand_less' : 'expand_more' }}</i>
+        </button>
+      </div>
+      <div *ngIf="showTestEditor || this.tests.length == 0" [@collapse]>
+        <hr>
+        <app-test-generator class="gpu-layer" [@collapse]></app-test-generator>
+      </div>
+    </div>
+
+    <form id="classes-editor" #formVariable="ngForm" (ngSubmit)="onSubmit_FormVariable()" [@collapseByState]="tests.length > 0 ? 'visible' : 'collapsed'">
       <div class="row spacer center-items clickable" (click)="showVariablesEditor = !showVariablesEditor">
         <span class="grow">Define global variables</span>
         <button type="button" class="icon-button">
@@ -37,8 +50,6 @@
       </ng-container>
     </form>
 
-    <app-test-generator class="gpu-layer"></app-test-generator>
-
     <app-test-card [id]="'card-'+i" class="gpu-layer" *ngFor="let test of tests; let i = index; trackBy: trackByFn" [test]="test" (onChange)="onTestChange()">
       <i class="clickable material-icons" (click)="start(test)">play_arrow</i>
       <i class="clickable material-icons" (click)="test.response = null" [@fadeInOut]="test.response ? 'visible' : 'hidden'">replay</i>
@@ -49,7 +60,7 @@
   </div>
 </div>
 
-<div id="wrapper-statuses" class="row spacer wrap">
+<div id="wrapper-statuses" class="row spacer wrap" *ngIf="tests.length > 0">
   <button id="play-btn" class="icon fab" (click)="testAll()" *ngIf="tests?.length > 0">
     <i class="material-icons">play_arrow</i>
   </button>
