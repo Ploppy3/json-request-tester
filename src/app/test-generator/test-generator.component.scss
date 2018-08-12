@@ -1,14 +1,11 @@
 :host {
   display: block;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
 }
-.wrapper-path{
+.wrapper-path {
   border: 1px solid rgba(0, 0, 0, .24);
   border-radius: 8px;
   padding: 8px;
-  span{
+  span {
     line-height: 24px;
   }
   .segment {
@@ -16,8 +13,8 @@
     border-radius: 4px;
     padding: 0 4px;
     cursor: text;
-    &[contentEditable=true]:empty:not(:focus)::before{
-      content:attr(data-placeholder)
+    &[contentEditable=true]:empty:not(:focus)::before {
+      content: attr(data-placeholder)
     }
   }
 }
