@@ -30,3 +30,31 @@ export const collapse = trigger('collapse', [
   ]),
   transition('collapsed <=> expanded', animate('500ms ease-in-out')),
 ]);
+
+export const collapseByState = trigger('collapseByState', [
+  state('collapsed', style({
+    height: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    marginTop: 0,
+    marginBottom: 0,
+    opacity: 0,
+  })),
+  state('visible', style({
+    height: '*',
+    paddingTop: '*',
+    paddingBottom: '*',
+    marginTop: '*',
+    marginBottom: '*',
+    opacity: '*',
+  })),
+  transition('collapsed => visible', [
+    animate('.25s ease-in', style({ height: '*', paddingTop: '*', paddingBottom: '*', marginTop: '*', marginBottom: '*' })),
+    animate('.25s ease-out', style({ opacity: 1 })),
+  ]),
+  transition('visible => collapsed', [
+    animate('.25s ease-in', style({ opacity: 0 })),
+    animate('.25s ease-out', style({ height: 0, paddingTop: 0, paddingBottom: 0, marginTop: 0, marginBottom: 0 })),
+  ]),
+  transition('collapsed <=> expanded', animate('500ms ease-in-out')),
+]);
