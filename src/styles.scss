@@ -15,7 +15,8 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #424242;
   overflow-y: visible;
-  color: rgba(0, 0, 0, .87)
+  color: rgba(0, 0, 0, .87);
+  overflow-y: scroll;
 }
 button {
   cursor: pointer;
@@ -63,6 +64,7 @@ button {
     width: 36px;
     height: 36px;
     background: none;
+    border-radius: 18px;
     span {
       padding-left: 8px;
     }
